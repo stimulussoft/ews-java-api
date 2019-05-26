@@ -42,12 +42,6 @@
     <!-- Used by the javadoc plugin to generate the comments at the bottom. -->
     <inceptionYear>2012</inceptionYear>
 
-    <!-- Used to define a minimum Maven version. Used in conjunction with plugin
-        management to lock in a more current version of the various plugins. -->
-    <prerequisites>
-        <maven>3.1.0</maven>
-    </prerequisites>
-
     <organization>
         <name>Microsoft</name>
         <url>http://www.microsoft.com/</url>
@@ -84,6 +78,7 @@
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
         <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+        <maven-enforcer-plugin.version>3.0.0-M2</maven-enforcer-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.5</nexus-staging-maven-plugin.version>
         <maven-source-plugin.version>2.4</maven-source-plugin.version>
         <animal-sniffer-maven-plugin.version>1.14</animal-sniffer-maven-plugin.version>
@@ -112,7 +107,7 @@
 
     <profiles>
         <profile>
-            <!-- handle broken builds on jdk1.8 due to doclint function -->
+            <!-- Handle broken builds on jdk1.8 due to doclint function -->
             <id>default-jdk18-profile</id>
             <activation>
                 <jdk>[1.8,)</jdk>
@@ -308,6 +303,7 @@
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -318,6 +314,28 @@
                     <target>${javaLanguage.version}</target>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven-enforcer-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>3.3.9</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -335,6 +353,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -348,6 +367,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>animal-sniffer-maven-plugin</artifactId>
