@@ -401,6 +401,15 @@
                     <artifactId>maven-site-plugin</artifactId>
                     <version>${maven-site-plugin.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-site-plugin.version}</version>
+                    <configuration>
+                        <fork>true</fork>
+                        <compilerArgument>-XDignore.symbol.file</compilerArgument>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>

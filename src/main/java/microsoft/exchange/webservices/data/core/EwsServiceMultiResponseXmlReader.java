@@ -54,7 +54,7 @@ public class EwsServiceMultiResponseXmlReader extends EwsServiceXmlReader {
    * @throws Exception
    */
   private EwsServiceMultiResponseXmlReader(InputStream stream,
-      ExchangeService service) throws Exception {
+                                           ExchangeService service) throws Exception {
     super(stream, service);
   }
 
@@ -78,7 +78,7 @@ public class EwsServiceMultiResponseXmlReader extends EwsServiceXmlReader {
    * @throws XMLStreamException the XML stream exception
    */
   private static XMLEventReader createXmlReader(InputStream stream)
-      throws XMLStreamException {
+          throws XMLStreamException {
 
     // E14:240522 The ProhibitDtd property is used to indicate whether XmlReader should process DTDs or not. By default,
     // it will do so. EWS doesn't use DTD references so we want to turn this off. Also, the XmlResolver property is
@@ -98,8 +98,8 @@ public class EwsServiceMultiResponseXmlReader extends EwsServiceXmlReader {
    * @throws Exception on error
    */
   @Override
-  protected XMLEventReader initializeXmlReader(InputStream stream)
-      throws Exception {
+  protected XMLEventReader initializeXmlReader(InputStream stream, boolean ignoreErrors)
+          throws Exception {
     return createXmlReader(stream);
   }
 
