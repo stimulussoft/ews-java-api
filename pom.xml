@@ -31,7 +31,7 @@
     <groupId>com.microsoft.ews-java-api</groupId>
     <artifactId>ews-java-api</artifactId>
     
-    <version>2.1-SNAPSHOT</version>
+    <version>2.1.2-SNAPSHOT</version>
 
     <name>Exchange Web Services Java API</name>
     <description>Exchange Web Services (EWS) Java API</description>
@@ -76,7 +76,7 @@
         <!-- Eliminates the file encoding warning. Of course, all of your files
             should probably be UTF-8 nowadays. -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <javaLanguage.version>1.6</javaLanguage.version>
+        <javaLanguage.version>1.7</javaLanguage.version>
         <javadoc.doclint.param/>
 
         <!--  Dependencies [BUILD]:  -->
@@ -202,13 +202,9 @@
     </scm>
 
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh-snapshot</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+            <id>local-dav</id>
+            <url>file:///Volumes/release</url>
         </repository>
     </distributionManagement>
 
@@ -348,27 +344,27 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>animal-sniffer-maven-plugin</artifactId>
-                <version>${animal-sniffer-maven-plugin.version}</version>
-                <configuration>
-                    <signature>
-                        <groupId>org.codehaus.mojo.signature</groupId>
-                        <artifactId>java16-sun</artifactId>
-                        <version>${animal-sniffer-maven-plugin.signature.version}</version>
-                    </signature>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>check-java16-sun</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>animal-sniffer-maven-plugin</artifactId>-->
+                <!--<version>${animal-sniffer-maven-plugin.version}</version>-->
+                <!--<configuration>-->
+                    <!--<signature>-->
+                        <!--<groupId>org.codehaus.mojo.signature</groupId>-->
+                        <!--<artifactId>java16-sun</artifactId>-->
+                        <!--<version>${animal-sniffer-maven-plugin.signature.version}</version>-->
+                    <!--</signature>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>check-java16-sun</id>-->
+                        <!--<phase>test</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>check</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
 
             <plugin>
                 <groupId>org.jacoco</groupId>
