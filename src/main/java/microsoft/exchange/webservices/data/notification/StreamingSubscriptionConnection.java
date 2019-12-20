@@ -41,10 +41,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.io.Closeable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Represents a connection to an ongoing stream of events.
@@ -262,7 +259,7 @@ public final class StreamingSubscriptionConnection implements Closeable,
     EwsUtilities.validateParam(subscription, "subscription");
     this.validateConnectionState(false, "Subscriptions can't be added to an open connection.");
 
-    synchronized (this) {
+    synchronized (this.subscriptions) {
       if (this.subscriptions.containsKey(subscription.getId())) {
         return;
       }
@@ -284,7 +281,7 @@ public final class StreamingSubscriptionConnection implements Closeable,
 
     this.validateConnectionState(false, "Subscriptions can't be removed from an open connection.");
 
-    synchronized (this) {
+    synchronized (this.subscriptions) {
       this.subscriptions.remove(subscription.getId());
     }
   }
@@ -297,22 +294,19 @@ public final class StreamingSubscriptionConnection implements Closeable,
    * @throws ServiceLocalException Thrown when Open is called while connected.
    */
   public void open() throws ServiceLocalException, Exception {
-    synchronized (this) {
-      this.throwIfDisposed();
-
-      this.validateConnectionState(false, "The connection has already opened.");
-
-      if (this.subscriptions.size() == 0) {
-        throw new ServiceLocalException(
-            "You must add at least one subscription to this connection before it can be opened.");
-      }
-
+    this.throwIfDisposed();
+    this.validateConnectionState(false, "The connection has already opened.");
+    Set<String> subs;
+    synchronized (this.subscriptions) {
+      if (this.subscriptions.size() == 0)
+        throw new ServiceLocalException("You must add at least one subscription to this connection before it can be opened.");
+      subs = new HashSet<>(this.subscriptions.keySet());
+    }
+    synchronized (this.currentHangingRequest) {
       this.currentHangingRequest = new GetStreamingEventsRequest(
-          this.session, this, this.subscriptions.keySet(),
-          this.connectionTimeout);
-
+              this.session, this, subs,
+              this.connectionTimeout);
       this.currentHangingRequest.addOnDisconnectEvent(this);
-
       this.currentHangingRequest.internalExecute();
     }
   }
@@ -335,21 +329,23 @@ public final class StreamingSubscriptionConnection implements Closeable,
    * terminates a long-standing call to EWS.
    */
   public void close() {
-    synchronized (this) {
-      try {
-        this.throwIfDisposed();
+        try {
+          this.throwIfDisposed();
 
-        this.validateConnectionState(true, "The connection is already closed.");
+          this.validateConnectionState(true, "The connection is already closed.");
 
-        // Further down in the stack, this will result in a
-        // call to our OnRequestDisconnect event handler,
-        // doing the necessary cleanup.
-        this.currentHangingRequest.disconnect();
-      } catch (Exception e) {
-        LOG.error(e);
-      }
+          synchronized(currentHangingRequest) {
+            // Further down in the stack, this will result in a
+            // call to our OnRequestDisconnect event handler,
+            // doing the necessary cleanup.
+            this.currentHangingRequest.disconnect();
+          }
+
+        } catch (Exception e) {
+          LOG.error(e);
+        }
     }
-  }
+
 
   /**
    * Internal helper method called when the request disconnects.
@@ -445,7 +441,7 @@ public final class StreamingSubscriptionConnection implements Closeable,
     for (String id : gseResponse.getErrorSubscriptionIds()) {
       StreamingSubscription subscription = null;
 
-      synchronized (this) {
+      synchronized (this.subscriptions) {
         // Client can do any good or bad things in the below event
         // handler
         if (this.subscriptions != null
@@ -467,7 +463,7 @@ public final class StreamingSubscriptionConnection implements Closeable,
       if (gseResponse.getErrorCode() != ServiceError.ErrorMissedNotificationEvents) {
         // Client can do any good or bad things in the above event
         // handler
-        synchronized (this) {
+        synchronized (this.subscriptions) {
           if (this.subscriptions != null
               && this.subscriptions.containsKey(id)) {
             // We are no longer servicing the subscription.
@@ -505,7 +501,7 @@ public final class StreamingSubscriptionConnection implements Closeable,
         .getResults().getNotifications()) {
       StreamingSubscription subscription = null;
 
-      synchronized (this) {
+      synchronized (this.subscriptions) {
         // Client can do any good or bad things in the below event
         // handler
         if (this.subscriptions != null
@@ -532,18 +528,11 @@ public final class StreamingSubscriptionConnection implements Closeable,
    * Frees resources associated with this StreamingSubscriptionConnection.
    */
   public void dispose() {
-    synchronized (this) {
-      if (!this.isDisposed) {
-        if (this.currentHangingRequest != null) {
-          this.currentHangingRequest = null;
-        }
-
-        this.subscriptions = null;
-        this.session = null;
-
-        this.isDisposed = true;
-      }
-    }
+      if (this.currentHangingRequest != null)
+        this.currentHangingRequest = null;
+      this.subscriptions = null;
+      this.session = null;
+      this.isDisposed = true;
   }
 
   /**
