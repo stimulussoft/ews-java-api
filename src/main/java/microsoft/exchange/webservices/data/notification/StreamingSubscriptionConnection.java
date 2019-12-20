@@ -296,16 +296,14 @@ public final class StreamingSubscriptionConnection implements Closeable,
   public void open() throws ServiceLocalException, Exception {
     this.throwIfDisposed();
     this.validateConnectionState(false, "The connection has already opened.");
-    Set<String> subs;
     synchronized (this.subscriptions) {
       if (this.subscriptions.size() == 0)
         throw new ServiceLocalException("You must add at least one subscription to this connection before it can be opened.");
-      subs = new HashSet<>(this.subscriptions.keySet());
+      this.currentHangingRequest = new GetStreamingEventsRequest(
+              this.session, this, subscriptions.keySet(),
+              this.connectionTimeout);
     }
     synchronized (this.currentHangingRequest) {
-      this.currentHangingRequest = new GetStreamingEventsRequest(
-              this.session, this, subs,
-              this.connectionTimeout);
       this.currentHangingRequest.addOnDisconnectEvent(this);
       this.currentHangingRequest.internalExecute();
     }
