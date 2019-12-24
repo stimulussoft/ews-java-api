@@ -57,6 +57,7 @@ import java.util.Date;
 public class EwsServiceXmlWriter implements IDisposable {
 
   private static final Log LOG = LogFactory.getLog(EwsServiceXmlWriter.class);
+  private static final XMLOutputFactory xmlof = XMLOutputFactory.newInstance();
 
   /**
    * The is disposed.
@@ -98,9 +99,7 @@ public class EwsServiceXmlWriter implements IDisposable {
    */
   public EwsServiceXmlWriter(ExchangeServiceBase service, OutputStream stream) throws XMLStreamException {
     this.service = service;
-    XMLOutputFactory xmlof = XMLOutputFactory.newInstance();
     xmlWriter = xmlof.createXMLStreamWriter(stream, "utf-8");
-
   }
 
   /**

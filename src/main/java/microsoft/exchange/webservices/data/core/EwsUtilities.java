@@ -84,6 +84,7 @@ import java.util.regex.Pattern;
 public final class EwsUtilities {
 
   private static final Log LOG = LogFactory.getLog(EwsUtilities.class);
+  private static final XMLOutputFactory factory = XMLOutputFactory.newInstance();
 
   /**
    * The Constant XSFalse.
@@ -551,7 +552,6 @@ public final class EwsUtilities {
       throws XMLStreamException, IOException {
     String lineSeparator = System.getProperty("line.separator");
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-    XMLOutputFactory factory = XMLOutputFactory.newInstance();
     XMLStreamWriter writer = factory.createXMLStreamWriter(outStream);
     EwsUtilities.writeTraceStartElement(writer, entryKind, false);
     writer.writeCharacters(lineSeparator);
