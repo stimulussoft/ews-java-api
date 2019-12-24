@@ -61,6 +61,10 @@ import java.io.UnsupportedEncodingException;
 public class EwsXmlReader {
 
   private static final Log LOG = LogFactory.getLog(EwsXmlReader.class);
+  private static final XMLInputFactory inputFactory = new XMLInputFactoryImpl();
+  static {
+    inputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
+  }
 
   /**
    * The Read write buffer size.
@@ -115,9 +119,6 @@ public class EwsXmlReader {
    * @throws Exception on error
    */
   protected XMLEventReader initializeXmlReader(InputStream stream, boolean ignoreErrors) throws Exception {
-    XMLInputFactory inputFactory = new XMLInputFactoryImpl();
-    inputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
-
     XMLEventReader reader = inputFactory.createXMLEventReader(stream);
 
     if (ignoreErrors) {
