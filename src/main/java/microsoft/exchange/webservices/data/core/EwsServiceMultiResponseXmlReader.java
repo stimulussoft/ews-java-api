@@ -23,10 +23,10 @@
 
 package microsoft.exchange.webservices.data.core;
 
-import javax.xml.stream.XMLEventReader;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamException;
+import microsoft.exchange.webservices.data.security.SafeXmlFactory;
 
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLStreamException;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -84,12 +84,10 @@ public class EwsServiceMultiResponseXmlReader extends EwsServiceXmlReader {
     // it will do so. EWS doesn't use DTD references so we want to turn this off. Also, the XmlResolver property is
     // set to an instance of XmlUrlResolver by default. We don't want XmlTextReader to try to resolve this DTD reference
     // so we disable the XmlResolver as well.
-    XMLInputFactory inputFactory = XMLInputFactory.newInstance();
     InputStreamReader isr = new InputStreamReader(stream);
     BufferedReader in = new BufferedReader(isr);
-    return inputFactory.createXMLEventReader(in);
+    return SafeXmlFactory.createSafeXMLEventReader(in);
   }
-
 
   /**
    * Initializes the XML reader.

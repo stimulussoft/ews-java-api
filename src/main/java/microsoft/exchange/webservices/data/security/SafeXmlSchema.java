@@ -57,8 +57,7 @@ public class SafeXmlSchema extends Schema {
    * @throws javax.xml.stream.XMLStreamException
    */
   public static Schema read(final InputStream stream) throws XMLStreamException {
-    final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-    return (Schema) inputFactory.createXMLEventReader(stream);
+    return (Schema) SafeXmlFactory.createSafeXMLEventReader(stream);
   }
 
   /**
@@ -70,8 +69,7 @@ public class SafeXmlSchema extends Schema {
    */
 
   public static Schema read(XMLStreamReader reader) throws XMLStreamException {
-    final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-    return (Schema) inputFactory.createXMLEventReader(reader);
+    return (Schema) SafeXmlFactory.createSafeXMLEventReader(reader);
   }
 
 }

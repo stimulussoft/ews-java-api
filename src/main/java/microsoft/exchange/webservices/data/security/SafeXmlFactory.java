@@ -23,39 +23,48 @@
 
 package microsoft.exchange.webservices.data.security;
 
+import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.Reader;
 
 public class SafeXmlFactory {
-  public static XMLInputFactory factory = XMLInputFactory.newInstance();
+    public static XMLInputFactory factory = XMLInputFactory.newInstance();
 
 
-  public static XMLStreamReader createSafeXmlTextReader(InputStream stream) throws Exception {
-    XMLStreamReader xsr = factory.createXMLStreamReader(stream);
-    return xsr;
-
-  }
-
-
-  public static XMLStreamReader createSafeXmlTextReader(String url) throws Exception {
-    FileInputStream fis = new FileInputStream(url);
-    XMLStreamReader xtr = factory.createXMLStreamReader(url, fis);
-    return xtr;
-  }
-
-  public static XMLStreamReader createSafeXmlTextReader(XMLStreamReader reader) throws Exception {
-
-    XMLStreamReader xmlr =
-        factory.createXMLStreamReader((Reader) reader);
-    return xmlr;
+    public static XMLStreamReader createSafeXmlTextReader(InputStream stream) throws Exception {
+        XMLStreamReader xsr = factory.createXMLStreamReader(stream);
+        return xsr;
+    }
 
 
-  }
+    public static XMLStreamReader createSafeXmlTextReader(String url) throws Exception {
+        FileInputStream fis = new FileInputStream(url);
+        XMLStreamReader xtr = factory.createXMLStreamReader(url, fis);
+        return xtr;
+    }
+
+    public static XMLStreamReader createSafeXmlTextReader(XMLStreamReader reader) throws Exception {
+
+        XMLStreamReader xmlr = factory.createXMLStreamReader((Reader) reader);
+        return xmlr;
+    }
 
 
+    public static XMLEventReader createSafeXMLEventReader(Reader in) throws XMLStreamException {
+        return factory.createXMLEventReader(in);
+    }
 
+    public static XMLEventReader createSafeXMLEventReader(InputStream in) throws XMLStreamException {
+        return factory.createXMLEventReader(in);
+    }
+
+    public static XMLEventReader createSafeXMLEventReader(XMLStreamReader reader) throws XMLStreamException {
+        return factory.createXMLEventReader(reader);
+    }
 }

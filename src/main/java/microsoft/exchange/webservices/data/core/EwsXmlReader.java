@@ -29,6 +29,7 @@ import com.sun.xml.internal.stream.XMLInputFactoryImpl;
 import microsoft.exchange.webservices.data.core.enumeration.misc.XmlNamespace;
 import microsoft.exchange.webservices.data.core.exception.service.local.ServiceXmlDeserializationException;
 import microsoft.exchange.webservices.data.misc.OutParam;
+import microsoft.exchange.webservices.data.security.SafeXmlFactory;
 import microsoft.exchange.webservices.data.security.XmlNodeType;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
@@ -992,14 +993,12 @@ public class EwsXmlReader {
 
     try {
 
-      XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-
       try {
         in = new ByteArrayInputStream(str.toString().getBytes("UTF-8"));
       } catch (UnsupportedEncodingException e) {
         LOG.error(e);
       }
-      eventReader = inputFactory.createXMLEventReader(in);
+      eventReader = SafeXmlFactory.createSafeXMLEventReader(in);
 
     } catch (Exception e) {
       LOG.error(e);
