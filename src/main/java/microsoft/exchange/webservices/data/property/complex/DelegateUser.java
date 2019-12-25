@@ -156,14 +156,11 @@ public final class DelegateUser extends ComplexProperty {
       throws Exception {
       switch (reader.getLocalName()) {
           case XmlElementNames.UserId:
-
               this.userId = new UserId();
               this.userId.loadFromXml(reader, reader.getLocalName());
-              return true;
-          case XmlElementNames.UserId:
-
-              this.permissions.reset();
-              this.permissions.loadFromXml(reader, reader.getLocalName());
+              //todo before this code never executed.
+//              this.permissions.reset();
+//              this.permissions.loadFromXml(reader, reader.getLocalName());
               return true;
           case XmlElementNames.ReceiveCopiesOfMeetingMessages:
 

@@ -69,8 +69,8 @@ public class SafeXmlDocument extends DocumentBuilder {
         // the stream doesn't belong to us
         XMLEventReader reader = SafeXmlFactory
                 .createSafeXMLEventReader(inStream);
-
-        this.load((InputStream) reader);
+//todo check recursive call
+//        this.load((InputStream) reader);
     }
 
     /**
