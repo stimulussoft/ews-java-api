@@ -1805,8 +1805,7 @@ public class AutodiscoverService extends ExchangeServiceBase
    */
   public GetUserSettingsResponse getUserSettings(String userSmtpAddress,
       UserSettingName... userSettingNames) throws Exception {
-    List<UserSettingName> requestedSettings = new ArrayList<>();
-    requestedSettings.addAll(Arrays.asList(userSettingNames));
+    List<UserSettingName> requestedSettings = new ArrayList<>(Arrays.asList(userSettingNames));
 
     if (userSmtpAddress == null || userSmtpAddress.isEmpty()) {
       throw new ServiceValidationException("A valid SMTP address must be specified.");
@@ -1843,10 +1842,8 @@ public class AutodiscoverService extends ExchangeServiceBase
           String.format("The Autodiscover service only supports %s or a later version.",
               MinimumRequestVersionForAutoDiscoverSoapService));
     }
-    List<String> smtpAddresses = new ArrayList<>();
-    smtpAddresses.addAll((Collection<? extends String>) userSmtpAddresses);
-    List<UserSettingName> settings = new ArrayList<>();
-    settings.addAll(Arrays.asList(userSettingNames));
+    List<String> smtpAddresses = new ArrayList<>((Collection<? extends String>) userSmtpAddresses);
+    List<UserSettingName> settings = new ArrayList<>(Arrays.asList(userSettingNames));
     return this.getUserSettings(smtpAddresses, settings);
   }
 
@@ -1866,8 +1863,7 @@ public class AutodiscoverService extends ExchangeServiceBase
     List<String> domains = new ArrayList<>(1);
     domains.add(domain);
 
-    List<DomainSettingName> settings = new ArrayList<>();
-    settings.addAll(Arrays.asList(domainSettingNames));
+    List<DomainSettingName> settings = new ArrayList<>(Arrays.asList(domainSettingNames));
 
     return this.getDomainSettings(domains, settings, requestedVersion).
         getTResponseAtIndex(0);
@@ -1887,11 +1883,9 @@ public class AutodiscoverService extends ExchangeServiceBase
       Iterable<String> domains, ExchangeVersion requestedVersion,
       DomainSettingName... domainSettingNames)
       throws Exception {
-    List<DomainSettingName> settings = new ArrayList<>();
-    settings.addAll(Arrays.asList(domainSettingNames));
+    List<DomainSettingName> settings = new ArrayList<>(Arrays.asList(domainSettingNames));
 
-    List<String> domainslst = new ArrayList<>();
-    domainslst.addAll((Collection<? extends String>) domains);
+    List<String> domainslst = new ArrayList<>((Collection<? extends String>) domains);
 
     return this.getDomainSettings(domainslst, settings, requestedVersion);
   }

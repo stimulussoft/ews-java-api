@@ -46,7 +46,9 @@ import org.apache.commons.logging.LogFactory;
 import javax.xml.stream.XMLStreamException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Represents the base search filter class. Use descendant search filter classes
@@ -1251,11 +1253,14 @@ public abstract class SearchFilter extends ComplexProperty {
     public SearchFilterCollection(LogicalOperator logicalOperator,
         SearchFilter... searchFilters) {
       this(logicalOperator);
+      List<SearchFilter> filters = new ArrayList<>();
+
       for (SearchFilter search : searchFilters) {
-        Iterable<SearchFilter> searchFil = java.util.Arrays
-            .asList(search);
-        this.addRange(searchFil);
+        filters.add(search);
       }
+
+      if (!filters.isEmpty())
+        this.addRange(filters);
     }
 
     /**
