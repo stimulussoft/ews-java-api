@@ -51,7 +51,7 @@ public abstract class AutodiscoverResponseCollection
    */
   public AutodiscoverResponseCollection() {
     super();
-    this.responses = new ArrayList<TResponse>();
+    this.responses = new ArrayList<>();
   }
 
   /**

@@ -39,7 +39,7 @@ public final class GetRoomsResponse extends ServiceResponse {
   /**
    * The rooms.
    */
-  private Collection<EmailAddress> rooms = new ArrayList<EmailAddress>();
+  private Collection<EmailAddress> rooms = new ArrayList<>();
 
   /**
    * Initializes a new instance of the class.

@@ -259,7 +259,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
       MessageDisposition messageDisposition) throws Exception {
     CreateResponseObjectRequest request = new CreateResponseObjectRequest(
         this, ServiceErrorHandling.ThrowOnError);
-    Collection<ServiceObject> serviceList = new ArrayList<ServiceObject>();
+    Collection<ServiceObject> serviceList = new ArrayList<>();
     serviceList.add(responseObject);
     request.setParentFolderId(parentFolderId);
     request.setItems(serviceList);
@@ -282,7 +282,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
       throws Exception {
     CreateFolderRequest request = new CreateFolderRequest(this,
         ServiceErrorHandling.ThrowOnError);
-    List<Folder> folArry = new ArrayList<Folder>();
+    List<Folder> folArry = new ArrayList<>();
     folArry.add(folder);
     request.setFolders(folArry);
     request.setParentFolderId(parentFolderId);
@@ -394,7 +394,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
     EwsUtilities.validateParam(view, "view");
     EwsUtilities.validateParamAllowNull(searchFilter, "searchFilter");
 
-    List<FolderId> folderIdArray = new ArrayList<FolderId>();
+    List<FolderId> folderIdArray = new ArrayList<>();
     folderIdArray.add(parentFolderId);
     ServiceResponseCollection<FindFolderResponse> responses = this
         .internalFindFolders(folderIdArray, searchFilter, view,
@@ -417,7 +417,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
     EwsUtilities.validateParam(parentFolderId, "parentFolderId");
     EwsUtilities.validateParam(view, "view");
 
-    List<FolderId> folderIdArray = new ArrayList<FolderId>();
+    List<FolderId> folderIdArray = new ArrayList<>();
     folderIdArray.add(parentFolderId);
 
     ServiceResponseCollection<FindFolderResponse> responses = this
@@ -650,7 +650,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
    */
   public void createItem(Item item, FolderId parentFolderId, MessageDisposition messageDisposition,
       SendInvitationsMode sendInvitationsMode) throws Exception {
-    ArrayList<Item> items = new ArrayList<Item>();
+    ArrayList<Item> items = new ArrayList<>();
     items.add(item);
     internalCreateItems(items, parentFolderId, messageDisposition, sendInvitationsMode,
                         ServiceErrorHandling.ThrowOnError);
@@ -754,7 +754,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
       ConflictResolutionMode conflictResolution, MessageDisposition messageDisposition,
       SendInvitationsOrCancellationsMode sendInvitationsOrCancellationsMode)
       throws Exception {
-    List<Item> itemIdArray = new ArrayList<Item>();
+    List<Item> itemIdArray = new ArrayList<>();
     itemIdArray.add(item);
 
     ServiceResponseCollection<UpdateItemResponse> responses = this
@@ -778,7 +778,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
     SendItemRequest request = new SendItemRequest(this,
         ServiceErrorHandling.ThrowOnError);
 
-    List<Item> itemIdArray = new ArrayList<Item>();
+    List<Item> itemIdArray = new ArrayList<>();
     itemIdArray.add(item);
 
     request.setItems(itemIdArray);
@@ -859,7 +859,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
    */
   public Item copyItem(ItemId itemId, FolderId destinationFolderId)
       throws Exception {
-    List<ItemId> itemIdArray = new ArrayList<ItemId>();
+    List<ItemId> itemIdArray = new ArrayList<>();
     itemIdArray.add(itemId);
 
     return this.internalCopyItems(itemIdArray, destinationFolderId, null,
@@ -938,7 +938,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
    */
   public Item moveItem(ItemId itemId, FolderId destinationFolderId)
       throws Exception {
-    List<ItemId> itemIdArray = new ArrayList<ItemId>();
+    List<ItemId> itemIdArray = new ArrayList<>();
     itemIdArray.add(itemId);
 
     return this.internalMoveItems(itemIdArray, destinationFolderId, null,
@@ -971,8 +971,8 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
     EwsUtilities.validateParamAllowNull(queryString, "queryString");
     EwsUtilities.validateParamAllowNull(searchFilter, "searchFilter");
 
-    FindItemRequest<TItem> request = new FindItemRequest<TItem>(this,
-        errorHandlingMode);
+    FindItemRequest<TItem> request = new FindItemRequest<>(this,
+            errorHandlingMode);
 
     request.getParentFolderIds().addRangeFolderId(parentFolderIds);
     request.setSearchFilter(searchFilter);
@@ -997,7 +997,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
       String queryString, ItemView view) throws Exception {
     EwsUtilities.validateParamAllowNull(queryString, "queryString");
 
-    List<FolderId> folderIdArray = new ArrayList<FolderId>();
+    List<FolderId> folderIdArray = new ArrayList<>();
     folderIdArray.add(parentFolderId);
 
     ServiceResponseCollection<FindItemResponse<Item>> responses = this
@@ -1021,7 +1021,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
   public FindItemsResults<Item> findItems(FolderId parentFolderId,
       SearchFilter searchFilter, ItemView view) throws Exception {
     EwsUtilities.validateParamAllowNull(searchFilter, "searchFilter");
-    List<FolderId> folderIdArray = new ArrayList<FolderId>();
+    List<FolderId> folderIdArray = new ArrayList<>();
     folderIdArray.add(parentFolderId);
     ServiceResponseCollection<FindItemResponse<Item>> responses = this
         .findItems(folderIdArray, searchFilter, null, /* queryString */
@@ -1042,7 +1042,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
    */
   public FindItemsResults<Item> findItems(FolderId parentFolderId,
       ItemView view) throws Exception {
-    List<FolderId> folderIdArray = new ArrayList<FolderId>();
+    List<FolderId> folderIdArray = new ArrayList<>();
     folderIdArray.add(parentFolderId);
     ServiceResponseCollection<FindItemResponse<Item>> responses = this
         .findItems(folderIdArray, null, /* searchFilter */
@@ -1119,7 +1119,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
     EwsUtilities.validateParam(groupBy, "groupBy");
     EwsUtilities.validateParamAllowNull(queryString, "queryString");
 
-    List<FolderId> folderIdArray = new ArrayList<FolderId>();
+    List<FolderId> folderIdArray = new ArrayList<>();
     folderIdArray.add(parentFolderId);
 
     ServiceResponseCollection<FindItemResponse<Item>> responses = this
@@ -1146,7 +1146,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
     EwsUtilities.validateParam(groupBy, "groupBy");
     EwsUtilities.validateParamAllowNull(searchFilter, "searchFilter");
 
-    List<FolderId> folderIdArray = new ArrayList<FolderId>();
+    List<FolderId> folderIdArray = new ArrayList<>();
     folderIdArray.add(parentFolderId);
 
     ServiceResponseCollection<FindItemResponse<Item>> responses = this
@@ -1170,7 +1170,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
       ItemView view, Grouping groupBy) throws Exception {
     EwsUtilities.validateParam(groupBy, "groupBy");
 
-    List<FolderId> folderIdArray = new ArrayList<FolderId>();
+    List<FolderId> folderIdArray = new ArrayList<>();
     folderIdArray.add(parentFolderId);
 
     ServiceResponseCollection<FindItemResponse<Item>> responses = this
@@ -1198,7 +1198,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
       Class<TItem> cls, FolderId parentFolderId,
       SearchFilter searchFilter, ViewBase view, Grouping groupBy)
       throws Exception {
-    List<FolderId> folderIdArray = new ArrayList<FolderId>();
+    List<FolderId> folderIdArray = new ArrayList<>();
     folderIdArray.add(parentFolderId);
 
     return this.findItems(folderIdArray, searchFilter, null, /* queryString */
@@ -1256,7 +1256,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
   public FindItemsResults<Appointment> findAppointments(
       FolderId parentFolderId, CalendarView calendarView)
       throws Exception {
-    List<FolderId> folderIdArray = new ArrayList<FolderId>();
+    List<FolderId> folderIdArray = new ArrayList<>();
     folderIdArray.add(parentFolderId);
 
     ServiceResponseCollection<FindItemResponse<Appointment>> response = this
@@ -1371,7 +1371,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
       throws Exception {
     EwsUtilities.validateParam(itemId, "itemId");
     EwsUtilities.validateParam(propertySet, "propertySet");
-    List<ItemId> itmLst = new ArrayList<ItemId>();
+    List<ItemId> itmLst = new ArrayList<>();
     itmLst.add(itemId);
     ServiceResponseCollection<GetItemResponse> responses = this
         .internalBindToItems(itmLst, propertySet, ServiceErrorHandling.ThrowOnError);
@@ -1460,7 +1460,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
    */
   public void deleteItem(ItemId itemId, DeleteMode deleteMode, SendCancellationsMode sendCancellationsMode,
       AffectedTaskOccurrence affectedTaskOccurrences) throws Exception {
-    List<ItemId> itemIdArray = new ArrayList<ItemId>();
+    List<ItemId> itemIdArray = new ArrayList<>();
     itemIdArray.add(itemId);
 
     EwsUtilities.validateParam(itemId, "itemId");
@@ -1484,14 +1484,13 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
       throws Exception {
     GetAttachmentRequest request = new GetAttachmentRequest(this, errorHandling);
 
-    Iterator<Attachment> it = attachments.iterator();
-    while (it.hasNext()) {
-      request.getAttachments().add(it.next());
-    }
+      for (Attachment attachment : attachments) {
+          request.getAttachments().add(attachment);
+      }
     request.setBodyType(bodyType);
 
     if (additionalProperties != null) {
-      List<PropertyDefinitionBase> propsArray = new ArrayList<PropertyDefinitionBase>();
+      List<PropertyDefinitionBase> propsArray = new ArrayList<>();
       for (PropertyDefinitionBase propertyDefinitionBase : additionalProperties) {
         propsArray.add(propertyDefinitionBase);
       }
@@ -1530,7 +1529,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
       Iterable<PropertyDefinitionBase> additionalProperties)
       throws Exception {
 
-    List<Attachment> attachmentArray = new ArrayList<Attachment>();
+    List<Attachment> attachmentArray = new ArrayList<>();
     attachmentArray.add(attachment);
 
     this.internalGetAttachments(attachmentArray, bodyType, additionalProperties,
@@ -3138,7 +3137,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
       IdFormat destinationFormat) throws Exception {
     EwsUtilities.validateParam(id, "id");
 
-    List<AlternateIdBase> alternateIdBaseArray = new ArrayList<AlternateIdBase>();
+    List<AlternateIdBase> alternateIdBaseArray = new ArrayList<>();
     alternateIdBaseArray.add(id);
 
     ServiceResponseCollection<ConvertIdResponse> responses = this
@@ -3237,7 +3236,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
 
     request.setMailbox(mailbox);
 
-    ArrayList<DelegateUser> delUser = new ArrayList<DelegateUser>();
+    ArrayList<DelegateUser> delUser = new ArrayList<>();
     for (DelegateUser user : delegateUsers) {
       delUser.add(user);
     }
@@ -3281,7 +3280,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
     RemoveDelegateRequest request = new RemoveDelegateRequest(this);
     request.setMailbox(mailbox);
 
-    ArrayList<UserId> delUser = new ArrayList<UserId>();
+    ArrayList<UserId> delUser = new ArrayList<>();
     for (UserId user : userIds) {
       delUser.add(user);
     }
@@ -3325,7 +3324,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
 
     request.setMailbox(mailbox);
 
-    ArrayList<UserId> delUser = new ArrayList<UserId>();
+    ArrayList<UserId> delUser = new ArrayList<>();
     for (UserId user : userIds) {
       delUser.add(user);
     }
@@ -3662,7 +3661,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
     // First try external, then internal.
     // Bug E14:82650 -- Either protocol
     // may be returned without a configured URL.
-    OutParam<String> outParam = new OutParam<String>();
+    OutParam<String> outParam = new OutParam<>();
     if ((isExternal && response.tryGetSettingValue(String.class,
         UserSettingName.ExternalEwsUrl, outParam))) {
       uriString = outParam.getParam();
@@ -3957,7 +3956,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
    */
   public Collection<TimeZoneDefinition> getServerTimeZones(
       Iterable<String> timeZoneIds) throws Exception {
-    Map<String, TimeZoneDefinition> timeZoneMap = new HashMap<String, TimeZoneDefinition>();
+    Map<String, TimeZoneDefinition> timeZoneMap = new HashMap<>();
     
     GetServerTimeZonesRequest request = new GetServerTimeZonesRequest(this);
 	ServiceResponseCollection<GetServerTimeZonesResponse> responses = request.execute();
@@ -3967,7 +3966,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
 		}
 	}
    
-    Collection<TimeZoneDefinition> timeZoneList = new ArrayList<TimeZoneDefinition>();
+    Collection<TimeZoneDefinition> timeZoneList = new ArrayList<>();
 
     for (String timeZoneId : timeZoneIds) {
     	timeZoneList.add(timeZoneMap.get(timeZoneId));
@@ -3985,7 +3984,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
    */
   public Collection<TimeZoneDefinition> getServerTimeZones() throws Exception {
 	  GetServerTimeZonesRequest request = new GetServerTimeZonesRequest(this);
-	  Collection<TimeZoneDefinition> timeZoneList = new ArrayList<TimeZoneDefinition>();
+	  Collection<TimeZoneDefinition> timeZoneList = new ArrayList<>();
 	  ServiceResponseCollection<GetServerTimeZonesResponse> responses = request.execute();
 	  for (GetServerTimeZonesResponse response : responses) {
 		  timeZoneList.addAll(response.getTimeZones());

@@ -478,7 +478,7 @@ public abstract class ServiceObject {
       throws Exception {
 
     Collection<PropertyDefinitionBase> propDefs =
-        new ArrayList<PropertyDefinitionBase>();
+            new ArrayList<>();
     for (PropertyDefinition propDef : this.getPropertyBag().getProperties()
         .keySet()) {
       propDefs.add(propDef);
@@ -534,7 +534,7 @@ public abstract class ServiceObject {
     PropertyDefinition idPropertyDefinition = this
         .getIdPropertyDefinition();
 
-    OutParam<Object> serviceId = new OutParam<Object>();
+    OutParam<Object> serviceId = new OutParam<>();
 
     if (idPropertyDefinition != null) {
       this.getPropertyBag().tryGetValue(idPropertyDefinition, serviceId);
@@ -602,7 +602,7 @@ public abstract class ServiceObject {
    * The on change.
    */
   private List<IServiceObjectChangedDelegate> onChange =
-      new ArrayList<IServiceObjectChangedDelegate>();
+          new ArrayList<>();
 
   /**
    * Adds the service object changed event.

@@ -172,7 +172,7 @@ class AutodiscoverDnsClient {
       return null;
     }
 
-    List<DnsSrvRecord> bestDnsSrvRecordList = new ArrayList<DnsSrvRecord>();
+    List<DnsSrvRecord> bestDnsSrvRecordList = new ArrayList<>();
     for (DnsSrvRecord dnsSrvRecord : dnsSrvRecordList) {
       if (dnsSrvRecord.getPort() == SslPort &&
           dnsSrvRecord.getPriority() == priority &&

@@ -66,16 +66,18 @@ public final class DomainSettingError {
       reader.read();
 
       if (reader.getNodeType().getNodeType() == XmlNodeType.START_ELEMENT) {
-        if (reader.getLocalName().equals(XmlElementNames.ErrorCode)) {
-          this.errorCode = reader
-              .readElementValue(AutodiscoverErrorCode.class);
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.ErrorMessage)) {
-          this.errorMessage = reader.readElementValue();
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.SettingName)) {
-          this.settingName = reader.readElementValue();
-        }
+          switch (reader.getLocalName()) {
+              case XmlElementNames.ErrorCode:
+                  this.errorCode = reader
+                          .readElementValue(AutodiscoverErrorCode.class);
+                  break;
+              case XmlElementNames.ErrorMessage:
+                  this.errorMessage = reader.readElementValue();
+                  break;
+              case XmlElementNames.SettingName:
+                  this.settingName = reader.readElementValue();
+                  break;
+          }
       }
     } while (!reader.isEndElement(XmlNamespace.Autodiscover,
         XmlElementNames.DomainSettingError));

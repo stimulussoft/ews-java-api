@@ -95,8 +95,8 @@ public class SubscribeToStreamingNotificationsRequest extends
   @Override
   protected SubscribeResponse<StreamingSubscription> createServiceResponse(ExchangeService service,
       int responseIndex) throws Exception {
-    return new SubscribeResponse<StreamingSubscription>(
-        new StreamingSubscription(service));
+    return new SubscribeResponse<>(
+            new StreamingSubscription(service));
   }
 
   /**

@@ -47,7 +47,7 @@ public final class ExpandGroupResults implements Iterable<EmailAddress> {
   /**
    * DL members.
    */
-  private Collection<EmailAddress> members = new ArrayList<EmailAddress>();
+  private Collection<EmailAddress> members = new ArrayList<>();
 
   /**
    * Initializes a new instance of the class.

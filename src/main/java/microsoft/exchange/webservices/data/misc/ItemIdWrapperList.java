@@ -42,7 +42,7 @@ public class ItemIdWrapperList implements Iterable<AbstractItemIdWrapper> {
    * The item ids.
    */
   private List<AbstractItemIdWrapper> itemIds =
-      new ArrayList<AbstractItemIdWrapper>();
+          new ArrayList<>();
 
   /**
    * Initializes a new instance of the class.

@@ -54,7 +54,7 @@ public final class FolderPermissionCollection extends ComplexPropertyCollection<
   /**
    * The unknown entries.
    */
-  private Collection<String> unknownEntries = new ArrayList<String>();
+  private Collection<String> unknownEntries = new ArrayList<>();
 
   /**
    * Initializes a new instance of the FolderPermissionCollection class.
@@ -139,8 +139,6 @@ public final class FolderPermissionCollection extends ComplexPropertyCollection<
       FolderPermission permission = this.getItems().get(permissionIndex);
       try {
         permission.validate(this.isCalendarFolder, permissionIndex);
-      } catch (ServiceValidationException e) {
-        LOG.error(e);
       } catch (ServiceLocalException e) {
         LOG.error(e);
       }

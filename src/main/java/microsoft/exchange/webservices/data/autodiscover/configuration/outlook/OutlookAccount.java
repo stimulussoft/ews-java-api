@@ -78,7 +78,7 @@ final class OutlookAccount {
    * Initializes a new instance of the OutlookAccount class.
    */
   protected OutlookAccount() {
-    this.protocols = new HashMap<OutlookProtocolType, OutlookProtocol>();
+    this.protocols = new HashMap<>();
     this.alternateMailboxes = new AlternateMailboxCollection();
   }
 
@@ -95,43 +95,50 @@ final class OutlookAccount {
       reader.read();
 
       if (reader.getNodeType().getNodeType() == XmlNodeType.START_ELEMENT) {
-        if (reader.getLocalName().equals(XmlElementNames.AccountType)) {
-          this.setAccountType(reader.readElementValue());
-        } else if (reader.getLocalName().equals(XmlElementNames.Action)) {
-          String xmlResponseType = reader.readElementValue();
-          if (xmlResponseType.equals(OutlookAccount.Settings)) {
-            this.setResponseType(AutodiscoverResponseType.Success);
-          } else if (xmlResponseType
-              .equals(OutlookAccount.RedirectUrl)) {
-            this.setResponseType(AutodiscoverResponseType.
-                RedirectUrl);
-          } else if (xmlResponseType
-              .equals(OutlookAccount.RedirectAddr)) {
-            this.setResponseType(
-                AutodiscoverResponseType.RedirectAddress);
-          } else {
-            this.setResponseType(AutodiscoverResponseType.Error);
-          }
+        switch (reader.getLocalName()) {
+          case XmlElementNames.AccountType:
+            this.setAccountType(reader.readElementValue());
+            break;
+          case XmlElementNames.Action:
+            String xmlResponseType = reader.readElementValue();
+            switch (xmlResponseType) {
+              case OutlookAccount.Settings:
+                this.setResponseType(AutodiscoverResponseType.Success);
+                break;
+              case OutlookAccount.RedirectUrl:
+                this.setResponseType(AutodiscoverResponseType.
+                        RedirectUrl);
+                break;
+              case OutlookAccount.RedirectAddr:
+                this.setResponseType(
+                        AutodiscoverResponseType.RedirectAddress);
+                break;
+              default:
+                this.setResponseType(AutodiscoverResponseType.Error);
+                break;
+            }
 
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.Protocol)) {
-          OutlookProtocol protocol = new OutlookProtocol();
-          protocol.loadFromXml(reader);
-          this.protocols.put(
-              protocol.getProtocolType(), protocol);
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.RedirectAddr)) {
-          this.setRedirectTarget(reader.readElementValue());
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.RedirectUrl)) {
-          this.setRedirectTarget(reader.readElementValue());
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.AlternateMailboxes)) {
-          AlternateMailbox alternateMailbox = AlternateMailbox.
-              loadFromXml(reader);
-          this.alternateMailboxes.getEntries().add(alternateMailbox);
-        } else {
-          reader.skipCurrentElement();
+            break;
+          case XmlElementNames.Protocol:
+            OutlookProtocol protocol = new OutlookProtocol();
+            protocol.loadFromXml(reader);
+            this.protocols.put(
+                    protocol.getProtocolType(), protocol);
+            break;
+          case XmlElementNames.RedirectAddr:
+            this.setRedirectTarget(reader.readElementValue());
+            break;
+          case XmlElementNames.RedirectUrl:
+            this.setRedirectTarget(reader.readElementValue());
+            break;
+          case XmlElementNames.AlternateMailboxes:
+            AlternateMailbox alternateMailbox = AlternateMailbox.
+                    loadFromXml(reader);
+            this.alternateMailboxes.getEntries().add(alternateMailbox);
+            break;
+          default:
+            reader.skipCurrentElement();
+            break;
         }
       }
     } while (!reader.isEndElement(XmlNamespace.NotSpecified,

@@ -79,17 +79,17 @@ public class MeetingMessageSchema extends EmailMessageSchema {
    * Defines the AssociatedAppointmentId property.
    */
   public static final PropertyDefinition AssociatedAppointmentId =
-      new ComplexPropertyDefinition<ItemId>(
-          //	ItemId.class,
-          XmlElementNames.AssociatedCalendarItemId,
-          FieldUris.AssociatedCalendarItemId,
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<ItemId>() {
-            @Override
-            public ItemId createComplexProperty() {
-              return new ItemId();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  //	ItemId.class,
+                  XmlElementNames.AssociatedCalendarItemId,
+                  FieldUris.AssociatedCalendarItemId,
+                  ExchangeVersion.Exchange2007_SP1,
+                  new ICreateComplexPropertyDelegate<ItemId>() {
+                      @Override
+                      public ItemId createComplexProperty() {
+                          return new ItemId();
+                      }
+                  });
 
   /**
    * Defines the IsDelegated property.
@@ -121,11 +121,11 @@ public class MeetingMessageSchema extends EmailMessageSchema {
    * Defines the ResponseType property.
    */
   public static final PropertyDefinition ResponseType =
-      new GenericPropertyDefinition<MeetingResponseType>(
-          MeetingResponseType.class,
-          XmlElementNames.ResponseType, FieldUris.ResponseType, EnumSet
-          .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1);
+          new GenericPropertyDefinition<>(
+                  MeetingResponseType.class,
+                  XmlElementNames.ResponseType, FieldUris.ResponseType, EnumSet
+                  .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1);
 
   /**
    * Defines the ICalendar Uid property.

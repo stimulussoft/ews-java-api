@@ -184,7 +184,7 @@ public class TimeSpan implements Comparable<TimeSpan>, java.io.Serializable, Clo
    * @return a string containing the number of milliseconds.
    */
   public String toString() {
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
     long millis = this.time;
     if (millis < 0) {
       sb.append("-");

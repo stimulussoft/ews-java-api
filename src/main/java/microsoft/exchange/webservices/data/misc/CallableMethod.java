@@ -53,13 +53,7 @@ public class CallableMethod implements Callable<Object> {
 
     try {
       return executeMethod();
-    } catch (EWSHttpException e) {
-      // TODO Auto-generated catch block
-      LOG.error(e);
-    } catch (HttpErrorException e) {
-      // TODO Auto-generated catch block
-      LOG.error(e);
-    } catch (IOException e) {
+    } catch (EWSHttpException | IOException | HttpErrorException e) {
       // TODO Auto-generated catch block
       LOG.error(e);
     }

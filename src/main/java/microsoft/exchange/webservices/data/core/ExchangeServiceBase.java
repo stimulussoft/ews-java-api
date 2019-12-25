@@ -140,9 +140,9 @@ public abstract class ExchangeServiceBase implements Closeable {
    */
   private ExchangeServerInfo serverInfo;
 
-  private Map<String, String> httpHeaders = new HashMap<String, String>();
+  private Map<String, String> httpHeaders = new HashMap<>();
 
-  private Map<String, String> httpResponseHeaders = new HashMap<String, String>();
+  private Map<String, String> httpResponseHeaders = new HashMap<>();
 
   private WebProxy webProxy;
 

@@ -40,7 +40,7 @@ public class GetServerTimeZonesResponse extends ServiceResponse {
    * The time zones.
    */
   private Collection<TimeZoneDefinition> timeZones =
-      new ArrayList<TimeZoneDefinition>();
+          new ArrayList<>();
 
   /**
    * Initializes a new instance of the class.

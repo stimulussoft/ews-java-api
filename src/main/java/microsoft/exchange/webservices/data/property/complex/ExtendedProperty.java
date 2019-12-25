@@ -82,28 +82,29 @@ public final class ExtendedProperty extends ComplexProperty {
   public boolean tryReadElementFromXml(EwsServiceXmlReader reader)
       throws Exception {
 
-    if (reader.getLocalName().equals(XmlElementNames.ExtendedFieldURI)) {
-      this.propertyDefinition = new ExtendedPropertyDefinition();
-      this.propertyDefinition.loadFromXml(reader);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.Value)) {
-      EwsUtilities.ewsAssert(this.getPropertyDefinition() != null, "ExtendedProperty.TryReadElementFromXml",
-                             "PropertyDefintion is missing");
-      String stringValue = reader.readElementValue();
-      this.value = MapiTypeConverter.convertToValue(this.getPropertyDefinition().getMapiType(), stringValue);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.Values)) {
-      EwsUtilities.ewsAssert(this.getPropertyDefinition() != null, "ExtendedProperty.TryReadElementFromXml",
-                             "PropertyDefintion is missing");
+    switch (reader.getLocalName()) {
+      case XmlElementNames.ExtendedFieldURI:
+        this.propertyDefinition = new ExtendedPropertyDefinition();
+        this.propertyDefinition.loadFromXml(reader);
+        return true;
+      case XmlElementNames.Value:
+        EwsUtilities.ewsAssert(this.getPropertyDefinition() != null, "ExtendedProperty.TryReadElementFromXml",
+                "PropertyDefintion is missing");
+        String stringValue = reader.readElementValue();
+        this.value = MapiTypeConverter.convertToValue(this.getPropertyDefinition().getMapiType(), stringValue);
+        return true;
+      case XmlElementNames.Values:
+        EwsUtilities.ewsAssert(this.getPropertyDefinition() != null, "ExtendedProperty.TryReadElementFromXml",
+                "PropertyDefintion is missing");
 
-      StringList stringList = new StringList(XmlElementNames.Value);
-      stringList.loadFromXml(reader, reader.getLocalName());
-      this.value = MapiTypeConverter.convertToValue(this
-          .getPropertyDefinition().getMapiType(), stringList
-          .iterator());
-      return true;
-    } else {
-      return false;
+        StringList stringList = new StringList(XmlElementNames.Value);
+        stringList.loadFromXml(reader, reader.getLocalName());
+        this.value = MapiTypeConverter.convertToValue(this
+                .getPropertyDefinition().getMapiType(), stringList
+                .iterator());
+        return true;
+      default:
+        return false;
     }
   }
 
@@ -125,11 +126,11 @@ public final class ExtendedProperty extends ComplexProperty {
       writer
           .writeStartElement(XmlNamespace.Types,
               XmlElementNames.Values);
-      for (int index = 0; index < array.size(); index++) {
+      for (Object o : array) {
         writer.writeElementValue(XmlNamespace.Types,
-            XmlElementNames.Value, MapiTypeConverter
-                .convertToString(this.getPropertyDefinition()
-                    .getMapiType(), array.get(index)));
+                XmlElementNames.Value, MapiTypeConverter
+                        .convertToString(this.getPropertyDefinition()
+                                .getMapiType(), o));
       }
       writer.writeEndElement();
     } else {
@@ -188,10 +189,9 @@ public final class ExtendedProperty extends ComplexProperty {
       } else {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        for (int index = 0; index < array.size(); index++) {
+        for (Object o : array) {
           sb.append(MapiTypeConverter.convertToString(this
-              .getPropertyDefinition().getMapiType(), array
-              .get(index)));
+                  .getPropertyDefinition().getMapiType(), o));
           sb.append(",");
         }
         sb.append("]");

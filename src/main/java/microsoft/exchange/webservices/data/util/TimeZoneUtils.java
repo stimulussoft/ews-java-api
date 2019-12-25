@@ -59,7 +59,7 @@ public final class TimeZoneUtils {
 
 
   public static Map<String, String> createOlsonTimeZoneToMsMap() {
-    final Map<String, String> map = new HashMap<String, String>();
+    final Map<String, String> map = new HashMap<>();
     map.put("Africa/Abidjan", "Greenwich Standard Time");
     map.put("Africa/Accra", "Greenwich Standard Time");
     map.put("Africa/Addis_Ababa", "E. Africa Standard Time");

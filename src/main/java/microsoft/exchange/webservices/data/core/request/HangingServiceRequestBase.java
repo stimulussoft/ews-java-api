@@ -125,7 +125,7 @@ public abstract class HangingServiceRequestBase<T> extends ServiceRequestBase<T>
    * Disconnect events Occur when the hanging request is disconnected.
    */
   private List<IHangingRequestDisconnectHandler> onDisconnectList =
-      new ArrayList<IHangingRequestDisconnectHandler>();
+          new ArrayList<>();
 
   /**
    * Set event to happen when property disconnect.
@@ -222,13 +222,7 @@ public abstract class HangingServiceRequestBase<T> extends ServiceRequestBase<T>
     } catch (SocketTimeoutException ex) {
       // The connection timed out.
       this.disconnect(HangingRequestDisconnectReason.Timeout, ex);
-    } catch (UnknownServiceException ex) {
-      // Stream is closed, so disconnect.
-      this.disconnect(HangingRequestDisconnectReason.Exception, ex);
-    } catch (ObjectStreamException ex) {
-      // Stream is closed, so disconnect.
-      this.disconnect(HangingRequestDisconnectReason.Exception, ex);
-    } catch (IOException ex) {
+    } catch (UnknownServiceException | ObjectStreamException ex) {
       // Stream is closed, so disconnect.
       this.disconnect(HangingRequestDisconnectReason.Exception, ex);
     } catch (UnsupportedOperationException ex) {
@@ -306,8 +300,8 @@ public abstract class HangingServiceRequestBase<T> extends ServiceRequestBase<T>
       long keepAliveTime = 10;
 
       final ArrayBlockingQueue<Runnable> queue =
-          new ArrayBlockingQueue<Runnable>(
-              1);
+              new ArrayBlockingQueue<>(
+                      1);
       ThreadPoolExecutor threadPool = new ThreadPoolExecutor(poolSize,
           maxPoolSize,
           keepAliveTime, TimeUnit.SECONDS, queue);
@@ -349,9 +343,7 @@ public abstract class HangingServiceRequestBase<T> extends ServiceRequestBase<T>
     // Do nothing.
     try {
       ewsXmlReader.read(new XmlNodeType(XmlNodeType.START_DOCUMENT));
-    } catch (XmlException ex) {
-      throw new ServiceRequestException("The response received from the service didn't contain valid XML.", ex);
-    } catch (ServiceXmlDeserializationException ex) {
+    } catch (XmlException | ServiceXmlDeserializationException ex) {
       throw new ServiceRequestException("The response received from the service didn't contain valid XML.", ex);
     }
   }

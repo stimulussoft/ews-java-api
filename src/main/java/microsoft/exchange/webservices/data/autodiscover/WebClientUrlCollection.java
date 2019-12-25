@@ -44,7 +44,7 @@ public final class WebClientUrlCollection {
    * Initializes a new instance of the {@link WebClientUrlCollection} class.
    */
   public WebClientUrlCollection() {
-    this.urls = new ArrayList<WebClientUrl>();
+    this.urls = new ArrayList<>();
   }
 
   /**

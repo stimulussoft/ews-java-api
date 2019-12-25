@@ -54,7 +54,7 @@ public final class CreateAttachmentRequest extends
   /**
    * The attachments.
    */
-  private ArrayList<Attachment> attachments = new ArrayList<Attachment>();
+  private ArrayList<Attachment> attachments = new ArrayList<>();
 
   /**
    * Gets the attachments.
@@ -144,19 +144,14 @@ public final class CreateAttachmentRequest extends
   protected boolean emitTimeZoneHeader() throws ServiceLocalException, Exception {
     {
 
-      ListIterator<Attachment> items = this.getAttachments()
-          .listIterator();
+      for (Attachment attachment : this.getAttachments()) {
 
-      while (items.hasNext())
-
-      {
-
-        ItemAttachment itemAttachment = (ItemAttachment) items.next();
+        ItemAttachment itemAttachment = (ItemAttachment) attachment;
 
         if ((itemAttachment.getItem() != null)
-            && itemAttachment
-            .getItem()
-            .getIsTimeZoneHeaderRequired(false /* isUpdateOperation */)) {
+                && itemAttachment
+                .getItem()
+                .getIsTimeZoneHeaderRequired(false /* isUpdateOperation */)) {
           return true;
         }
       }

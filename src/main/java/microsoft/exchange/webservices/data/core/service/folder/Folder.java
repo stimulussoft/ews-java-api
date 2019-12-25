@@ -388,7 +388,7 @@ public class Folder extends ServiceObject {
   internalFindItems(String queryString,
       ViewBase view, Grouping groupBy)
       throws Exception {
-    ArrayList<FolderId> folderIdArry = new ArrayList<FolderId>();
+    ArrayList<FolderId> folderIdArry = new ArrayList<>();
     folderIdArry.add(this.getId());
 
     this.throwIfThisIsNew();
@@ -414,7 +414,7 @@ public class Folder extends ServiceObject {
   internalFindItems(SearchFilter searchFilter,
       ViewBase view, Grouping groupBy)
       throws Exception {
-    ArrayList<FolderId> folderIdArry = new ArrayList<FolderId>();
+    ArrayList<FolderId> folderIdArry = new ArrayList<>();
     folderIdArry.add(this.getId());
     this.throwIfThisIsNew();
 

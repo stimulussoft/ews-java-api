@@ -344,14 +344,14 @@ public class ContactSchema extends ItemSchema {
    * Defines the FileAsMapping property.
    */
   public static final PropertyDefinition FileAsMapping =
-      new GenericPropertyDefinition<FileAsMapping>(
-          FileAsMapping.class,
-          XmlElementNames.FileAsMapping, FieldUris.FileAsMapping, EnumSet.of(
-          PropertyDefinitionFlags.CanSet,
-          PropertyDefinitionFlags.CanUpdate,
-          PropertyDefinitionFlags.CanDelete,
-          PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1);
+          new GenericPropertyDefinition<>(
+                  FileAsMapping.class,
+                  XmlElementNames.FileAsMapping, FieldUris.FileAsMapping, EnumSet.of(
+                  PropertyDefinitionFlags.CanSet,
+                  PropertyDefinitionFlags.CanUpdate,
+                  PropertyDefinitionFlags.CanDelete,
+                  PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1);
 
   /**
    * Defines the DisplayName property.
@@ -417,17 +417,17 @@ public class ContactSchema extends ItemSchema {
    * Defines the CompleteName property.
    */
   public static final PropertyDefinition CompleteName =
-      new ComplexPropertyDefinition<microsoft.exchange.webservices.data.property.complex.CompleteName>(
-          CompleteName.class,
-          XmlElementNames.CompleteName, FieldUris.CompleteName, EnumSet
-          .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<CompleteName>() {
-            @Override
-            public CompleteName createComplexProperty() {
-              return new CompleteName();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  CompleteName.class,
+                  XmlElementNames.CompleteName, FieldUris.CompleteName, EnumSet
+                  .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1,
+                  new ICreateComplexPropertyDelegate<CompleteName>() {
+                      @Override
+                      public CompleteName createComplexProperty() {
+                          return new CompleteName();
+                      }
+                  });
 
   /**
    * Defines the CompanyName property.
@@ -445,61 +445,61 @@ public class ContactSchema extends ItemSchema {
    * Defines the EmailAddresses property.
    */
   public static final PropertyDefinition EmailAddresses =
-      new ComplexPropertyDefinition<EmailAddressDictionary>(
-          EmailAddressDictionary.class,
-          XmlElementNames.EmailAddresses,
-          FieldUris.EmailAddresses,
-          EnumSet.of(PropertyDefinitionFlags.AutoInstantiateOnRead,
-              PropertyDefinitionFlags.CanSet,
-              PropertyDefinitionFlags.CanUpdate),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate
-              <EmailAddressDictionary>() {
-            @Override
-            public EmailAddressDictionary createComplexProperty() {
-              return new EmailAddressDictionary();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  EmailAddressDictionary.class,
+                  XmlElementNames.EmailAddresses,
+                  FieldUris.EmailAddresses,
+                  EnumSet.of(PropertyDefinitionFlags.AutoInstantiateOnRead,
+                          PropertyDefinitionFlags.CanSet,
+                          PropertyDefinitionFlags.CanUpdate),
+                  ExchangeVersion.Exchange2007_SP1,
+                  new ICreateComplexPropertyDelegate
+                          <EmailAddressDictionary>() {
+                      @Override
+                      public EmailAddressDictionary createComplexProperty() {
+                          return new EmailAddressDictionary();
+                      }
+                  });
 
   /**
    * Defines the PhysicalAddresses property.
    */
   public static final PropertyDefinition PhysicalAddresses =
-      new ComplexPropertyDefinition<PhysicalAddressDictionary>(
-          PhysicalAddressDictionary.class,
-          XmlElementNames.PhysicalAddresses,
-          FieldUris.PhysicalAddresses,
-          EnumSet.of(PropertyDefinitionFlags.AutoInstantiateOnRead,
-              PropertyDefinitionFlags.CanSet,
-              PropertyDefinitionFlags.CanUpdate),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate
-              <PhysicalAddressDictionary>() {
-            @Override
-            public PhysicalAddressDictionary createComplexProperty() {
-              return new PhysicalAddressDictionary();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  PhysicalAddressDictionary.class,
+                  XmlElementNames.PhysicalAddresses,
+                  FieldUris.PhysicalAddresses,
+                  EnumSet.of(PropertyDefinitionFlags.AutoInstantiateOnRead,
+                          PropertyDefinitionFlags.CanSet,
+                          PropertyDefinitionFlags.CanUpdate),
+                  ExchangeVersion.Exchange2007_SP1,
+                  new ICreateComplexPropertyDelegate
+                          <PhysicalAddressDictionary>() {
+                      @Override
+                      public PhysicalAddressDictionary createComplexProperty() {
+                          return new PhysicalAddressDictionary();
+                      }
+                  });
 
   /**
    * Defines the PhoneNumbers property.
    */
   public static final PropertyDefinition PhoneNumbers =
-      new ComplexPropertyDefinition<PhoneNumberDictionary>(
-          PhoneNumberDictionary.class,
-          XmlElementNames.PhoneNumbers,
-          FieldUris.PhoneNumbers,
-          EnumSet.of(PropertyDefinitionFlags.AutoInstantiateOnRead,
-              PropertyDefinitionFlags.CanSet,
-              PropertyDefinitionFlags.CanUpdate),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate
-              <PhoneNumberDictionary>() {
-            @Override
-            public PhoneNumberDictionary createComplexProperty() {
-              return new PhoneNumberDictionary();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  PhoneNumberDictionary.class,
+                  XmlElementNames.PhoneNumbers,
+                  FieldUris.PhoneNumbers,
+                  EnumSet.of(PropertyDefinitionFlags.AutoInstantiateOnRead,
+                          PropertyDefinitionFlags.CanSet,
+                          PropertyDefinitionFlags.CanUpdate),
+                  ExchangeVersion.Exchange2007_SP1,
+                  new ICreateComplexPropertyDelegate
+                          <PhoneNumberDictionary>() {
+                      @Override
+                      public PhoneNumberDictionary createComplexProperty() {
+                          return new PhoneNumberDictionary();
+                      }
+                  });
 
   /**
    * Defines the AssistantName property.
@@ -543,51 +543,51 @@ public class ContactSchema extends ItemSchema {
    * Defines the Children property.
    */
   public static final PropertyDefinition Children =
-      new ComplexPropertyDefinition<StringList>(
-          StringList.class,
-          XmlElementNames.Children, FieldUris.Children, EnumSet.of(
-          PropertyDefinitionFlags.AutoInstantiateOnRead,
-          PropertyDefinitionFlags.CanSet,
-          PropertyDefinitionFlags.CanUpdate,
-          PropertyDefinitionFlags.CanDelete,
-          PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<StringList>() {
-            @Override
-            public StringList createComplexProperty() {
-              return new StringList();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  StringList.class,
+                  XmlElementNames.Children, FieldUris.Children, EnumSet.of(
+                  PropertyDefinitionFlags.AutoInstantiateOnRead,
+                  PropertyDefinitionFlags.CanSet,
+                  PropertyDefinitionFlags.CanUpdate,
+                  PropertyDefinitionFlags.CanDelete,
+                  PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1,
+                  new ICreateComplexPropertyDelegate<StringList>() {
+                      @Override
+                      public StringList createComplexProperty() {
+                          return new StringList();
+                      }
+                  });
 
   /**
    * Defines the Companies property.
    */
   public static final PropertyDefinition Companies =
-      new ComplexPropertyDefinition<StringList>(
-          StringList.class,
-          XmlElementNames.Companies, FieldUris.Companies, EnumSet.of(
-          PropertyDefinitionFlags.AutoInstantiateOnRead,
-          PropertyDefinitionFlags.CanSet,
-          PropertyDefinitionFlags.CanUpdate,
-          PropertyDefinitionFlags.CanDelete,
-          PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<StringList>() {
-            @Override
-            public StringList createComplexProperty() {
-              return new StringList();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  StringList.class,
+                  XmlElementNames.Companies, FieldUris.Companies, EnumSet.of(
+                  PropertyDefinitionFlags.AutoInstantiateOnRead,
+                  PropertyDefinitionFlags.CanSet,
+                  PropertyDefinitionFlags.CanUpdate,
+                  PropertyDefinitionFlags.CanDelete,
+                  PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1,
+                  new ICreateComplexPropertyDelegate<StringList>() {
+                      @Override
+                      public StringList createComplexProperty() {
+                          return new StringList();
+                      }
+                  });
 
   /**
    * Defines the ContactSource property.
    */
   public static final PropertyDefinition ContactSource =
-      new GenericPropertyDefinition<ContactSource>(
-          ContactSource.class,
-          XmlElementNames.ContactSource, FieldUris.ContactSource, EnumSet
-          .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1);
+          new GenericPropertyDefinition<>(
+                  ContactSource.class,
+                  XmlElementNames.ContactSource, FieldUris.ContactSource, EnumSet
+                  .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1);
 
   /**
    * Defines the Department property.
@@ -617,19 +617,19 @@ public class ContactSchema extends ItemSchema {
    * Defines the ImAddresses property.
    */
   public static final PropertyDefinition ImAddresses =
-      new ComplexPropertyDefinition<ImAddressDictionary>(
-          ImAddressDictionary.class,
-          XmlElementNames.ImAddresses, FieldUris.ImAddresses, EnumSet.of(
-          PropertyDefinitionFlags.AutoInstantiateOnRead,
-          PropertyDefinitionFlags.CanSet,
-          PropertyDefinitionFlags.CanUpdate),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<ImAddressDictionary>() {
-            @Override
-            public ImAddressDictionary createComplexProperty() {
-              return new ImAddressDictionary();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  ImAddressDictionary.class,
+                  XmlElementNames.ImAddresses, FieldUris.ImAddresses, EnumSet.of(
+                  PropertyDefinitionFlags.AutoInstantiateOnRead,
+                  PropertyDefinitionFlags.CanSet,
+                  PropertyDefinitionFlags.CanUpdate),
+                  ExchangeVersion.Exchange2007_SP1,
+                  new ICreateComplexPropertyDelegate<ImAddressDictionary>() {
+                      @Override
+                      public ImAddressDictionary createComplexProperty() {
+                          return new ImAddressDictionary();
+                      }
+                  });
 
   /**
    * Defines the JobTitle property.
@@ -683,14 +683,14 @@ public class ContactSchema extends ItemSchema {
    * Defines the PostalAddressIndex property.
    */
   public static final PropertyDefinition PostalAddressIndex =
-      new GenericPropertyDefinition<PhysicalAddressIndex>(
-          PhysicalAddressIndex.class,
-          XmlElementNames.PostalAddressIndex, FieldUris.PostalAddressIndex,
-          EnumSet.of(PropertyDefinitionFlags.CanSet,
-              PropertyDefinitionFlags.CanUpdate,
-              PropertyDefinitionFlags.CanDelete,
-              PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1);
+          new GenericPropertyDefinition<>(
+                  PhysicalAddressIndex.class,
+                  XmlElementNames.PostalAddressIndex, FieldUris.PostalAddressIndex,
+                  EnumSet.of(PropertyDefinitionFlags.CanSet,
+                          PropertyDefinitionFlags.CanUpdate,
+                          PropertyDefinitionFlags.CanDelete,
+                          PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1);
 
   /**
    * Defines the Profession property.
@@ -820,36 +820,36 @@ public class ContactSchema extends ItemSchema {
    */
 
   public static final PropertyDefinition UserSMIMECertificate =
-      new ComplexPropertyDefinition<ByteArrayArray>(
-          ByteArrayArray.class,
-          XmlElementNames.UserSMIMECertificate,
-          FieldUris.UserSMIMECertificate,
-          EnumSet.of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<ByteArrayArray>() {
-            @Override
-            public ByteArrayArray createComplexProperty() {
-              return new ByteArrayArray();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  ByteArrayArray.class,
+                  XmlElementNames.UserSMIMECertificate,
+                  FieldUris.UserSMIMECertificate,
+                  EnumSet.of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1,
+                  new ICreateComplexPropertyDelegate<ByteArrayArray>() {
+                      @Override
+                      public ByteArrayArray createComplexProperty() {
+                          return new ByteArrayArray();
+                      }
+                  });
 
   /**
    * Defines MSExchangeCertificate Property **
    */
 
   public static final PropertyDefinition MSExchangeCertificate =
-      new ComplexPropertyDefinition<ByteArrayArray>(
-          ByteArrayArray.class,
-          XmlElementNames.MSExchangeCertificate,
-          FieldUris.MSExchangeCertificate,
-          EnumSet.of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<ByteArrayArray>() {
-            @Override
-            public ByteArrayArray createComplexProperty() {
-              return new ByteArrayArray();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  ByteArrayArray.class,
+                  XmlElementNames.MSExchangeCertificate,
+                  FieldUris.MSExchangeCertificate,
+                  EnumSet.of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1,
+                  new ICreateComplexPropertyDelegate<ByteArrayArray>() {
+                      @Override
+                      public ByteArrayArray createComplexProperty() {
+                          return new ByteArrayArray();
+                      }
+                  });
 
 
   /**
@@ -868,39 +868,37 @@ public class ContactSchema extends ItemSchema {
    */
 
   public static final PropertyDefinition ManagerMailbox =
-      new ContainedPropertyDefinition<EmailAddress>(
-          EmailAddress.class,
-          XmlElementNames.ManagerMailbox,
-          FieldUris.ManagerMailbox,
-          XmlElementNames.Mailbox,
-          EnumSet.of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<EmailAddress>() {
-            @Override
-            public EmailAddress createComplexProperty() {
-              return new EmailAddress();
-            }
-          });
+          new ContainedPropertyDefinition<>(
+                  EmailAddress.class,
+                  XmlElementNames.ManagerMailbox,
+                  FieldUris.ManagerMailbox,
+                  XmlElementNames.Mailbox,
+                  EnumSet.of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1,
+                  new ICreateComplexPropertyDelegate<EmailAddress>() {
+                      @Override
+                      public EmailAddress createComplexProperty() {
+                          return new EmailAddress();
+                      }
+                  });
 
   /**
    * Defines DirectReports Property **
    */
 
   public static final PropertyDefinition DirectReports =
-      new ComplexPropertyDefinition<EmailAddressCollection>(
-          EmailAddressCollection.class,
-          XmlElementNames.DirectReports,
-          FieldUris.DirectReports,
-          EnumSet.of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<EmailAddressCollection>() {
-            @Override
-            public EmailAddressCollection createComplexProperty()
-
-            {
-              return new EmailAddressCollection();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  EmailAddressCollection.class,
+                  XmlElementNames.DirectReports,
+                  FieldUris.DirectReports,
+                  EnumSet.of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1,
+                  new ICreateComplexPropertyDelegate<EmailAddressCollection>() {
+                      @Override
+                      public EmailAddressCollection createComplexProperty() {
+                          return new EmailAddressCollection();
+                      }
+                  });
 
 
 

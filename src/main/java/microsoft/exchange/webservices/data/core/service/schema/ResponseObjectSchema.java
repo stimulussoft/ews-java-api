@@ -43,32 +43,32 @@ public class ResponseObjectSchema extends ServiceObjectSchema {
    * The Reference item id.
    */
   public static final PropertyDefinition ReferenceItemId =
-      new ComplexPropertyDefinition<ItemId>(
-          ItemId.class,
-          XmlElementNames.ReferenceItemId, EnumSet.of(
-          PropertyDefinitionFlags.AutoInstantiateOnRead,
-          PropertyDefinitionFlags.CanSet),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<ItemId>() {
-            public ItemId createComplexProperty() {
-              return new ItemId();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  ItemId.class,
+                  XmlElementNames.ReferenceItemId, EnumSet.of(
+                  PropertyDefinitionFlags.AutoInstantiateOnRead,
+                  PropertyDefinitionFlags.CanSet),
+                  ExchangeVersion.Exchange2007_SP1,
+                  new ICreateComplexPropertyDelegate<ItemId>() {
+                      public ItemId createComplexProperty() {
+                          return new ItemId();
+                      }
+                  });
 
   /**
    * The Body prefix.
    */
   public static final PropertyDefinition BodyPrefix =
-      new ComplexPropertyDefinition<MessageBody>(
-          MessageBody.class,
-          XmlElementNames.NewBodyContent, EnumSet
-          .of(PropertyDefinitionFlags.CanSet),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<MessageBody>() {
-            public MessageBody createComplexProperty() {
-              return new MessageBody();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  MessageBody.class,
+                  XmlElementNames.NewBodyContent, EnumSet
+                  .of(PropertyDefinitionFlags.CanSet),
+                  ExchangeVersion.Exchange2007_SP1,
+                  new ICreateComplexPropertyDelegate<MessageBody>() {
+                      public MessageBody createComplexProperty() {
+                          return new MessageBody();
+                      }
+                  });
 
   /**
    * This must be declared after the property definitions.

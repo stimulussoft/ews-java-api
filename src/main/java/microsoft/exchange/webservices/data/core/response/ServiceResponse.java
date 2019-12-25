@@ -64,13 +64,13 @@ public class ServiceResponse {
   /**
    * The error details.
    */
-  private Map<String, String> errorDetails = new HashMap<String, String>();
+  private Map<String, String> errorDetails = new HashMap<>();
 
   /**
    * The error property.
    */
   private Collection<PropertyDefinitionBase> errorProperties =
-      new ArrayList<PropertyDefinitionBase>();
+          new ArrayList<>();
 
   /**
    * Initializes a new instance.
@@ -175,32 +175,34 @@ public class ServiceResponse {
     do {
       reader.read();
       if (reader.isStartElement()) {
-        if (reader.getLocalName().equals(XmlElementNames.Value)) {
-          this.errorDetails.put(reader
-              .readAttributeValue(XmlAttributeNames.Name), reader
-              .readElementValue());
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.FieldURI)) {
-          this.errorProperties
-              .add(ServiceObjectSchema
-                  .findPropertyDefinition(reader.readAttributeValue(XmlAttributeNames.
-                                                                        FieldURI)));
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.IndexedFieldURI)) {
-          this.errorProperties
-              .add(new IndexedPropertyDefinition(
-                  reader
-                      .readAttributeValue(XmlAttributeNames.
-                          FieldURI),
-                  reader
-                      .readAttributeValue(XmlAttributeNames.
-                          FieldIndex)));
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.ExtendedFieldURI)) {
-          ExtendedPropertyDefinition extendedPropDef =
-              new ExtendedPropertyDefinition();
-          extendedPropDef.loadFromXml(reader);
-          this.errorProperties.add(extendedPropDef);
+        switch (reader.getLocalName()) {
+          case XmlElementNames.Value:
+            this.errorDetails.put(reader
+                    .readAttributeValue(XmlAttributeNames.Name), reader
+                    .readElementValue());
+            break;
+          case XmlElementNames.FieldURI:
+            this.errorProperties
+                    .add(ServiceObjectSchema
+                            .findPropertyDefinition(reader.readAttributeValue(XmlAttributeNames.
+                                    FieldURI)));
+            break;
+          case XmlElementNames.IndexedFieldURI:
+            this.errorProperties
+                    .add(new IndexedPropertyDefinition(
+                            reader
+                                    .readAttributeValue(XmlAttributeNames.
+                                            FieldURI),
+                            reader
+                                    .readAttributeValue(XmlAttributeNames.
+                                            FieldIndex)));
+            break;
+          case XmlElementNames.ExtendedFieldURI:
+            ExtendedPropertyDefinition extendedPropDef =
+                    new ExtendedPropertyDefinition();
+            extendedPropDef.loadFromXml(reader);
+            this.errorProperties.add(extendedPropDef);
+            break;
         }
       }
     } while (!reader.isEndElement(XmlNamespace.Messages,

@@ -49,7 +49,7 @@ public final class DayOfTheWeekCollection extends ComplexProperty implements
   /**
    * The item.
    */
-  private List<DayOfTheWeek> items = new ArrayList<DayOfTheWeek>();
+  private List<DayOfTheWeek> items = new ArrayList<>();
 
   /**
    * Initializes a new instance of the class.

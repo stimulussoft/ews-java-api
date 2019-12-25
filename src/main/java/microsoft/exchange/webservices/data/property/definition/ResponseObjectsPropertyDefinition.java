@@ -71,47 +71,48 @@ public class ResponseObjectsPropertyDefinition extends PropertyDefinition {
 
         if (reader.isStartElement()) {
 
-          if (reader.getLocalName()
-              .equals(XmlElementNames.AcceptItem)) {
+            switch (reader.getLocalName()) {
+                case XmlElementNames.AcceptItem:
 
-            value.add(ResponseActions.Accept);
-          } else if (reader.getLocalName().equals(
-              XmlElementNames.TentativelyAcceptItem)) {
+                    value.add(ResponseActions.Accept);
+                    break;
+                case XmlElementNames.TentativelyAcceptItem:
 
-            value.add(ResponseActions.TentativelyAccept);
-          } else if (reader.getLocalName().equals(
-              XmlElementNames.DeclineItem)) {
+                    value.add(ResponseActions.TentativelyAccept);
+                    break;
+                case XmlElementNames.DeclineItem:
 
-            value.add(ResponseActions.Decline);
-          } else if (reader.getLocalName().equals(
-              XmlElementNames.ReplyToItem)) {
+                    value.add(ResponseActions.Decline);
+                    break;
+                case XmlElementNames.ReplyToItem:
 
-            value.add(ResponseActions.Reply);
-          } else if (reader.getLocalName().equals(
-              XmlElementNames.ForwardItem)) {
+                    value.add(ResponseActions.Reply);
+                    break;
+                case XmlElementNames.ForwardItem:
 
-            value.add(ResponseActions.Forward);
-          } else if (reader.getLocalName().equals(
-              XmlElementNames.ReplyAllToItem)) {
+                    value.add(ResponseActions.Forward);
+                    break;
+                case XmlElementNames.ReplyAllToItem:
 
-            value.add(ResponseActions.ReplyAll);
-          } else if (reader.getLocalName().equals(
-              XmlElementNames.CancelCalendarItem)) {
+                    value.add(ResponseActions.ReplyAll);
+                    break;
+                case XmlElementNames.CancelCalendarItem:
 
-            value.add(ResponseActions.Cancel);
-          } else if (reader.getLocalName().equals(
-              XmlElementNames.RemoveItem)) {
+                    value.add(ResponseActions.Cancel);
+                    break;
+                case XmlElementNames.RemoveItem:
 
-            value.add(ResponseActions.RemoveFromCalendar);
-          } else if (reader.getLocalName().equals(
-              XmlElementNames.SuppressReadReceipt)) {
+                    value.add(ResponseActions.RemoveFromCalendar);
+                    break;
+                case XmlElementNames.SuppressReadReceipt:
 
-            value.add(ResponseActions.SuppressReadReceipt);
-          } else if (reader.getLocalName().equals(
-              XmlElementNames.PostReplyItem)) {
+                    value.add(ResponseActions.SuppressReadReceipt);
+                    break;
+                case XmlElementNames.PostReplyItem:
 
-            value.add(ResponseActions.PostReply);
-          }
+                    value.add(ResponseActions.PostReply);
+                    break;
+            }
         }
 
       } while (!reader.isEndElement(XmlNamespace.Types, this

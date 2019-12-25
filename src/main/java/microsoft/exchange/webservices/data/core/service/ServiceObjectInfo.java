@@ -78,11 +78,11 @@ public class ServiceObjectInfo {
    */
   public ServiceObjectInfo() {
     this.xmlElementNameToServiceObjectClassMap =
-        new HashMap<String, Class<?>>();
+            new HashMap<>();
     this.serviceObjectConstructorsWithServiceParam =
-        new HashMap<Class<?>, ICreateServiceObjectWithServiceParam>();
+            new HashMap<>();
     this.serviceObjectConstructorsWithAttachmentParam =
-        new HashMap<Class<?>, ICreateServiceObjectWithAttachmentParam>();
+            new HashMap<>();
 
     this.initializeServiceObjectClassMap();
   }
@@ -399,13 +399,13 @@ public class ServiceObjectInfo {
    * The on change list.
    */
   private List<ICreateServiceObjectWithAttachmentParam> onChangeList =
-      new ArrayList<ICreateServiceObjectWithAttachmentParam>();
+          new ArrayList<>();
 
   /**
    * The on change list1.
    */
   private List<ICreateServiceObjectWithServiceParam> onChangeList1 =
-      new ArrayList<ICreateServiceObjectWithServiceParam>();
+          new ArrayList<>();
 
   /**
    * Set event to happen when property changed.

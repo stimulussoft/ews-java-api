@@ -53,7 +53,7 @@ public final class ItemCollection<TItem extends Item> extends ComplexProperty
   /**
    * The item.
    */
-  private List<TItem> items = new ArrayList<TItem>();
+  private List<TItem> items = new ArrayList<>();
 
   /**
    * Initializes a new instance of the "ItemCollection&lt;TItem&gt;" class.
@@ -86,9 +86,7 @@ public final class ItemCollection<TItem extends Item> extends ComplexProperty
             try {
               item.loadFromXml(reader,
                   true /* clearPropertyBag */);
-            } catch (ServiceObjectPropertyException e) {
-              LOG.error(e);
-            } catch (ServiceVersionException e) {
+            } catch (ServiceObjectPropertyException | ServiceVersionException e) {
               LOG.error(e);
             }
 

@@ -137,7 +137,7 @@ public class EwsServiceXmlReader extends EwsXmlReader {
       boolean clearPropertyBag, PropertySet requestedPropertySet,
       boolean summaryPropertiesOnly) throws Exception {
 
-    List<TServiceObject> serviceObjects = new ArrayList<TServiceObject>();
+    List<TServiceObject> serviceObjects = new ArrayList<>();
     TServiceObject serviceObject;
 
     this.readStartElement(XmlNamespace.Messages, collectionXmlElementName);

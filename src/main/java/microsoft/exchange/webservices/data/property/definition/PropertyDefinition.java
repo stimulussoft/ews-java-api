@@ -142,7 +142,7 @@ public abstract class PropertyDefinition extends
    */
   public List<PropertyDefinition> getAssociatedInternalProperties() {
     List<PropertyDefinition> properties = new
-        ArrayList<PropertyDefinition>();
+            ArrayList<>();
     this.registerAssociatedInternalProperties(properties);
     return properties;
   }

@@ -53,7 +53,7 @@ public final class Suggestion extends ComplexProperty {
    * The time suggestions.
    */
   private Collection<TimeSuggestion> timeSuggestions =
-      new ArrayList<TimeSuggestion>();
+          new ArrayList<>();
 
   /**
    * Initializes a new instance of the Suggestion class.
@@ -71,36 +71,36 @@ public final class Suggestion extends ComplexProperty {
    */
   @Override
   public boolean tryReadElementFromXml(EwsServiceXmlReader reader) throws Exception {
-    if (reader.getLocalName().equals(XmlElementNames.Date)) {
-      SimpleDateFormat sdfin = new SimpleDateFormat(
-          "yyyy-MM-dd'T'HH:mm:ss");
-      this.date = sdfin.parse(reader.readElementValue());
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.DayQuality)) {
-      this.quality = reader.readElementValue(SuggestionQuality.class);
-      return true;
-    } else if (reader.getLocalName()
-        .equals(XmlElementNames.SuggestionArray)) {
-      if (!reader.isEmptyElement()) {
-        do {
-          reader.read();
+    switch (reader.getLocalName()) {
+      case XmlElementNames.Date:
+        SimpleDateFormat sdfin = new SimpleDateFormat(
+                "yyyy-MM-dd'T'HH:mm:ss");
+        this.date = sdfin.parse(reader.readElementValue());
+        return true;
+      case XmlElementNames.DayQuality:
+        this.quality = reader.readElementValue(SuggestionQuality.class);
+        return true;
+      case XmlElementNames.SuggestionArray:
+        if (!reader.isEmptyElement()) {
+          do {
+            reader.read();
 
-          if (reader.isStartElement(XmlNamespace.Types,
-              XmlElementNames.Suggestion)) {
-            TimeSuggestion timeSuggestion = new TimeSuggestion();
+            if (reader.isStartElement(XmlNamespace.Types,
+                    XmlElementNames.Suggestion)) {
+              TimeSuggestion timeSuggestion = new TimeSuggestion();
 
-            timeSuggestion.loadFromXml(reader, reader
-                .getLocalName());
+              timeSuggestion.loadFromXml(reader, reader
+                      .getLocalName());
 
-            this.timeSuggestions.add(timeSuggestion);
-          }
-        } while (!reader.isEndElement(XmlNamespace.Types,
-            XmlElementNames.SuggestionArray));
-      }
+              this.timeSuggestions.add(timeSuggestion);
+            }
+          } while (!reader.isEndElement(XmlNamespace.Types,
+                  XmlElementNames.SuggestionArray));
+        }
 
-      return true;
-    } else {
-      return false;
+        return true;
+      default:
+        return false;
     }
 
   }

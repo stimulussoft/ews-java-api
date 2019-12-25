@@ -174,7 +174,7 @@ public final class GetUserAvailabilityRequest extends SimpleServiceRequestBase<G
 
     if (this.isFreeBusyViewRequested()) {
       serviceResponse
-          .setAttendeesAvailability(new ServiceResponseCollection<AttendeeAvailability>());
+          .setAttendeesAvailability(new ServiceResponseCollection<>());
 
       reader.readStartElement(XmlNamespace.Messages,
           XmlElementNames.FreeBusyResponseArray);

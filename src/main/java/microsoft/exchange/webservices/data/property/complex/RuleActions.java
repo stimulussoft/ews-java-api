@@ -121,7 +121,7 @@ public final class RuleActions extends ComplexProperty {
         new EmailAddressCollection(XmlElementNames.Address);
     this.redirectToRecipients =
         new EmailAddressCollection(XmlElementNames.Address);
-    this.sendSMSAlertToRecipients = new ArrayList<MobilePhone>();
+    this.sendSMSAlertToRecipients = new ArrayList<>();
   }
 
   /**
@@ -315,66 +315,67 @@ public final class RuleActions extends ComplexProperty {
   @Override
   public boolean tryReadElementFromXml(EwsServiceXmlReader
       reader) throws Exception {
-    if (reader.getLocalName().equals(XmlElementNames.CopyToFolder)) {
-      reader.readStartElement(XmlNamespace.NotSpecified,
-          XmlElementNames.FolderId);
-      this.copyToFolder = new FolderId();
-      this.copyToFolder.loadFromXml(reader, XmlElementNames.FolderId);
-      reader.readEndElement(XmlNamespace.NotSpecified,
-          XmlElementNames.CopyToFolder);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.AssignCategories)) {
-      this.assignCategories.loadFromXml(reader,
-          reader.getLocalName());
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.Delete)) {
-      this.delete = reader.readElementValue(Boolean.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.ForwardAsAttachmentToRecipients)) {
-      this.forwardAsAttachmentToRecipients.loadFromXml(reader,
-          reader.getLocalName());
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.ForwardToRecipients)) {
-      this.forwardToRecipients.loadFromXml(reader, reader.getLocalName());
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.MarkImportance)) {
-      this.markImportance = reader.readElementValue(Importance.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.MarkAsRead)) {
-      this.markAsRead = reader.readElementValue(Boolean.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.MoveToFolder)) {
-      reader.readStartElement(XmlNamespace.NotSpecified,
-          XmlElementNames.FolderId);
-      this.moveToFolder = new FolderId();
-      this.moveToFolder.loadFromXml(reader, XmlElementNames.FolderId);
-      reader.readEndElement(XmlNamespace.NotSpecified,
-          XmlElementNames.MoveToFolder);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.PermanentDelete)) {
-      this.permanentDelete = reader.readElementValue(Boolean.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.RedirectToRecipients)) {
-      this.redirectToRecipients.loadFromXml(reader,
-          reader.getLocalName());
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.SendSMSAlertToRecipients)) {
-      EmailAddressCollection smsRecipientCollection =
-          new EmailAddressCollection(XmlElementNames.Address);
-      smsRecipientCollection.loadFromXml(reader, reader.getLocalName());
-      this.sendSMSAlertToRecipients = convertSMSRecipientsFromEmailAddressCollectionToMobilePhoneCollection(
-          smsRecipientCollection);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.ServerReplyWithMessage)) {
-      this.serverReplyWithMessage = new ItemId();
-      this.serverReplyWithMessage.loadFromXml(reader,
-          reader.getLocalName());
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.StopProcessingRules)) {
-      this.stopProcessingRules = reader.readElementValue(Boolean.class);
-      return true;
-    } else {
-      return false;
+    switch (reader.getLocalName()) {
+      case XmlElementNames.CopyToFolder:
+        reader.readStartElement(XmlNamespace.NotSpecified,
+                XmlElementNames.FolderId);
+        this.copyToFolder = new FolderId();
+        this.copyToFolder.loadFromXml(reader, XmlElementNames.FolderId);
+        reader.readEndElement(XmlNamespace.NotSpecified,
+                XmlElementNames.CopyToFolder);
+        return true;
+      case XmlElementNames.AssignCategories:
+        this.assignCategories.loadFromXml(reader,
+                reader.getLocalName());
+        return true;
+      case XmlElementNames.Delete:
+        this.delete = reader.readElementValue(Boolean.class);
+        return true;
+      case XmlElementNames.ForwardAsAttachmentToRecipients:
+        this.forwardAsAttachmentToRecipients.loadFromXml(reader,
+                reader.getLocalName());
+        return true;
+      case XmlElementNames.ForwardToRecipients:
+        this.forwardToRecipients.loadFromXml(reader, reader.getLocalName());
+        return true;
+      case XmlElementNames.MarkImportance:
+        this.markImportance = reader.readElementValue(Importance.class);
+        return true;
+      case XmlElementNames.MarkAsRead:
+        this.markAsRead = reader.readElementValue(Boolean.class);
+        return true;
+      case XmlElementNames.MoveToFolder:
+        reader.readStartElement(XmlNamespace.NotSpecified,
+                XmlElementNames.FolderId);
+        this.moveToFolder = new FolderId();
+        this.moveToFolder.loadFromXml(reader, XmlElementNames.FolderId);
+        reader.readEndElement(XmlNamespace.NotSpecified,
+                XmlElementNames.MoveToFolder);
+        return true;
+      case XmlElementNames.PermanentDelete:
+        this.permanentDelete = reader.readElementValue(Boolean.class);
+        return true;
+      case XmlElementNames.RedirectToRecipients:
+        this.redirectToRecipients.loadFromXml(reader,
+                reader.getLocalName());
+        return true;
+      case XmlElementNames.SendSMSAlertToRecipients:
+        EmailAddressCollection smsRecipientCollection =
+                new EmailAddressCollection(XmlElementNames.Address);
+        smsRecipientCollection.loadFromXml(reader, reader.getLocalName());
+        this.sendSMSAlertToRecipients = convertSMSRecipientsFromEmailAddressCollectionToMobilePhoneCollection(
+                smsRecipientCollection);
+        return true;
+      case XmlElementNames.ServerReplyWithMessage:
+        this.serverReplyWithMessage = new ItemId();
+        this.serverReplyWithMessage.loadFromXml(reader,
+                reader.getLocalName());
+        return true;
+      case XmlElementNames.StopProcessingRules:
+        this.stopProcessingRules = reader.readElementValue(Boolean.class);
+        return true;
+      default:
+        return false;
     }
 
   }
@@ -500,7 +501,7 @@ public final class RuleActions extends ComplexProperty {
   private static Collection<MobilePhone> convertSMSRecipientsFromEmailAddressCollectionToMobilePhoneCollection(
       EmailAddressCollection emailCollection) {
     Collection<MobilePhone> mobilePhoneCollection =
-        new ArrayList<MobilePhone>();
+            new ArrayList<>();
     for (EmailAddress emailAddress : emailCollection) {
       mobilePhoneCollection.add(new MobilePhone(emailAddress.getName(),
           emailAddress.getAddress()));

@@ -66,7 +66,7 @@ public final class GetStreamingEventsResponse extends ServiceResponse {
    */
   public GetStreamingEventsResponse(HangingServiceRequestBase request) {
     super();
-    List<String> string = new ArrayList<String>();
+    List<String> string = new ArrayList<>();
     this.setErrorSubscriptionIds(string);
     this.request = request;
   }

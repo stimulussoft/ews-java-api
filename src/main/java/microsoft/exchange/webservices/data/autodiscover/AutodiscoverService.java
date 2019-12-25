@@ -253,13 +253,11 @@ public class AutodiscoverService extends ExchangeServiceBase
 
     TSettings settings = cls.newInstance();
 
-    HttpWebRequest request = null;
-    try {
-      request = this.prepareHttpWebRequestForUrl(url);
+    try (HttpWebRequest request = this.prepareHttpWebRequestForUrl(url)) {
 
       this.traceHttpRequestHeaders(
-          TraceFlags.AutodiscoverRequestHttpHeaders,
-          request);
+              TraceFlags.AutodiscoverRequestHttpHeaders,
+              request);
       // OutputStreamWriter out = new
       // OutputStreamWriter(request.getOutputStream());
       OutputStream urlOutStream = request.getOutputStream();
@@ -285,16 +283,16 @@ public class AutodiscoverService extends ExchangeServiceBase
         PrintWriter writer = new PrintWriter(urlOutStream);
         this.writeLegacyAutodiscoverRequest(emailAddress, settings, writer);
 
-      /*  Flush Start */
+        /*  Flush Start */
         writer.flush();
         urlOutStream.flush();
         urlOutStream.close();
-      /* Flush End */
+        /* Flush End */
       }
       request.executeRequest();
       request.getResponseCode();
       URI redirectUrl;
-      OutParam<URI> outParam = new OutParam<URI>();
+      OutParam<URI> outParam = new OutParam<>();
       if (this.tryGetRedirectionResponse(request, outParam)) {
         redirectUrl = outParam.getParam();
         settings.makeRedirectionResponse(redirectUrl);
@@ -321,7 +319,7 @@ public class AutodiscoverService extends ExchangeServiceBase
 
         this.traceResponse(request, memoryStream);
         ByteArrayInputStream memoryStreamIn = new ByteArrayInputStream(
-            memoryStream.toByteArray());
+                memoryStream.toByteArray());
         EwsXmlReader reader = new EwsXmlReader(memoryStreamIn);
         reader.read(new XmlNodeType(XmlNodeType.START_DOCUMENT));
         settings.loadFromXml(reader);
@@ -333,15 +331,8 @@ public class AutodiscoverService extends ExchangeServiceBase
       }
 
       serviceResponseStream.close();
-    } finally {
-      if (request != null) {
-        try {
-          request.close();
-        } catch (Exception e2) {
-          // Ignore exception while closing the request.
-        }
-      }
     }
+    // Ignore exception while closing the request.
 
     return settings;
   }
@@ -386,10 +377,7 @@ public class AutodiscoverService extends ExchangeServiceBase
     traceMessage(TraceFlags.AutodiscoverConfiguration,
                  String.format("Trying to get Autodiscover redirection URL from %s.", url));
 
-    HttpWebRequest request = null;
-
-    try {
-      request = new HttpClientWebRequest(httpClient, httpContext);
+    try (HttpWebRequest request = new HttpClientWebRequest(httpClient, httpContext)) {
       request.setProxy(getWebProxy());
 
       try {
@@ -416,19 +404,12 @@ public class AutodiscoverService extends ExchangeServiceBase
         return null;
       }
 
-      OutParam<URI> outParam = new OutParam<URI>();
+      OutParam<URI> outParam = new OutParam<>();
       if (tryGetRedirectionResponse(request, outParam)) {
         return outParam.getParam();
       }
-    } finally {
-      if (request != null) {
-        try {
-          request.close();
-        } catch (Exception e) {
-          // Ignore exception when closing the request
-        }
-      }
     }
+    // Ignore exception when closing the request
 
     traceMessage(TraceFlags.AutodiscoverConfiguration, "No Autodiscover redirection URL was returned.");
     return null;
@@ -516,9 +497,9 @@ public class AutodiscoverService extends ExchangeServiceBase
       // No Url or Domain specified, need to
       //figure out which endpoint to use.
       int currentHop = 1;
-      OutParam<Integer> outParam = new OutParam<Integer>();
+      OutParam<Integer> outParam = new OutParam<>();
       outParam.setParam(currentHop);
-      List<String> redirectionEmailAddresses = new ArrayList<String>();
+      List<String> redirectionEmailAddresses = new ArrayList<>();
       return this.internalGetLegacyUserSettings(
           cls,
           emailAddress,
@@ -547,7 +528,7 @@ public class AutodiscoverService extends ExchangeServiceBase
     String domainName = EwsUtilities.domainFromEmailAddress(emailAddress);
 
     int scpUrlCount;
-    OutParam<Integer> outParamInt = new OutParam<Integer>();
+    OutParam<Integer> outParamInt = new OutParam<>();
     List<URI> urls = this.getAutodiscoverServiceUrls(domainName, outParamInt);
     scpUrlCount = outParamInt.getParam();
     if (urls.size() == 0) {
@@ -682,7 +663,7 @@ public class AutodiscoverService extends ExchangeServiceBase
       } catch (Exception ex) {
         HttpWebRequest response = null;
         URI redirectUrl;
-        OutParam<URI> outParam1 = new OutParam<URI>();
+        OutParam<URI> outParam1 = new OutParam<>();
         if ((response != null) &&
             this.tryGetRedirectionResponse(response, outParam1)) {
           redirectUrl = outParam1.getParam();
@@ -717,7 +698,7 @@ public class AutodiscoverService extends ExchangeServiceBase
     // address. (This will be a common scenario for
     // DataCenter deployments).
     URI redirectionUrl = this.getRedirectUrl(domainName);
-    OutParam<TSettings> outParam = new OutParam<TSettings>();
+    OutParam<TSettings> outParam = new OutParam<>();
     if ((redirectionUrl != null)
         && this.tryLastChanceHostRedirection(cls, emailAddress,
         redirectionUrl, outParam)) {
@@ -800,7 +781,7 @@ public class AutodiscoverService extends ExchangeServiceBase
       Class<TSettings> cls, String emailAddress, URI redirectionUrl,
       OutParam<TSettings> settings) throws AutodiscoverLocalException,
       AutodiscoverRemoteException, Exception {
-    List<String> redirectionEmailAddresses = new ArrayList<String>();
+    List<String> redirectionEmailAddresses = new ArrayList<>();
 
     // Bug 60274: Performing a non-SSL HTTP GET to retrieve a redirection
     // URL is potentially unsafe. We allow the caller
@@ -825,7 +806,7 @@ public class AutodiscoverService extends ExchangeServiceBase
               // in SCP lookups. Disable consideration of SCP records.
               this.disableScpLookupIfDuplicateRedirection(settings.getParam().getRedirectTarget(),
                   redirectionEmailAddresses);
-              OutParam<Integer> outParam = new OutParam<Integer>();
+              OutParam<Integer> outParam = new OutParam<>();
               outParam.setParam(currentHop);
               settings.setParam(
                   this.internalGetLegacyUserSettings(cls,
@@ -886,7 +867,7 @@ public class AutodiscoverService extends ExchangeServiceBase
         } catch (Exception ex) {
           // TODO: BUG response is always null
           HttpWebRequest response = null;
-          OutParam<URI> outParam = new OutParam<URI>();
+          OutParam<URI> outParam = new OutParam<>();
           if ((response != null)
               && this.tryGetRedirectionResponse(response,
               outParam)) {
@@ -978,10 +959,10 @@ public class AutodiscoverService extends ExchangeServiceBase
   protected GetUserSettingsResponse internalGetSoapUserSettings(
       String smtpAddress,
       List<UserSettingName> requestedSettings) throws Exception {
-    List<String> smtpAddresses = new ArrayList<String>();
+    List<String> smtpAddresses = new ArrayList<>();
     smtpAddresses.add(smtpAddress);
 
-    List<String> redirectionEmailAddresses = new ArrayList<String>();
+    List<String> redirectionEmailAddresses = new ArrayList<>();
     redirectionEmailAddresses.add(smtpAddress.toLowerCase());
 
     for (int currentHop = 0; currentHop < AutodiscoverService.AutodiscoverMaxRedirections; currentHop++) {
@@ -1120,7 +1101,7 @@ public class AutodiscoverService extends ExchangeServiceBase
 
       String domainName = getDomainMethod.func();
       int scpHostCount;
-      OutParam<Integer> outParam = new OutParam<Integer>();
+      OutParam<Integer> outParam = new OutParam<>();
       List<String> hosts = this.getAutodiscoverServiceHosts(domainName,
           outParam);
       scpHostCount = outParam.getParam();
@@ -1132,7 +1113,7 @@ public class AutodiscoverService extends ExchangeServiceBase
       for (int currentHostIndex = 0; currentHostIndex < hosts.size(); currentHostIndex++) {
         String host = hosts.get(currentHostIndex);
         boolean isScpHost = currentHostIndex < scpHostCount;
-        OutParam<URI> outParams = new OutParam<URI>();
+        OutParam<URI> outParams = new OutParam<>();
         if (this.tryGetAutodiscoverEndpointUrl(host, outParams)) {
           autodiscoverUrl = outParams.getParam();
           response = getSettingsMethod.func(identities, settings,
@@ -1155,7 +1136,7 @@ public class AutodiscoverService extends ExchangeServiceBase
       // Next-to-last chance: try unauthenticated GET over HTTP to be
       // redirected to appropriate service endpoint.
       autodiscoverUrl = this.getRedirectUrl(domainName);
-      OutParam<URI> outParamUrl = new OutParam<URI>();
+      OutParam<URI> outParamUrl = new OutParam<>();
       if ((autodiscoverUrl != null) &&
           this
               .callRedirectionUrlValidationCallback(
@@ -1323,7 +1304,7 @@ public class AutodiscoverService extends ExchangeServiceBase
    */
   private URI getAutodiscoverEndpointUrl(String host) throws Exception {
     URI autodiscoverUrl = null;
-    OutParam<URI> outParam = new OutParam<URI>();
+    OutParam<URI> outParam = new OutParam<>();
     if (this.tryGetAutodiscoverEndpointUrl(host, outParam)) {
       return autodiscoverUrl;
     } else {
@@ -1345,7 +1326,7 @@ public class AutodiscoverService extends ExchangeServiceBase
       throws Exception {
     EnumSet<AutodiscoverEndpoints> endpoints;
     OutParam<EnumSet<AutodiscoverEndpoints>> outParam =
-        new OutParam<EnumSet<AutodiscoverEndpoints>>();
+            new OutParam<>();
     if (this.tryGetEnabledEndpointsForHost(host, outParam)) {
       endpoints = outParam.getParam();
       url
@@ -1454,7 +1435,7 @@ public class AutodiscoverService extends ExchangeServiceBase
       OutParam<Integer> scpHostCount) throws URISyntaxException {
     List<URI> urls;
 
-    urls = new ArrayList<URI>();
+    urls = new ArrayList<>();
 
     scpHostCount.setParam(urls.size());
 
@@ -1481,7 +1462,7 @@ public class AutodiscoverService extends ExchangeServiceBase
       ClassNotFoundException {
 
     List<URI> urls = this.getAutodiscoverServiceUrls(domainName, outParam);
-    List<String> lst = new ArrayList<String>();
+    List<String> lst = new ArrayList<>();
     for (URI url : urls) {
       lst.add(url.getHost());
     }
@@ -1508,9 +1489,7 @@ public class AutodiscoverService extends ExchangeServiceBase
 
       endpoints.setParam(EnumSet.of(AutodiscoverEndpoints.None));
 
-      HttpWebRequest request = null;
-      try {
-        request = new HttpClientWebRequest(httpClient, httpContext);
+      try (HttpWebRequest request = new HttpClientWebRequest(httpClient, httpContext)) {
         request.setProxy(getWebProxy());
 
         try {
@@ -1535,30 +1514,23 @@ public class AutodiscoverService extends ExchangeServiceBase
           return false;
         }
 
-        OutParam<URI> outParam = new OutParam<URI>();
+        OutParam<URI> outParam = new OutParam<>();
         if (this.tryGetRedirectionResponse(request, outParam)) {
           URI redirectUrl = outParam.getParam();
           this.traceMessage(TraceFlags.AutodiscoverConfiguration,
-              String.format("Host returned redirection to host '%s'", redirectUrl.getHost()));
+                  String.format("Host returned redirection to host '%s'", redirectUrl.getHost()));
 
           host = redirectUrl.getHost();
         } else {
           endpoints.setParam(this.getEndpointsFromHttpWebResponse(request));
 
           this.traceMessage(TraceFlags.AutodiscoverConfiguration,
-              String.format("Host returned enabled endpoint flags: %s", endpoints.getParam().toString()));
+                  String.format("Host returned enabled endpoint flags: %s", endpoints.getParam().toString()));
 
           return true;
         }
-      } finally {
-        if (request != null) {
-          try {
-            request.close();
-          } catch (Exception e) {
-            // Connection can't be closed. We'll ignore this...
-          }
-        }
       }
+      // Connection can't be closed. We'll ignore this...
     }
 
     this.traceMessage(TraceFlags.AutodiscoverConfiguration,
@@ -1833,7 +1805,7 @@ public class AutodiscoverService extends ExchangeServiceBase
    */
   public GetUserSettingsResponse getUserSettings(String userSmtpAddress,
       UserSettingName... userSettingNames) throws Exception {
-    List<UserSettingName> requestedSettings = new ArrayList<UserSettingName>();
+    List<UserSettingName> requestedSettings = new ArrayList<>();
     requestedSettings.addAll(Arrays.asList(userSettingNames));
 
     if (userSmtpAddress == null || userSmtpAddress.isEmpty()) {
@@ -1871,9 +1843,9 @@ public class AutodiscoverService extends ExchangeServiceBase
           String.format("The Autodiscover service only supports %s or a later version.",
               MinimumRequestVersionForAutoDiscoverSoapService));
     }
-    List<String> smtpAddresses = new ArrayList<String>();
+    List<String> smtpAddresses = new ArrayList<>();
     smtpAddresses.addAll((Collection<? extends String>) userSmtpAddresses);
-    List<UserSettingName> settings = new ArrayList<UserSettingName>();
+    List<UserSettingName> settings = new ArrayList<>();
     settings.addAll(Arrays.asList(userSettingNames));
     return this.getUserSettings(smtpAddresses, settings);
   }
@@ -1891,10 +1863,10 @@ public class AutodiscoverService extends ExchangeServiceBase
   public GetDomainSettingsResponse getDomainSettings(String domain,
       ExchangeVersion requestedVersion,
       DomainSettingName... domainSettingNames) throws Exception {
-    List<String> domains = new ArrayList<String>(1);
+    List<String> domains = new ArrayList<>(1);
     domains.add(domain);
 
-    List<DomainSettingName> settings = new ArrayList<DomainSettingName>();
+    List<DomainSettingName> settings = new ArrayList<>();
     settings.addAll(Arrays.asList(domainSettingNames));
 
     return this.getDomainSettings(domains, settings, requestedVersion).
@@ -1915,10 +1887,10 @@ public class AutodiscoverService extends ExchangeServiceBase
       Iterable<String> domains, ExchangeVersion requestedVersion,
       DomainSettingName... domainSettingNames)
       throws Exception {
-    List<DomainSettingName> settings = new ArrayList<DomainSettingName>();
+    List<DomainSettingName> settings = new ArrayList<>();
     settings.addAll(Arrays.asList(domainSettingNames));
 
-    List<String> domainslst = new ArrayList<String>();
+    List<String> domainslst = new ArrayList<>();
     domainslst.addAll((Collection<? extends String>) domains);
 
     return this.getDomainSettings(domainslst, settings, requestedVersion);

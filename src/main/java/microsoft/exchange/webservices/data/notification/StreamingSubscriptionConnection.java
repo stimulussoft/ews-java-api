@@ -95,7 +95,7 @@ public final class StreamingSubscriptionConnection implements Closeable,
    * Notification events Occurs when notification are received from the
    * server.
    */
-  private List<INotificationEventDelegate> onNotificationEvent = new ArrayList<INotificationEventDelegate>();
+  private List<INotificationEventDelegate> onNotificationEvent = new ArrayList<>();
 
   /**
    * Set event to happen when property Notify.
@@ -142,7 +142,7 @@ public final class StreamingSubscriptionConnection implements Closeable,
   /**
    * Subscription events Occur when a subscription encounters an error.
    */
-  private List<ISubscriptionErrorDelegate> onSubscriptionError = new ArrayList<ISubscriptionErrorDelegate>();
+  private List<ISubscriptionErrorDelegate> onSubscriptionError = new ArrayList<>();
 
   /**
    * Set event to happen when property subscriptionError.
@@ -175,7 +175,7 @@ public final class StreamingSubscriptionConnection implements Closeable,
    * Disconnect events Occurs when a streaming subscription connection is
    * disconnected from the server.
    */
-  private List<ISubscriptionErrorDelegate> onDisconnect = new ArrayList<ISubscriptionErrorDelegate>();
+  private List<ISubscriptionErrorDelegate> onDisconnect = new ArrayList<>();
 
   /**
    * Set event to happen when property disconnect.
@@ -223,7 +223,7 @@ public final class StreamingSubscriptionConnection implements Closeable,
     }
 
     this.session = service;
-    this.subscriptions = new HashMap<String, StreamingSubscription>();
+    this.subscriptions = new HashMap<>();
     this.connectionTimeout = lifetime;
   }
 

@@ -53,32 +53,32 @@ public class MapiTypeConverterMapEntry {
   /**
    * Map CLR types used for MAPI property to matching default values.
    */
-  private static LazyMember<Map<Class<?>, Object>> defaultValueMap = new LazyMember<Map<Class<?>, Object>>(
-      new ILazyMember<Map<Class<?>, Object>>() {
-        public Map<Class<?>, Object> createInstance() {
+  private static LazyMember<Map<Class<?>, Object>> defaultValueMap = new LazyMember<>(
+          new ILazyMember<Map<Class<?>, Object>>() {
+            public Map<Class<?>, Object> createInstance() {
 
-          Map<Class<?>, Object> map = new HashMap<Class<?>, Object>();
+              Map<Class<?>, Object> map = new HashMap<>();
 
-          map.put(Boolean.class, false);
-          map.put(Byte[].class, null);
-          map.put(Short.class, new Short((short) 0));
-          map.put(Integer.class, 0);
-          map.put(Long.class, new Long(0L));
-          map.put(Float.class, new Float(0.0));
-          map.put(Double.class, new Double(0.0D));
-          SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-          try {
-            map.put(Date.class, formatter.parse("0001-01-01 12:00:00"));
-          } catch (ParseException e) {
-            LOG.error(e);
-          }
-          map.put(UUID.class, UUID.fromString("00000000-0000-0000-0000-000000000000"));
-          map.put(String.class, null);
+              map.put(Boolean.class, false);
+              map.put(Byte[].class, null);
+              map.put(Short.class, (short) 0);
+              map.put(Integer.class, 0);
+              map.put(Long.class, 0L);
+              map.put(Float.class, (float) 0.0);
+              map.put(Double.class, 0.0D);
+              SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+              try {
+                map.put(Date.class, formatter.parse("0001-01-01 12:00:00"));
+              } catch (ParseException e) {
+                LOG.error(e);
+              }
+              map.put(UUID.class, UUID.fromString("00000000-0000-0000-0000-000000000000"));
+              map.put(String.class, null);
 
-          return map;
+              return map;
 
-        }
-      });
+            }
+          });
   /**
    * The is array.
    */
@@ -140,7 +140,7 @@ public class MapiTypeConverterMapEntry {
       return value;
     } else {
       try {
-        if (this.getType().isInstance(Integer.valueOf(0))) {
+        if (this.getType().isInstance(0)) {
           Object o = null;
           o = Integer.parseInt(value + "");
           return o;
@@ -148,7 +148,7 @@ public class MapiTypeConverterMapEntry {
           DateFormat df = new SimpleDateFormat(
               "yyyy-MM-dd'T'HH:mm:ss'Z'");
           return df.parse(value + "");
-        } else if (this.getType().isInstance(Boolean.valueOf(false))) {
+        } else if (this.getType().isInstance(Boolean.FALSE)) {
           Object o = null;
           o = Boolean.parseBoolean(value + "");
           return o;
@@ -178,13 +178,10 @@ public class MapiTypeConverterMapEntry {
       throws ServiceXmlDeserializationException, FormatException {
     try {
       return this.getParse().func(stringValue);
-    } catch (ClassCastException ex) {
+    } catch (ClassCastException | NumberFormatException ex) {
       throw new ServiceXmlDeserializationException(String
           .format("The value '%s' couldn't be converted to type %s.", stringValue, this
               .getType()), ex);
-    } catch (NumberFormatException ex) {
-      throw new ServiceXmlDeserializationException(String
-          .format("The value '%s' couldn't be converted to type %s.", stringValue, this.getType()), ex);
     }
 
   }

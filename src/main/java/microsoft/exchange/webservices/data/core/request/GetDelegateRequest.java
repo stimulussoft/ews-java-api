@@ -45,7 +45,7 @@ public class GetDelegateRequest extends
   /**
    * The user ids.
    */
-  private List<UserId> userIds = new ArrayList<UserId>();
+  private List<UserId> userIds = new ArrayList<>();
 
   /**
    * The include permissions.

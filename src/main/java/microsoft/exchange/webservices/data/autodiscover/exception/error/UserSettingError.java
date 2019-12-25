@@ -81,16 +81,18 @@ public final class UserSettingError {
       reader.read();
 
       if (reader.getNodeType().getNodeType() == XmlNodeType.START_ELEMENT) {
-        if (reader.getLocalName().equals(XmlElementNames.ErrorCode)) {
-          this.setErrorCode(reader
-              .readElementValue(AutodiscoverErrorCode.class));
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.ErrorMessage)) {
-          this.setErrorMessage(reader.readElementValue());
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.SettingName)) {
-          this.setSettingName(reader.readElementValue());
-        }
+          switch (reader.getLocalName()) {
+              case XmlElementNames.ErrorCode:
+                  this.setErrorCode(reader
+                          .readElementValue(AutodiscoverErrorCode.class));
+                  break;
+              case XmlElementNames.ErrorMessage:
+                  this.setErrorMessage(reader.readElementValue());
+                  break;
+              case XmlElementNames.SettingName:
+                  this.setSettingName(reader.readElementValue());
+                  break;
+          }
       }
     } while (!reader.isEndElement(XmlNamespace.Autodiscover,
         XmlElementNames.UserSettingError));

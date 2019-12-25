@@ -44,7 +44,7 @@ public class FolderIdWrapperList implements Iterable<AbstractFolderIdWrapper> {
    * The ids.
    */
   private List<AbstractFolderIdWrapper> ids = new
-      ArrayList<AbstractFolderIdWrapper>();
+          ArrayList<>();
 
   /**
    * Adds the specified folder.

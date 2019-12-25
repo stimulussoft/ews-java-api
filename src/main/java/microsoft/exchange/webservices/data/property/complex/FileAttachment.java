@@ -49,12 +49,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.nio.file.Path;
 
 /**
  * Represents a file attachment.
@@ -203,15 +201,9 @@ public final class FileAttachment extends Attachment {
 
     if (!(this.fileName == null || this.fileName.isEmpty())) {
       File fileStream = new File(this.fileName);
-      FileInputStream fis = null;
-      try {
-        fis = new FileInputStream(fileStream);
-        writer.writeBase64ElementValue(fis);
-      } finally {
-        if (fis != null) {
-          fis.close();
+        try (FileInputStream fis = new FileInputStream(fileStream)) {
+            writer.writeBase64ElementValue(fis);
         }
-      }
 
     } else if (this.contentStream != null) {
       writer.writeBase64ElementValue(this.contentStream);
@@ -276,21 +268,15 @@ public final class FileAttachment extends Attachment {
   public void streamContent(OutputStream outputStream) throws Exception {
     File responseFile = File.createTempFile("response", ".tmp");
     responseFile.deleteOnExit();
-    BufferedOutputStream os = null;
-    try {
-      os = new BufferedOutputStream(new FileOutputStream(responseFile));
-      this.getOwner().getService().streamAttachment(this, os);
-      os.flush();
-      os.close();
-      writeContentFromResponseFile(new FileInputStream(responseFile), outputStream);
-      responseFile.delete();
-    } catch(Exception e) {
-      handleStreamContentException(e, responseFile, outputStream);
-    } finally {
-      if (os != null) {
-        os.close();
+      try (BufferedOutputStream os = new BufferedOutputStream(new FileOutputStream(responseFile))) {
+          this.getOwner().getService().streamAttachment(this, os);
+          os.flush();
+          os.close();
+          writeContentFromResponseFile(new FileInputStream(responseFile), outputStream);
+          responseFile.delete();
+      } catch (Exception e) {
+          handleStreamContentException(e, responseFile, outputStream);
       }
-    }
   }
 
   protected void handleStreamContentException(Exception e, File responseFile, OutputStream outputStream)
@@ -371,33 +357,25 @@ public final class FileAttachment extends Attachment {
   public static void writeContentFromResponseFile(final InputStream responseInputStream, OutputStream outputStream) throws
                                                                                                                     IOException {
 
-    InputStream is = new BufferedInputStream(responseInputStream);
-    final List<String> patterns = Arrays.asList(":Content>", ":Content/>");
-    try {
-      // read ahead until we match the "pattern" variable in the responseInputStream
-      readUntilPatternMatch(is, patterns);
+      try (InputStream is = new BufferedInputStream(responseInputStream)) {
+          final List<String> patterns = Arrays.asList(":Content>", ":Content/>");
+          // read ahead until we match the "pattern" variable in the responseInputStream
+          readUntilPatternMatch(is, patterns);
 
-      // now that we've found the beginning of the Base64-encoded element value, wrap it with
-      // a Base64ValueStream so it stops reading when the delimiting "<" character is found.
-      Base64ValueStream base64ValueStream = new Base64ValueStream(is);
+          // now that we've found the beginning of the Base64-encoded element value, wrap it with
+          // a Base64ValueStream so it stops reading when the delimiting "<" character is found.
 
-      // Use a Base64OutputStream to write to outputStream so the base64 data is decoded
-      // during the writing operation.
-      Base64OutputStream base64OutputStream = new Base64OutputStream(
-          new BufferedOutputStream(outputStream), false, 0, null);
-      int b;
-      try {
-        while (-1 != (b = base64ValueStream.read())) {
-          base64OutputStream.write(b);
-        }
-        base64OutputStream.flush();
-      } finally {
-        base64OutputStream.close();
-        base64ValueStream.close();
+          // Use a Base64OutputStream to write to outputStream so the base64 data is decoded
+          // during the writing operation.
+          int b;
+          try (Base64ValueStream base64ValueStream = new Base64ValueStream(is); Base64OutputStream base64OutputStream = new Base64OutputStream(
+                  new BufferedOutputStream(outputStream), false, 0, null)) {
+              while (-1 != (b = base64ValueStream.read())) {
+                  base64OutputStream.write(b);
+              }
+              base64OutputStream.flush();
+          }
       }
-    } finally {
-      is.close();
-    }
   }
 
   /**

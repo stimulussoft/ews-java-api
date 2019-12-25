@@ -61,21 +61,21 @@ public class MeetingRequestSchema extends MeetingMessageSchema {
    * Defines the MeetingRequestType property.
    */
   public static final PropertyDefinition MeetingRequestType =
-      new GenericPropertyDefinition<microsoft.exchange.webservices.data.core.enumeration.service.MeetingRequestType>(
-          MeetingRequestType.class,
-          XmlElementNames.MeetingRequestType, FieldUris.MeetingRequestType,
-          ExchangeVersion.Exchange2007_SP1);
+          new GenericPropertyDefinition<>(
+                  MeetingRequestType.class,
+                  XmlElementNames.MeetingRequestType, FieldUris.MeetingRequestType,
+                  ExchangeVersion.Exchange2007_SP1);
 
   /**
    * Defines the IntendedFreeBusyStatus property.
    */
   public static final PropertyDefinition IntendedFreeBusyStatus =
-      new GenericPropertyDefinition<microsoft.exchange.webservices.data.core.enumeration.property.LegacyFreeBusyStatus>(
-          LegacyFreeBusyStatus.class,
-          XmlElementNames.IntendedFreeBusyStatus,
-          FieldUris.IntendedFreeBusyStatus, EnumSet
-          .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1);
+          new GenericPropertyDefinition<>(
+                  LegacyFreeBusyStatus.class,
+                  XmlElementNames.IntendedFreeBusyStatus,
+                  FieldUris.IntendedFreeBusyStatus, EnumSet
+                  .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1);
 
   /**
    * Defines the Start property.

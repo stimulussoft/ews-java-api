@@ -87,10 +87,7 @@ public class SafeXmlDocument extends DocumentBuilder {
             inp = new FileInputStream(filename);
             reader = SafeXmlFactory.createSafeXMLEventReader(inp);
             this.load((InputStream) reader);
-        } catch (XMLStreamException e) {
-            // TODO Auto-generated catch block
-            LOG.error(e);
-        } catch (FileNotFoundException e) {
+        } catch (XMLStreamException | FileNotFoundException e) {
             // TODO Auto-generated catch block
             LOG.error(e);
         }

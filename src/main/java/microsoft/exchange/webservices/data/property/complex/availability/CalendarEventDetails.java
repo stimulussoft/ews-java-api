@@ -90,34 +90,35 @@ public final class CalendarEventDetails extends ComplexProperty {
   @Override
   public boolean tryReadElementFromXml(EwsServiceXmlReader reader)
       throws Exception {
-    if (reader.getLocalName().equals(XmlElementNames.ID)) {
-      this.storeId = reader.readElementValue();
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.Subject)) {
-      this.subject = reader.readElementValue();
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.Location)) {
-      this.location = reader.readElementValue();
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.IsMeeting)) {
-      this.isMeeting = reader.readElementValue(Boolean.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.IsRecurring)) {
-      this.isRecurring = reader.readElementValue(Boolean.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.IsException)) {
-      this.isException = reader.readElementValue(Boolean.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.IsReminderSet)) {
+      switch (reader.getLocalName()) {
+          case XmlElementNames.ID:
+              this.storeId = reader.readElementValue();
+              return true;
+          case XmlElementNames.Subject:
+              this.subject = reader.readElementValue();
+              return true;
+          case XmlElementNames.Location:
+              this.location = reader.readElementValue();
+              return true;
+          case XmlElementNames.IsMeeting:
+              this.isMeeting = reader.readElementValue(Boolean.class);
+              return true;
+          case XmlElementNames.IsRecurring:
+              this.isRecurring = reader.readElementValue(Boolean.class);
+              return true;
+          case XmlElementNames.IsException:
+              this.isException = reader.readElementValue(Boolean.class);
+              return true;
+          case XmlElementNames.IsReminderSet:
 
-      this.isReminderSet = reader.readElementValue(Boolean.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.IsPrivate)) {
-      this.isPrivate = reader.readElementValue(Boolean.class);
-      return true;
-    } else {
-      return false;
-    }
+              this.isReminderSet = reader.readElementValue(Boolean.class);
+              return true;
+          case XmlElementNames.IsPrivate:
+              this.isPrivate = reader.readElementValue(Boolean.class);
+              return true;
+          default:
+              return false;
+      }
 
   }
 

@@ -107,14 +107,14 @@ public final class FindItemResponse
             XmlAttributeNames.IndexedPagingOffset) : null;
 
     if (!this.isGrouped) {
-      this.results = new FindItemsResults<TItem>();
+      this.results = new FindItemsResults<>();
       this.results.setTotalCount(totalItemsInView);
       this.results.setNextPageOffset(nextPageOffset);
       this.results.setMoreAvailable(moreItemsAvailable);
       internalReadItemsFromXml(reader, this.propertySet, this.results
           .getItems());
     } else {
-      this.groupedFindResults = new GroupedFindItemsResults<TItem>();
+      this.groupedFindResults = new GroupedFindItemsResults<>();
       this.groupedFindResults.setTotalCount(totalItemsInView);
       this.groupedFindResults.setNextPageOffset(nextPageOffset);
       this.groupedFindResults.setMoreAvailable(moreItemsAvailable);
@@ -130,7 +130,7 @@ public final class FindItemResponse
             String groupIndex = reader.readElementValue(
                 XmlNamespace.Types, XmlElementNames.GroupIndex);
 
-            ArrayList<TItem> itemList = new ArrayList<TItem>();
+            ArrayList<TItem> itemList = new ArrayList<>();
             internalReadItemsFromXml(reader, this.propertySet,
                 itemList);
 
@@ -138,7 +138,7 @@ public final class FindItemResponse
                 XmlElementNames.GroupedItems);
 
             this.groupedFindResults.getItemGroups().add(
-                new ItemGroup<TItem>(groupIndex, itemList));
+                    new ItemGroup<>(groupIndex, itemList));
           }
         } while (!reader.isEndElement(XmlNamespace.Types,
             XmlElementNames.Groups));

@@ -64,7 +64,7 @@ public final class GetEventsResults {
    * Collection of notification events.
    */
   private Collection<NotificationEvent> events =
-      new ArrayList<NotificationEvent>();
+          new ArrayList<>();
 
   /**
    * Map XML element name to notification event type. If you add a new
@@ -72,25 +72,25 @@ public final class GetEventsResults {
    */
   private static LazyMember<Map<String, EventType>>
       xmlElementNameToEventTypeMap =
-      new LazyMember<Map<String, EventType>>(
-          new ILazyMember<Map<String, EventType>>() {
-            @Override
-            public Map<String, EventType> createInstance() {
-              Map<String, EventType> result =
-                  new HashMap<String, EventType>();
-              result.put(XmlElementNames.CopiedEvent, EventType.Copied);
-              result.put(XmlElementNames.CreatedEvent, EventType.Created);
-              result.put(XmlElementNames.DeletedEvent, EventType.Deleted);
-              result.put(XmlElementNames.ModifiedEvent,
-                  EventType.Modified);
-              result.put(XmlElementNames.MovedEvent, EventType.Moved);
-              result.put(XmlElementNames.NewMailEvent, EventType.NewMail);
-              result.put(XmlElementNames.StatusEvent, EventType.Status);
-              result.put(XmlElementNames.FreeBusyChangedEvent,
-                  EventType.FreeBusyChanged);
-              return result;
-            }
-          });
+          new LazyMember<>(
+                  new ILazyMember<Map<String, EventType>>() {
+                      @Override
+                      public Map<String, EventType> createInstance() {
+                          Map<String, EventType> result =
+                                  new HashMap<>();
+                          result.put(XmlElementNames.CopiedEvent, EventType.Copied);
+                          result.put(XmlElementNames.CreatedEvent, EventType.Created);
+                          result.put(XmlElementNames.DeletedEvent, EventType.Deleted);
+                          result.put(XmlElementNames.ModifiedEvent,
+                                  EventType.Modified);
+                          result.put(XmlElementNames.MovedEvent, EventType.Moved);
+                          result.put(XmlElementNames.NewMailEvent, EventType.NewMail);
+                          result.put(XmlElementNames.StatusEvent, EventType.Status);
+                          result.put(XmlElementNames.FreeBusyChangedEvent,
+                                  EventType.FreeBusyChanged);
+                          return result;
+                      }
+                  });
 
   /**
    * Gets the XML element name to event type mapping.
@@ -225,7 +225,7 @@ public final class GetEventsResults {
    * @return the folder events
    */
   public Iterable<FolderEvent> getFolderEvents() {
-    Collection<FolderEvent> folderEvents = new ArrayList<FolderEvent>();
+    Collection<FolderEvent> folderEvents = new ArrayList<>();
     for (Object event : this.events) {
       if (event instanceof FolderEvent) {
         folderEvents.add((FolderEvent) event);
@@ -240,7 +240,7 @@ public final class GetEventsResults {
    * @return the item events
    */
   public Iterable<ItemEvent> getItemEvents() {
-    Collection<ItemEvent> itemEvents = new ArrayList<ItemEvent>();
+    Collection<ItemEvent> itemEvents = new ArrayList<>();
     for (Object event : this.events) {
       if (event instanceof ItemEvent) {
         itemEvents.add((ItemEvent) event);

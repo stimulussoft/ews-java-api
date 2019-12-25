@@ -114,7 +114,7 @@ public final class ExtendedPropertyCollection extends ComplexPropertyCollection<
       ExtendedPropertyDefinition propertyDefinition) throws Exception {
     ExtendedProperty extendedProperty = null;
     OutParam<ExtendedProperty> extendedPropertyOut =
-        new OutParam<ExtendedProperty>();
+            new OutParam<>();
     if (!this.tryGetProperty(propertyDefinition, extendedPropertyOut)) {
       extendedProperty = new ExtendedProperty(propertyDefinition);
       this.internalAdd(extendedProperty);
@@ -151,7 +151,7 @@ public final class ExtendedPropertyCollection extends ComplexPropertyCollection<
 
     ExtendedProperty extendedProperty = null;
     OutParam<ExtendedProperty> extendedPropertyOut =
-        new OutParam<ExtendedProperty>();
+            new OutParam<>();
     if (this.tryGetProperty(propertyDefinition, extendedPropertyOut)) {
       extendedProperty = extendedPropertyOut.getParam();
       return this.internalRemove(extendedProperty);
@@ -194,7 +194,7 @@ public final class ExtendedPropertyCollection extends ComplexPropertyCollection<
       OutParam<T> propertyValueOut) throws ArgumentException {
     ExtendedProperty extendedProperty = null;
     OutParam<ExtendedProperty> extendedPropertyOut =
-        new OutParam<ExtendedProperty>();
+            new OutParam<>();
     if (this.tryGetProperty(propertyDefinition, extendedPropertyOut)) {
       extendedProperty = extendedPropertyOut.getParam();
       if (!cls.isAssignableFrom(propertyDefinition.getType())) {
@@ -227,7 +227,7 @@ public final class ExtendedPropertyCollection extends ComplexPropertyCollection<
       ServiceObject ewsObject, PropertyDefinition propertyDefinition)
       throws Exception {
     List<ExtendedProperty> propertiesToSet =
-        new ArrayList<ExtendedProperty>();
+            new ArrayList<>();
 
     propertiesToSet.addAll(this.getAddedItems());
     propertiesToSet.addAll(this.getModifiedItems());

@@ -54,164 +54,164 @@ public final class FolderPermission extends ComplexProperty implements IComplexP
 
   private static LazyMember<Map<FolderPermissionLevel, FolderPermission>>
       defaultPermissions =
-      new LazyMember<Map<FolderPermissionLevel, FolderPermission>>(
-          new ILazyMember<Map<FolderPermissionLevel, FolderPermission>>() {
-            @Override
-            public Map<FolderPermissionLevel, FolderPermission>
-            createInstance() {
-              Map<FolderPermissionLevel, FolderPermission> result =
-                  new HashMap<FolderPermissionLevel, FolderPermission>();
+          new LazyMember<>(
+                  new ILazyMember<Map<FolderPermissionLevel, FolderPermission>>() {
+                    @Override
+                    public Map<FolderPermissionLevel, FolderPermission>
+                    createInstance() {
+                      Map<FolderPermissionLevel, FolderPermission> result =
+                              new HashMap<>();
 
-              /** The default permissions. */
-              FolderPermission permission = new FolderPermission();
-              permission.canCreateItems = false;
-              permission.canCreateSubFolders = false;
-              permission.deleteItems = PermissionScope.None;
-              permission.editItems = PermissionScope.None;
-              permission.isFolderContact = false;
-              permission.isFolderOwner = false;
-              permission.isFolderVisible = false;
-              permission.readItems = FolderPermissionReadAccess.None;
+                      /** The default permissions. */
+                      FolderPermission permission = new FolderPermission();
+                      permission.canCreateItems = false;
+                      permission.canCreateSubFolders = false;
+                      permission.deleteItems = PermissionScope.None;
+                      permission.editItems = PermissionScope.None;
+                      permission.isFolderContact = false;
+                      permission.isFolderOwner = false;
+                      permission.isFolderVisible = false;
+                      permission.readItems = FolderPermissionReadAccess.None;
 
-              result.put(FolderPermissionLevel.None, permission);
+                      result.put(FolderPermissionLevel.None, permission);
 
-              permission = new FolderPermission();
-              permission.canCreateItems = true;
-              permission.canCreateSubFolders = false;
-              permission.deleteItems = PermissionScope.None;
-              permission.editItems = PermissionScope.None;
-              permission.isFolderContact = false;
-              permission.isFolderOwner = false;
-              permission.isFolderVisible = true;
-              permission.readItems = FolderPermissionReadAccess.None;
+                      permission = new FolderPermission();
+                      permission.canCreateItems = true;
+                      permission.canCreateSubFolders = false;
+                      permission.deleteItems = PermissionScope.None;
+                      permission.editItems = PermissionScope.None;
+                      permission.isFolderContact = false;
+                      permission.isFolderOwner = false;
+                      permission.isFolderVisible = true;
+                      permission.readItems = FolderPermissionReadAccess.None;
 
-              result.put(FolderPermissionLevel.Contributor, permission);
+                      result.put(FolderPermissionLevel.Contributor, permission);
 
-              permission = new FolderPermission();
-              permission.canCreateItems = false;
-              permission.canCreateSubFolders = false;
-              permission.deleteItems = PermissionScope.None;
-              permission.editItems = PermissionScope.None;
-              permission.isFolderContact = false;
-              permission.isFolderOwner = false;
-              permission.isFolderVisible = true;
-              permission.readItems = FolderPermissionReadAccess.
-                  FullDetails;
+                      permission = new FolderPermission();
+                      permission.canCreateItems = false;
+                      permission.canCreateSubFolders = false;
+                      permission.deleteItems = PermissionScope.None;
+                      permission.editItems = PermissionScope.None;
+                      permission.isFolderContact = false;
+                      permission.isFolderOwner = false;
+                      permission.isFolderVisible = true;
+                      permission.readItems = FolderPermissionReadAccess.
+                              FullDetails;
 
-              result.put(FolderPermissionLevel.Reviewer, permission);
+                      result.put(FolderPermissionLevel.Reviewer, permission);
 
-              permission = new FolderPermission();
-              permission.canCreateItems = true;
-              permission.canCreateSubFolders = false;
-              permission.deleteItems = PermissionScope.Owned;
-              permission.editItems = PermissionScope.None;
-              permission.isFolderContact = false;
-              permission.isFolderOwner = false;
-              permission.isFolderVisible = true;
-              permission.readItems = FolderPermissionReadAccess.
-                  FullDetails;
+                      permission = new FolderPermission();
+                      permission.canCreateItems = true;
+                      permission.canCreateSubFolders = false;
+                      permission.deleteItems = PermissionScope.Owned;
+                      permission.editItems = PermissionScope.None;
+                      permission.isFolderContact = false;
+                      permission.isFolderOwner = false;
+                      permission.isFolderVisible = true;
+                      permission.readItems = FolderPermissionReadAccess.
+                              FullDetails;
 
-              result.put(FolderPermissionLevel.NoneditingAuthor,
-                  permission);
+                      result.put(FolderPermissionLevel.NoneditingAuthor,
+                              permission);
 
-              permission = new FolderPermission();
-              permission.canCreateItems = true;
-              permission.canCreateSubFolders = false;
-              permission.deleteItems = PermissionScope.Owned;
-              permission.editItems = PermissionScope.Owned;
-              permission.isFolderContact = false;
-              permission.isFolderOwner = false;
-              permission.isFolderVisible = true;
-              permission.readItems = FolderPermissionReadAccess.
-                  FullDetails;
+                      permission = new FolderPermission();
+                      permission.canCreateItems = true;
+                      permission.canCreateSubFolders = false;
+                      permission.deleteItems = PermissionScope.Owned;
+                      permission.editItems = PermissionScope.Owned;
+                      permission.isFolderContact = false;
+                      permission.isFolderOwner = false;
+                      permission.isFolderVisible = true;
+                      permission.readItems = FolderPermissionReadAccess.
+                              FullDetails;
 
-              result.put(FolderPermissionLevel.Author, permission);
+                      result.put(FolderPermissionLevel.Author, permission);
 
-              permission = new FolderPermission();
-              permission.canCreateItems = true;
-              permission.canCreateSubFolders = true;
-              permission.deleteItems = PermissionScope.Owned;
-              permission.editItems = PermissionScope.Owned;
-              permission.isFolderContact = false;
-              permission.isFolderOwner = false;
-              permission.isFolderVisible = true;
-              permission.readItems = FolderPermissionReadAccess.
-                  FullDetails;
+                      permission = new FolderPermission();
+                      permission.canCreateItems = true;
+                      permission.canCreateSubFolders = true;
+                      permission.deleteItems = PermissionScope.Owned;
+                      permission.editItems = PermissionScope.Owned;
+                      permission.isFolderContact = false;
+                      permission.isFolderOwner = false;
+                      permission.isFolderVisible = true;
+                      permission.readItems = FolderPermissionReadAccess.
+                              FullDetails;
 
-              result.put(FolderPermissionLevel.PublishingAuthor,
-                  permission);
+                      result.put(FolderPermissionLevel.PublishingAuthor,
+                              permission);
 
-              permission = new FolderPermission();
-              permission.canCreateItems = true;
-              permission.canCreateSubFolders = false;
-              permission.deleteItems = PermissionScope.All;
-              permission.editItems = PermissionScope.All;
-              permission.isFolderContact = false;
-              permission.isFolderOwner = false;
-              permission.isFolderVisible = true;
-              permission.readItems = FolderPermissionReadAccess.
-                  FullDetails;
+                      permission = new FolderPermission();
+                      permission.canCreateItems = true;
+                      permission.canCreateSubFolders = false;
+                      permission.deleteItems = PermissionScope.All;
+                      permission.editItems = PermissionScope.All;
+                      permission.isFolderContact = false;
+                      permission.isFolderOwner = false;
+                      permission.isFolderVisible = true;
+                      permission.readItems = FolderPermissionReadAccess.
+                              FullDetails;
 
-              result.put(FolderPermissionLevel.Editor, permission);
+                      result.put(FolderPermissionLevel.Editor, permission);
 
-              permission = new FolderPermission();
-              permission.canCreateItems = true;
-              permission.canCreateSubFolders = true;
-              permission.deleteItems = PermissionScope.All;
-              permission.editItems = PermissionScope.All;
-              permission.isFolderContact = false;
-              permission.isFolderOwner = false;
-              permission.isFolderVisible = true;
-              permission.readItems = FolderPermissionReadAccess.
-                  FullDetails;
+                      permission = new FolderPermission();
+                      permission.canCreateItems = true;
+                      permission.canCreateSubFolders = true;
+                      permission.deleteItems = PermissionScope.All;
+                      permission.editItems = PermissionScope.All;
+                      permission.isFolderContact = false;
+                      permission.isFolderOwner = false;
+                      permission.isFolderVisible = true;
+                      permission.readItems = FolderPermissionReadAccess.
+                              FullDetails;
 
-              result.put(FolderPermissionLevel.PublishingEditor,
-                  permission);
+                      result.put(FolderPermissionLevel.PublishingEditor,
+                              permission);
 
-              permission = new FolderPermission();
-              permission.canCreateItems = true;
-              permission.canCreateSubFolders = true;
-              permission.deleteItems = PermissionScope.All;
-              permission.editItems = PermissionScope.All;
-              permission.isFolderContact = true;
-              permission.isFolderOwner = true;
-              permission.isFolderVisible = true;
-              permission.readItems = FolderPermissionReadAccess.
-                  FullDetails;
+                      permission = new FolderPermission();
+                      permission.canCreateItems = true;
+                      permission.canCreateSubFolders = true;
+                      permission.deleteItems = PermissionScope.All;
+                      permission.editItems = PermissionScope.All;
+                      permission.isFolderContact = true;
+                      permission.isFolderOwner = true;
+                      permission.isFolderVisible = true;
+                      permission.readItems = FolderPermissionReadAccess.
+                              FullDetails;
 
-              result.put(FolderPermissionLevel.Owner, permission);
+                      result.put(FolderPermissionLevel.Owner, permission);
 
-              permission = new FolderPermission();
-              permission.canCreateItems = false;
-              permission.canCreateSubFolders = false;
-              permission.deleteItems = PermissionScope.None;
-              permission.editItems = PermissionScope.None;
-              permission.isFolderContact = false;
-              permission.isFolderOwner = false;
-              permission.isFolderVisible = false;
-              permission.readItems = FolderPermissionReadAccess.TimeOnly;
+                      permission = new FolderPermission();
+                      permission.canCreateItems = false;
+                      permission.canCreateSubFolders = false;
+                      permission.deleteItems = PermissionScope.None;
+                      permission.editItems = PermissionScope.None;
+                      permission.isFolderContact = false;
+                      permission.isFolderOwner = false;
+                      permission.isFolderVisible = false;
+                      permission.readItems = FolderPermissionReadAccess.TimeOnly;
 
-              result.put(FolderPermissionLevel.FreeBusyTimeOnly,
-                  permission);
+                      result.put(FolderPermissionLevel.FreeBusyTimeOnly,
+                              permission);
 
-              permission = new FolderPermission();
-              permission.canCreateItems = false;
-              permission.canCreateSubFolders = false;
-              permission.deleteItems = PermissionScope.None;
-              permission.editItems = PermissionScope.None;
-              permission.isFolderContact = false;
-              permission.isFolderOwner = false;
-              permission.isFolderVisible = false;
-              permission.readItems = FolderPermissionReadAccess.
-                  TimeAndSubjectAndLocation;
+                      permission = new FolderPermission();
+                      permission.canCreateItems = false;
+                      permission.canCreateSubFolders = false;
+                      permission.deleteItems = PermissionScope.None;
+                      permission.editItems = PermissionScope.None;
+                      permission.isFolderContact = false;
+                      permission.isFolderOwner = false;
+                      permission.isFolderVisible = false;
+                      permission.readItems = FolderPermissionReadAccess.
+                              TimeAndSubjectAndLocation;
 
-              result
-                  .put(FolderPermissionLevel.
-                          FreeBusyTimeAndSubjectAndLocation,
-                      permission);
-              return result;
-            }
-          });
+                      result
+                              .put(FolderPermissionLevel.
+                                              FreeBusyTimeAndSubjectAndLocation,
+                                      permission);
+                      return result;
+                    }
+                  });
   //End Region
 
   /**
@@ -219,49 +219,49 @@ public final class FolderPermission extends ComplexProperty implements IComplexP
    * the same levels.
    */
   private static LazyMember<List<FolderPermission>> levelVariants =
-      new LazyMember<List<FolderPermission>>(
-          new ILazyMember<List<FolderPermission>>() {
-            @Override
-            public List<FolderPermission> createInstance() {
-              List<FolderPermission> results =
-                  new ArrayList<FolderPermission>();
+          new LazyMember<>(
+                  new ILazyMember<List<FolderPermission>>() {
+                    @Override
+                    public List<FolderPermission> createInstance() {
+                      List<FolderPermission> results =
+                              new ArrayList<>();
 
-              FolderPermission permissionNone = FolderPermission.
-                  defaultPermissions
-                  .getMember().get(FolderPermissionLevel.None);
-              FolderPermission permissionOwner = FolderPermission.
-                  defaultPermissions
-                  .getMember().get(FolderPermissionLevel.Owner);
+                      FolderPermission permissionNone = FolderPermission.
+                              defaultPermissions
+                              .getMember().get(FolderPermissionLevel.None);
+                      FolderPermission permissionOwner = FolderPermission.
+                              defaultPermissions
+                              .getMember().get(FolderPermissionLevel.Owner);
 
-              // PermissionLevelNoneOption1
-              FolderPermission permission;
-              try {
-                permission = (FolderPermission) permissionNone.clone();
-                permission.isFolderVisible = true;
-                results.add(permission);
+                      // PermissionLevelNoneOption1
+                      FolderPermission permission;
+                      try {
+                        permission = (FolderPermission) permissionNone.clone();
+                        permission.isFolderVisible = true;
+                        results.add(permission);
 
-                // PermissionLevelNoneOption2
-                permission = (FolderPermission) permissionNone.clone();
-                permission.isFolderContact = true;
-                results.add(permission);
+                        // PermissionLevelNoneOption2
+                        permission = (FolderPermission) permissionNone.clone();
+                        permission.isFolderContact = true;
+                        results.add(permission);
 
-                // PermissionLevelNoneOption3
-                permission = (FolderPermission) permissionNone.clone();
-                permission.isFolderContact = true;
-                permission.isFolderVisible = true;
-                results.add(permission);
+                        // PermissionLevelNoneOption3
+                        permission = (FolderPermission) permissionNone.clone();
+                        permission.isFolderContact = true;
+                        permission.isFolderVisible = true;
+                        results.add(permission);
 
-                // PermissionLevelOwnerOption1
-                permission = (FolderPermission) permissionOwner.clone();
-                permission.isFolderContact = false;
-                results.add(permission);
+                        // PermissionLevelOwnerOption1
+                        permission = (FolderPermission) permissionOwner.clone();
+                        permission.isFolderContact = false;
+                        results.add(permission);
 
-              } catch (CloneNotSupportedException e) {
-                LOG.error(e);
-              }
-              return results;
-            }
-          });
+                      } catch (CloneNotSupportedException e) {
+                        LOG.error(e);
+                      }
+                      return results;
+                    }
+                  });
 
   /**
    * The user id.

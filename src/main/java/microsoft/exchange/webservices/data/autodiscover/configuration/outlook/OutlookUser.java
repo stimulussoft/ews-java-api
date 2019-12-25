@@ -53,32 +53,32 @@ final class OutlookUser {
    */
   private static LazyMember<Map<UserSettingName, IFunc<OutlookUser, String>>>
       converterDictionary =
-      new LazyMember<Map<UserSettingName, IFunc<OutlookUser, String>>>(
-          new ILazyMember<Map<UserSettingName, IFunc<OutlookUser, String>>>() {
-            public Map<UserSettingName, IFunc<OutlookUser, String>> createInstance() {
-              Map<UserSettingName, IFunc<OutlookUser, String>> results =
-                  new HashMap<UserSettingName, IFunc<OutlookUser, String>>();
-              results.put(UserSettingName.UserDisplayName,
-                  new IFunc<OutlookUser, String>() {
-                    public String func(OutlookUser arg) {
-                      return arg.displayName;
-                    }
+          new LazyMember<>(
+                  new ILazyMember<Map<UserSettingName, IFunc<OutlookUser, String>>>() {
+                      public Map<UserSettingName, IFunc<OutlookUser, String>> createInstance() {
+                          Map<UserSettingName, IFunc<OutlookUser, String>> results =
+                                  new HashMap<>();
+                          results.put(UserSettingName.UserDisplayName,
+                                  new IFunc<OutlookUser, String>() {
+                                      public String func(OutlookUser arg) {
+                                          return arg.displayName;
+                                      }
+                                  });
+                          results.put(UserSettingName.UserDN,
+                                  new IFunc<OutlookUser, String>() {
+                                      public String func(OutlookUser arg) {
+                                          return arg.legacyDN;
+                                      }
+                                  });
+                          results.put(UserSettingName.UserDeploymentId,
+                                  new IFunc<OutlookUser, String>() {
+                                      public String func(OutlookUser arg) {
+                                          return arg.deploymentId;
+                                      }
+                                  });
+                          return results;
+                      }
                   });
-              results.put(UserSettingName.UserDN,
-                  new IFunc<OutlookUser, String>() {
-                    public String func(OutlookUser arg) {
-                      return arg.legacyDN;
-                    }
-                  });
-              results.put(UserSettingName.UserDeploymentId,
-                  new IFunc<OutlookUser, String>() {
-                    public String func(OutlookUser arg) {
-                      return arg.deploymentId;
-                    }
-                  });
-              return results;
-            }
-          });
 
   /**
    * The display name.
@@ -113,18 +113,21 @@ final class OutlookUser {
       reader.read();
 
       if (reader.getNodeType().getNodeType() == XmlNodeType.START_ELEMENT) {
-        if (reader.getLocalName().equals(XmlElementNames.DisplayName)) {
-          this.displayName = reader.readElementValue();
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.LegacyDN)) {
-          this.legacyDN = reader.readElementValue();
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.DeploymentId)) {
-          this.deploymentId = reader.readElementValue();
-        } else {
-          reader.skipCurrentElement();
+          switch (reader.getLocalName()) {
+              case XmlElementNames.DisplayName:
+                  this.displayName = reader.readElementValue();
+                  break;
+              case XmlElementNames.LegacyDN:
+                  this.legacyDN = reader.readElementValue();
+                  break;
+              case XmlElementNames.DeploymentId:
+                  this.deploymentId = reader.readElementValue();
+                  break;
+              default:
+                  reader.skipCurrentElement();
 
-        }
+                  break;
+          }
       }
     } while (!reader.isEndElement(XmlNamespace.NotSpecified,
         XmlElementNames.User));
@@ -142,8 +145,7 @@ final class OutlookUser {
     // In English: collect converters that are
     //contained in the requested settings.
     Map<UserSettingName, IFunc<OutlookUser, String>>
-        converterQuery = new HashMap<UserSettingName,
-        IFunc<OutlookUser, String>>();
+        converterQuery = new HashMap<>();
     for (Entry<UserSettingName, IFunc<OutlookUser, String>> map : converterDictionary.getMember()
         .entrySet()) {
       if (requestedSettings.contains(map.getKey())) {

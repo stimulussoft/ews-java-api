@@ -113,28 +113,28 @@ public final class OofSettings extends ComplexProperty implements ISelfValidate 
   @Override
   public boolean tryReadElementFromXml(EwsServiceXmlReader reader)
       throws Exception {
-    if (reader.getLocalName().equals(XmlElementNames.OofState)) {
-      this.state = reader.readValue(OofState.class);
-      return true;
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.ExternalAudience)) {
-      this.externalAudience = reader.readValue(OofExternalAudience.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.Duration)) {
-      this.duration = new TimeWindow();
-      this.duration.loadFromXml(reader);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.InternalReply)) {
-      this.internalReply = new OofReply();
-      this.internalReply.loadFromXml(reader, reader.getLocalName());
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.ExternalReply)) {
-      this.externalReply = new OofReply();
-      this.externalReply.loadFromXml(reader, reader.getLocalName());
-      return true;
-    } else {
-      return false;
-    }
+      switch (reader.getLocalName()) {
+          case XmlElementNames.OofState:
+              this.state = reader.readValue(OofState.class);
+              return true;
+          case XmlElementNames.ExternalAudience:
+              this.externalAudience = reader.readValue(OofExternalAudience.class);
+              return true;
+          case XmlElementNames.Duration:
+              this.duration = new TimeWindow();
+              this.duration.loadFromXml(reader);
+              return true;
+          case XmlElementNames.InternalReply:
+              this.internalReply = new OofReply();
+              this.internalReply.loadFromXml(reader, reader.getLocalName());
+              return true;
+          case XmlElementNames.ExternalReply:
+              this.externalReply = new OofReply();
+              this.externalReply.loadFromXml(reader, reader.getLocalName());
+              return true;
+          default:
+              return false;
+      }
   }
 
   /**

@@ -91,21 +91,21 @@ public final class PropertySet implements ISelfValidate,
    * Maps BasePropertySet values to EWS's BaseShape values.
    */
   private static LazyMember<Map<BasePropertySet, String>> defaultPropertySetMap =
-      new LazyMember<Map<BasePropertySet, String>>(new
-                                                       ILazyMember<Map<BasePropertySet, String>>() {
-                                                         @Override
-                                                         public Map<BasePropertySet, String> createInstance() {
-                                                           Map<BasePropertySet, String> result = new
-                                                               HashMap<BasePropertySet, String>();
-                                                           result.put(BasePropertySet.IdOnly,
-                                                               BasePropertySet.IdOnly
-                                                                   .getBaseShapeValue());
-                                                           result.put(BasePropertySet.FirstClassProperties,
-                                                               BasePropertySet.FirstClassProperties
-                                                                   .getBaseShapeValue());
-                                                           return result;
-                                                         }
-                                                       });
+          new LazyMember<>(new
+                                   ILazyMember<Map<BasePropertySet, String>>() {
+                                     @Override
+                                     public Map<BasePropertySet, String> createInstance() {
+                                       Map<BasePropertySet, String> result = new
+                                               HashMap<>();
+                                       result.put(BasePropertySet.IdOnly,
+                                               BasePropertySet.IdOnly
+                                                       .getBaseShapeValue());
+                                       result.put(BasePropertySet.FirstClassProperties,
+                                               BasePropertySet.FirstClassProperties
+                                                       .getBaseShapeValue());
+                                       return result;
+                                     }
+                                   });
   /**
    * The base property set this property set is based upon.
    */
@@ -115,7 +115,7 @@ public final class PropertySet implements ISelfValidate,
    * The list of additional property included in this property set.
    */
   private List<PropertyDefinitionBase> additionalProperties = new
-      ArrayList<PropertyDefinitionBase>();
+          ArrayList<>();
 
   /**
    * The requested body type for get and find operations. If null, the
@@ -258,10 +258,9 @@ public final class PropertySet implements ISelfValidate,
     Iterator<PropertyDefinitionBase> property = properties.iterator();
     EwsUtilities.validateParamCollection(property, "property");
 
-    for (Iterator<PropertyDefinitionBase> it = properties.iterator(); it
-        .hasNext(); ) {
-      this.add(it.next());
-    }
+      for (PropertyDefinitionBase propertyDefinitionBase : properties) {
+          this.add(propertyDefinitionBase);
+      }
   }
 
   /**

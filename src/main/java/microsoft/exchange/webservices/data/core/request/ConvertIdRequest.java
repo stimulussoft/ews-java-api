@@ -55,7 +55,7 @@ public final class ConvertIdRequest extends
   /**
    * The ids.
    */
-  private List<AlternateIdBase> ids = new ArrayList<AlternateIdBase>();
+  private List<AlternateIdBase> ids = new ArrayList<>();
 
   /**
    * Initializes a new instance of the class.

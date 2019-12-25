@@ -188,7 +188,7 @@ public class Item extends ServiceObject {
     this.throwIfThisIsNew();
     this.throwIfThisIsAttachment();
 
-    ArrayList<Item> itemArry = new ArrayList<Item>();
+    ArrayList<Item> itemArry = new ArrayList<>();
     itemArry.add(this);
     this.getService().internalLoadPropertiesForItems(itemArry, propertySet,
         ServiceErrorHandling.ThrowOnError);
@@ -526,20 +526,17 @@ public class Item extends ServiceObject {
         && (this.getService().getRequestedServerVersion().ordinal() >= ExchangeVersion.Exchange2010_SP2
         .ordinal())) {
 
-      ListIterator<Attachment> items = this.getAttachments().getItems()
-          .listIterator();
+        for (Attachment attachment : this.getAttachments().getItems()) {
 
-      while (items.hasNext()) {
+            ItemAttachment itemAttachment = (ItemAttachment) attachment;
 
-        ItemAttachment itemAttachment = (ItemAttachment) items.next();
-
-        if ((itemAttachment.getItem() != null)
-            && itemAttachment
-            .getItem()
-            .getIsTimeZoneHeaderRequired(false /* isUpdateOperation */)) {
-          return true;
+            if ((itemAttachment.getItem() != null)
+                    && itemAttachment
+                    .getItem()
+                    .getIsTimeZoneHeaderRequired(false /* isUpdateOperation */)) {
+                return true;
+            }
         }
-      }
     }
 
 		/*

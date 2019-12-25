@@ -112,22 +112,23 @@ public final class LegacyAvailabilityTimeZone extends ComplexProperty {
   @Override
   public boolean tryReadElementFromXml(EwsServiceXmlReader reader)
       throws Exception {
-    if (reader.getLocalName().equals(XmlElementNames.Bias)) {
-      this.bias = new TimeSpan((long)
-          reader.readElementValue(Integer.class) * 60 * 1000);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.StandardTime)) {
-      this.standardTime = new LegacyAvailabilityTimeZoneTime();
-      this.standardTime.loadFromXml(reader, reader.getLocalName());
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.DaylightTime)) {
-      this.daylightTime = new LegacyAvailabilityTimeZoneTime();
-      this.daylightTime.loadFromXml(reader, reader.getLocalName());
-      return true;
-    } else {
+      switch (reader.getLocalName()) {
+          case XmlElementNames.Bias:
+              this.bias = new TimeSpan((long)
+                      reader.readElementValue(Integer.class) * 60 * 1000);
+              return true;
+          case XmlElementNames.StandardTime:
+              this.standardTime = new LegacyAvailabilityTimeZoneTime();
+              this.standardTime.loadFromXml(reader, reader.getLocalName());
+              return true;
+          case XmlElementNames.DaylightTime:
+              this.daylightTime = new LegacyAvailabilityTimeZoneTime();
+              this.daylightTime.loadFromXml(reader, reader.getLocalName());
+              return true;
+          default:
 
-      return false;
-    }
+              return false;
+      }
 
   }
 

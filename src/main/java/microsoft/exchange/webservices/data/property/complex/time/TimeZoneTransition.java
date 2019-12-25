@@ -75,24 +75,22 @@ public class TimeZoneTransition extends ComplexProperty {
    */
   public static TimeZoneTransition create(TimeZoneDefinition timeZoneDefinition, String xmlElementName)
       throws ServiceLocalException {
-    if (xmlElementName.equals(XmlElementNames.AbsoluteDateTransition)) {
-      return new AbsoluteDateTransition(timeZoneDefinition);
-    } else if (xmlElementName
-        .equals(XmlElementNames.AbsoluteDateTransition)) {
-      return new AbsoluteDateTransition(timeZoneDefinition);
-    } else if (xmlElementName
-        .equals(XmlElementNames.RecurringDayTransition)) {
-      return new RelativeDayOfMonthTransition(timeZoneDefinition);
-    } else if (xmlElementName
-        .equals(XmlElementNames.RecurringDateTransition)) {
-      return new AbsoluteDayOfMonthTransition(timeZoneDefinition);
-    } else if (xmlElementName.equals(XmlElementNames.Transition)) {
-      return new TimeZoneTransition(timeZoneDefinition);
-    } else {
-      throw new ServiceLocalException(String
-          .format("Unknown time zone transition type: %s",
-              xmlElementName));
-    }
+      switch (xmlElementName) {
+          case XmlElementNames.AbsoluteDateTransition:
+              return new AbsoluteDateTransition(timeZoneDefinition);
+          case XmlElementNames.AbsoluteDateTransition:
+              return new AbsoluteDateTransition(timeZoneDefinition);
+          case XmlElementNames.RecurringDayTransition:
+              return new RelativeDayOfMonthTransition(timeZoneDefinition);
+          case XmlElementNames.RecurringDateTransition:
+              return new AbsoluteDayOfMonthTransition(timeZoneDefinition);
+          case XmlElementNames.Transition:
+              return new TimeZoneTransition(timeZoneDefinition);
+          default:
+              throw new ServiceLocalException(String
+                      .format("Unknown time zone transition type: %s",
+                              xmlElementName));
+      }
   }
 
   /**

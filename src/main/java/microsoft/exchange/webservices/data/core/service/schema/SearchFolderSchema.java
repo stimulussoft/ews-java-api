@@ -56,20 +56,20 @@ public class SearchFolderSchema extends FolderSchema {
    * Defines the SearchParameters property.
    */
   public static final PropertyDefinition SearchParameters =
-      new ComplexPropertyDefinition<SearchFolderParameters>(
-          SearchFolderParameters.class,
-          XmlElementNames.SearchParameters,
-          FieldUris.SearchParameters,
-          EnumSet.of(PropertyDefinitionFlags.CanSet,
-              PropertyDefinitionFlags.CanUpdate,
-              PropertyDefinitionFlags.AutoInstantiateOnRead),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<SearchFolderParameters>() {
-            @Override
-            public SearchFolderParameters createComplexProperty() {
-              return new SearchFolderParameters();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  SearchFolderParameters.class,
+                  XmlElementNames.SearchParameters,
+                  FieldUris.SearchParameters,
+                  EnumSet.of(PropertyDefinitionFlags.CanSet,
+                          PropertyDefinitionFlags.CanUpdate,
+                          PropertyDefinitionFlags.AutoInstantiateOnRead),
+                  ExchangeVersion.Exchange2007_SP1,
+                  new ICreateComplexPropertyDelegate<SearchFolderParameters>() {
+                      @Override
+                      public SearchFolderParameters createComplexProperty() {
+                          return new SearchFolderParameters();
+                      }
+                  });
 
   // This must be declared after the property definitions
   /**

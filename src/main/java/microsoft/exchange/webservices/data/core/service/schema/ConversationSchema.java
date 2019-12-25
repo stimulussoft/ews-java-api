@@ -216,16 +216,16 @@ public class ConversationSchema extends ServiceObjectSchema {
   /**
    * Defines the Id property.
    */
-  public static final PropertyDefinition Id = new ComplexPropertyDefinition<ConversationId>(
-      ConversationId.class,
-      XmlElementNames.ConversationId, FieldUris.ConversationId, EnumSet
-      .of(PropertyDefinitionFlags.CanFind),
-      ExchangeVersion.Exchange2010_SP1,
-      new ICreateComplexPropertyDelegate<ConversationId>() {
-        public ConversationId createComplexProperty() {
-          return new ConversationId();
-        }
-      });
+  public static final PropertyDefinition Id = new ComplexPropertyDefinition<>(
+          ConversationId.class,
+          XmlElementNames.ConversationId, FieldUris.ConversationId, EnumSet
+          .of(PropertyDefinitionFlags.CanFind),
+          ExchangeVersion.Exchange2010_SP1,
+          new ICreateComplexPropertyDelegate<ConversationId>() {
+              public ConversationId createComplexProperty() {
+                  return new ConversationId();
+              }
+          });
 
   /**
    * Defines the Topic property.
@@ -242,103 +242,103 @@ public class ConversationSchema extends ServiceObjectSchema {
    * Defines the UniqueRecipients property.
    */
   public static final PropertyDefinition UniqueRecipients = new
-      ComplexPropertyDefinition<StringList>(
-      StringList.class,
-      XmlElementNames.UniqueRecipients,
-      FieldUris.UniqueRecipients, EnumSet
-      .of(PropertyDefinitionFlags.CanFind),
-      ExchangeVersion.Exchange2010_SP1,
-      new ICreateComplexPropertyDelegate<StringList>() {
-        public StringList createComplexProperty() {
-          return new StringList();
-        }
-      });
+          ComplexPropertyDefinition<>(
+          StringList.class,
+          XmlElementNames.UniqueRecipients,
+          FieldUris.UniqueRecipients, EnumSet
+          .of(PropertyDefinitionFlags.CanFind),
+          ExchangeVersion.Exchange2010_SP1,
+          new ICreateComplexPropertyDelegate<StringList>() {
+              public StringList createComplexProperty() {
+                  return new StringList();
+              }
+          });
 
 
   /**
    * Defines the GlobalUniqueRecipients property.
    */
   public static final PropertyDefinition GlobalUniqueRecipients =
-      new ComplexPropertyDefinition<StringList>(
-          StringList.class,
-          XmlElementNames.GlobalUniqueRecipients,
-          FieldUris.GlobalUniqueRecipients,
-          EnumSet
-              .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<StringList>() {
-            public StringList createComplexProperty() {
-              return new StringList();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  StringList.class,
+                  XmlElementNames.GlobalUniqueRecipients,
+                  FieldUris.GlobalUniqueRecipients,
+                  EnumSet
+                          .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1,
+                  new ICreateComplexPropertyDelegate<StringList>() {
+                      public StringList createComplexProperty() {
+                          return new StringList();
+                      }
+                  });
 
   /**
    * Defines the UniqueUnreadSenders property.
    */
   public static final PropertyDefinition UniqueUnreadSenders =
-      new ComplexPropertyDefinition<StringList>(
-          StringList.class,
-          XmlElementNames.UniqueUnreadSenders,
-          FieldUris.UniqueUnreadSenders,
-          EnumSet
-              .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<StringList>() {
-            public StringList createComplexProperty() {
-              return new StringList();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  StringList.class,
+                  XmlElementNames.UniqueUnreadSenders,
+                  FieldUris.UniqueUnreadSenders,
+                  EnumSet
+                          .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1,
+                  new ICreateComplexPropertyDelegate<StringList>() {
+                      public StringList createComplexProperty() {
+                          return new StringList();
+                      }
+                  });
 
   /**
    * Defines the GlobalUniqueUnreadSenders property.
    */
   public static final PropertyDefinition GlobalUniqueUnreadSenders =
-      new ComplexPropertyDefinition<StringList>(
-          StringList.class,
-          XmlElementNames.GlobalUniqueUnreadSenders,
-          FieldUris.GlobalUniqueUnreadSenders,
-          EnumSet
-              .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<StringList>() {
-            public StringList createComplexProperty() {
-              return new StringList();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  StringList.class,
+                  XmlElementNames.GlobalUniqueUnreadSenders,
+                  FieldUris.GlobalUniqueUnreadSenders,
+                  EnumSet
+                          .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1,
+                  new ICreateComplexPropertyDelegate<StringList>() {
+                      public StringList createComplexProperty() {
+                          return new StringList();
+                      }
+                  });
 
   /**
    * Defines the UniqueSenders property.
    */
   public static final PropertyDefinition UniqueSenders =
-      new ComplexPropertyDefinition<StringList>(
-          StringList.class,
-          XmlElementNames.UniqueSenders,
-          FieldUris.UniqueSenders,
-          EnumSet
-              .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<StringList>() {
-            public StringList createComplexProperty() {
-              return new StringList();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  StringList.class,
+                  XmlElementNames.UniqueSenders,
+                  FieldUris.UniqueSenders,
+                  EnumSet
+                          .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1,
+                  new ICreateComplexPropertyDelegate<StringList>() {
+                      public StringList createComplexProperty() {
+                          return new StringList();
+                      }
+                  });
 
   /**
    * Defines the GlobalUniqueSenders property.
    */
   public static final PropertyDefinition GlobalUniqueSenders =
-      new ComplexPropertyDefinition<StringList>(
-          StringList.class,
-          XmlElementNames.GlobalUniqueSenders,
-          FieldUris.GlobalUniqueSenders,
-          EnumSet
-              .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<StringList>() {
-            public StringList createComplexProperty() {
-              return new StringList();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  StringList.class,
+                  XmlElementNames.GlobalUniqueSenders,
+                  FieldUris.GlobalUniqueSenders,
+                  EnumSet
+                          .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1,
+                  new ICreateComplexPropertyDelegate<StringList>() {
+                      public StringList createComplexProperty() {
+                          return new StringList();
+                      }
+                  });
 
   /**
    * Defines the LastDeliveryTime property.
@@ -366,59 +366,59 @@ public class ConversationSchema extends ServiceObjectSchema {
    * Defines the Categories property.
    */
   public static final PropertyDefinition Categories =
-      new ComplexPropertyDefinition<StringList>(
-          StringList.class,
-          XmlElementNames.Categories,
-          FieldUris.Categories,
-          EnumSet
-              .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<StringList>() {
-            public StringList createComplexProperty() {
-              return new StringList();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  StringList.class,
+                  XmlElementNames.Categories,
+                  FieldUris.Categories,
+                  EnumSet
+                          .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1,
+                  new ICreateComplexPropertyDelegate<StringList>() {
+                      public StringList createComplexProperty() {
+                          return new StringList();
+                      }
+                  });
 
   /**
    * Defines the GlobalCategories property.
    */
   public static final PropertyDefinition GlobalCategories =
-      new ComplexPropertyDefinition<StringList>(
-          StringList.class,
-          XmlElementNames.GlobalCategories,
-          FieldUris.GlobalCategories,
-          EnumSet
-              .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<StringList>() {
-            public StringList createComplexProperty() {
-              return new StringList();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  StringList.class,
+                  XmlElementNames.GlobalCategories,
+                  FieldUris.GlobalCategories,
+                  EnumSet
+                          .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1,
+                  new ICreateComplexPropertyDelegate<StringList>() {
+                      public StringList createComplexProperty() {
+                          return new StringList();
+                      }
+                  });
 
   /**
    * Defines the FlagStatus property.
    */
   public static final PropertyDefinition FlagStatus =
-      new GenericPropertyDefinition<ConversationFlagStatus>(
-          ConversationFlagStatus.class,
-          XmlElementNames.FlagStatus,
-          FieldUris.FlagStatus,
-          EnumSet
-              .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1);
+          new GenericPropertyDefinition<>(
+                  ConversationFlagStatus.class,
+                  XmlElementNames.FlagStatus,
+                  FieldUris.FlagStatus,
+                  EnumSet
+                          .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1);
 
   /**
    * Defines the GlobalFlagStatus property.
    */
   public static final PropertyDefinition GlobalFlagStatus =
-      new GenericPropertyDefinition<ConversationFlagStatus>(
-          ConversationFlagStatus.class,
-          XmlElementNames.GlobalFlagStatus,
-          FieldUris.GlobalFlagStatus,
-          EnumSet
-              .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1);
+          new GenericPropertyDefinition<>(
+                  ConversationFlagStatus.class,
+                  XmlElementNames.GlobalFlagStatus,
+                  FieldUris.GlobalFlagStatus,
+                  EnumSet
+                          .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1);
 
   /**
    * Defines the HasAttachments property.
@@ -512,95 +512,95 @@ public class ConversationSchema extends ServiceObjectSchema {
    * Defines the ItemClasses property.
    */
   public static final PropertyDefinition ItemClasses =
-      new ComplexPropertyDefinition<StringList>(
-          StringList.class,
-          XmlElementNames.ItemClasses,
-          FieldUris.ItemClasses,
-          EnumSet
-              .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<StringList>() {
-            public StringList createComplexProperty() {
-              return new StringList(XmlElementNames.
-                  ItemClass);
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  StringList.class,
+                  XmlElementNames.ItemClasses,
+                  FieldUris.ItemClasses,
+                  EnumSet
+                          .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1,
+                  new ICreateComplexPropertyDelegate<StringList>() {
+                      public StringList createComplexProperty() {
+                          return new StringList(XmlElementNames.
+                                  ItemClass);
+                      }
+                  });
 
   /**
    * Defines the GlobalItemClasses property.
    */
   public static final PropertyDefinition GlobalItemClasses =
-      new ComplexPropertyDefinition<StringList>(
-          StringList.class,
-          XmlElementNames.GlobalItemClasses,
-          FieldUris.GlobalItemClasses,
-          EnumSet
-              .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<StringList>() {
-            public StringList createComplexProperty() {
-              return new StringList(XmlElementNames.
-                  ItemClass);
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  StringList.class,
+                  XmlElementNames.GlobalItemClasses,
+                  FieldUris.GlobalItemClasses,
+                  EnumSet
+                          .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1,
+                  new ICreateComplexPropertyDelegate<StringList>() {
+                      public StringList createComplexProperty() {
+                          return new StringList(XmlElementNames.
+                                  ItemClass);
+                      }
+                  });
 
   /**
    * Defines the Importance property.
    */
   public static final PropertyDefinition Importance =
-      new GenericPropertyDefinition<microsoft.exchange.webservices.data.core.enumeration.property.Importance>(
-          Importance.class,
-          XmlElementNames.Importance,
-          FieldUris.Importance,
-          EnumSet
-              .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1);
+          new GenericPropertyDefinition<>(
+                  Importance.class,
+                  XmlElementNames.Importance,
+                  FieldUris.Importance,
+                  EnumSet
+                          .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1);
 
   /**
    * Defines the GlobalImportance property.
    */
   public static final PropertyDefinition GlobalImportance =
-      new GenericPropertyDefinition<Importance>(
-          Importance.class,
-          XmlElementNames.GlobalImportance,
-          FieldUris.GlobalImportance,
-          EnumSet
-              .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1);
+          new GenericPropertyDefinition<>(
+                  Importance.class,
+                  XmlElementNames.GlobalImportance,
+                  FieldUris.GlobalImportance,
+                  EnumSet
+                          .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1);
 
   /**
    * Defines the ItemIds property.
    */
   public static final PropertyDefinition ItemIds =
-      new ComplexPropertyDefinition<ItemIdCollection>(
-          ItemIdCollection.class,
-          XmlElementNames.ItemIds,
-          FieldUris.ItemIds,
-          EnumSet
-              .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<ItemIdCollection>() {
-            public ItemIdCollection createComplexProperty() {
-              return new ItemIdCollection();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  ItemIdCollection.class,
+                  XmlElementNames.ItemIds,
+                  FieldUris.ItemIds,
+                  EnumSet
+                          .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1,
+                  new ICreateComplexPropertyDelegate<ItemIdCollection>() {
+                      public ItemIdCollection createComplexProperty() {
+                          return new ItemIdCollection();
+                      }
+                  });
 
   /**
    * Defines the GlobalItemIds property.
    */
   public static final PropertyDefinition GlobalItemIds =
-      new ComplexPropertyDefinition<ItemIdCollection>(
-          ItemIdCollection.class,
-          XmlElementNames.GlobalItemIds,
-          FieldUris.GlobalItemIds,
-          EnumSet
-              .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<ItemIdCollection>() {
-            public ItemIdCollection createComplexProperty() {
-              return new ItemIdCollection();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  ItemIdCollection.class,
+                  XmlElementNames.GlobalItemIds,
+                  FieldUris.GlobalItemIds,
+                  EnumSet
+                          .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010_SP1,
+                  new ICreateComplexPropertyDelegate<ItemIdCollection>() {
+                      public ItemIdCollection createComplexProperty() {
+                          return new ItemIdCollection();
+                      }
+                  });
 
   /**
    * This must be declared after the property definitions

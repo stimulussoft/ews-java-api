@@ -41,7 +41,7 @@ public final class ChangeCollection<TChange extends Change> implements
   /**
    * The changes.
    */
-  private List<TChange> changes = new ArrayList<TChange>();
+  private List<TChange> changes = new ArrayList<>();
 
   /**
    * The sync state.

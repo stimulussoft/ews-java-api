@@ -73,7 +73,7 @@ public final class UserConfigurationDictionary extends ComplexProperty
    */
   public UserConfigurationDictionary() {
     super();
-    this.dictionary = new HashMap<Object, Object>();
+    this.dictionary = new HashMap<>();
   }
 
   /**
@@ -240,18 +240,15 @@ public final class UserConfigurationDictionary extends ComplexProperty
   public void writeElementsToXml(EwsServiceXmlWriter writer)
       throws XMLStreamException, ServiceXmlSerializationException {
     EwsUtilities.ewsAssert(writer != null, "UserConfigurationDictionary.WriteElementsToXml", "writer is null");
-    Iterator<Entry<Object, Object>> it = this.dictionary.entrySet()
-        .iterator();
-    while (it.hasNext()) {
-      Entry<Object, Object> dictionaryEntry = it.next();
-      writer.writeStartElement(XmlNamespace.Types,
-          XmlElementNames.DictionaryEntry);
-      this.writeObjectToXml(writer, XmlElementNames.DictionaryKey,
-          dictionaryEntry.getKey());
-      this.writeObjectToXml(writer, XmlElementNames.DictionaryValue,
-          dictionaryEntry.getValue());
-      writer.writeEndElement();
-    }
+      for (Entry<Object, Object> dictionaryEntry : this.dictionary.entrySet()) {
+          writer.writeStartElement(XmlNamespace.Types,
+                  XmlElementNames.DictionaryEntry);
+          this.writeObjectToXml(writer, XmlElementNames.DictionaryKey,
+                  dictionaryEntry.getKey());
+          this.writeObjectToXml(writer, XmlElementNames.DictionaryValue,
+                  dictionaryEntry.getValue());
+          writer.writeEndElement();
+      }
   }
 
   /**
@@ -513,7 +510,7 @@ public final class UserConfigurationDictionary extends ComplexProperty
       UserConfigurationDictionaryObjectType type) throws Exception {
     EwsUtilities.ewsAssert(reader != null, "UserConfigurationDictionary.loadFromXml", "reader is null");
 
-    List<String> values = new ArrayList<String>();
+    List<String> values = new ArrayList<>();
 
     reader.readStartElement(this.getNamespace(), XmlElementNames.Value);
 

@@ -174,8 +174,8 @@ public final class AttachmentCollection extends ComplexPropertyCollection<Attach
     }
 
     GenericItemAttachment<TItem> itemAttachment =
-        new GenericItemAttachment<TItem>(
-            this.owner);
+            new GenericItemAttachment<>(
+                    this.owner);
     itemAttachment.setTItem((TItem) EwsUtilities.createItemFromItemClass(
         itemAttachment, cls, true));
 
@@ -265,7 +265,7 @@ public final class AttachmentCollection extends ComplexPropertyCollection<Attach
    */
   public void save() throws Exception {
     ArrayList<Attachment> attachments =
-        new ArrayList<Attachment>();
+            new ArrayList<>();
 
     for (Attachment attachment : this.getRemovedItems()) {
       if (!attachment.isNew()) {
@@ -345,7 +345,7 @@ public final class AttachmentCollection extends ComplexPropertyCollection<Attach
 
 
     Collection<ItemAttachment> itemAttachments =
-        new ArrayList<ItemAttachment>();
+            new ArrayList<>();
     for (Object event : this.getItems()) {
       if (event instanceof ItemAttachment) {
         itemAttachments.add((ItemAttachment) event);

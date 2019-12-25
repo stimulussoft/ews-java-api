@@ -56,7 +56,7 @@ public final class PhysicalAddressEntry extends DictionaryEntryProperty<Physical
    */
   public PhysicalAddressEntry() {
     super(PhysicalAddressKey.class);
-    this.propertyBag = new SimplePropertyBag<String>();
+    this.propertyBag = new SimplePropertyBag<>();
     this.propertyBag.addOnChangeEvent(this);
   }
 
@@ -233,7 +233,7 @@ public final class PhysicalAddressEntry extends DictionaryEntryProperty<Physical
   protected boolean writeSetUpdateToXml(EwsServiceXmlWriter writer,
       ServiceObject ewsObject, String ownerDictionaryXmlElementName)
       throws XMLStreamException, ServiceXmlSerializationException {
-    List<String> fieldsToSet = new ArrayList<String>();
+    List<String> fieldsToSet = new ArrayList<>();
 
     for (String xmlElementName : this.propertyBag.getAddedItems()) {
       fieldsToSet.add(xmlElementName);
@@ -366,20 +366,20 @@ public final class PhysicalAddressEntry extends DictionaryEntryProperty<Physical
      * List of XML element names.
      */
     private static LazyMember<List<String>> xmlElementNames =
-        new LazyMember<List<String>>(
+            new LazyMember<>(
 
-            new ILazyMember<List<String>>() {
-              @Override
-              public List<String> createInstance() {
-                List<String> result = new ArrayList<String>();
-                result.add(Street);
-                result.add(City);
-                result.add(State);
-                result.add(CountryOrRegion);
-                result.add(PostalCode);
-                return result;
-              }
-            });
+                    new ILazyMember<List<String>>() {
+                        @Override
+                        public List<String> createInstance() {
+                            List<String> result = new ArrayList<>();
+                            result.add(Street);
+                            result.add(City);
+                            result.add(State);
+                            result.add(CountryOrRegion);
+                            result.add(PostalCode);
+                            return result;
+                        }
+                    });
 
     /**
      * Gets the XML element names.

@@ -143,25 +143,23 @@ public final class PhoneCall extends ComplexProperty {
   @Override
   public boolean tryReadElementFromXml(EwsServiceXmlReader reader)
       throws Exception {
-    if (reader.getLocalName().equals(XmlElementNames.PhoneCallState)) {
-      this.state = reader.readElementValue(PhoneCallState.class);
-      return true;
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.ConnectionFailureCause)) {
-      this.connectionFailureCause = reader
-          .readElementValue(ConnectionFailureCause.class);
-      return true;
-    } else if (reader.getLocalName()
-        .equals(XmlElementNames.SIPResponseText)) {
-      this.sipResponseText = reader.readElementValue();
-      return true;
-    } else if (reader.getLocalName()
-        .equals(XmlElementNames.SIPResponseCode)) {
-      this.sipResponseCode = reader.readElementValue(Integer.class);
-      return true;
-    } else {
-      return false;
-    }
+      switch (reader.getLocalName()) {
+          case XmlElementNames.PhoneCallState:
+              this.state = reader.readElementValue(PhoneCallState.class);
+              return true;
+          case XmlElementNames.ConnectionFailureCause:
+              this.connectionFailureCause = reader
+                      .readElementValue(ConnectionFailureCause.class);
+              return true;
+          case XmlElementNames.SIPResponseText:
+              this.sipResponseText = reader.readElementValue();
+              return true;
+          case XmlElementNames.SIPResponseCode:
+              this.sipResponseCode = reader.readElementValue(Integer.class);
+              return true;
+          default:
+              return false;
+      }
 
   }
 

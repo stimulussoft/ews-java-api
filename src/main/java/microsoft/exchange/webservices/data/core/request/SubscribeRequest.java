@@ -58,7 +58,7 @@ abstract class SubscribeRequest<TSubscription extends SubscriptionBase> extends
   /**
    * The event types.
    */
-  private List<EventType> eventTypes = new ArrayList<EventType>();
+  private List<EventType> eventTypes = new ArrayList<>();
 
   /**
    * The watermark.
@@ -203,7 +203,7 @@ abstract class SubscribeRequest<TSubscription extends SubscriptionBase> extends
       throws Exception {
     super(service, ServiceErrorHandling.ThrowOnError);
     this.setFolderIds(new FolderIdWrapperList());
-    this.setEventTypes(new ArrayList<EventType>());
+    this.setEventTypes(new ArrayList<>());
   }
 
   /**

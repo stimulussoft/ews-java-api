@@ -39,7 +39,6 @@ import microsoft.exchange.webservices.data.core.exception.service.local.ServiceX
 import microsoft.exchange.webservices.data.misc.OutParam;
 import microsoft.exchange.webservices.data.property.complex.ComplexProperty;
 import microsoft.exchange.webservices.data.property.complex.IComplexPropertyChangedDelegate;
-import microsoft.exchange.webservices.data.property.complex.ISearchStringProvider;
 import microsoft.exchange.webservices.data.property.definition.PropertyDefinitionBase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -983,7 +982,7 @@ public abstract class SearchFilter extends ComplexProperty {
     public boolean tryReadElementFromXml(EwsServiceXmlReader reader)
         throws Exception {
       OutParam<PropertyDefinitionBase> outParam =
-          new OutParam<PropertyDefinitionBase>();
+              new OutParam<>();
       outParam.setParam(this.propertyDefinition);
 
       return PropertyDefinitionBase.tryLoadFromXml(reader, outParam);
@@ -1106,9 +1105,7 @@ public abstract class SearchFilter extends ComplexProperty {
           try {
             reader.read();
             reader.ensureCurrentNodeIsStartElement();
-          } catch (ServiceXmlDeserializationException e) {
-            LOG.error(e);
-          } catch (XMLStreamException e) {
+          } catch (ServiceXmlDeserializationException | XMLStreamException e) {
             LOG.error(e);
           }
 
@@ -1119,7 +1116,7 @@ public abstract class SearchFilter extends ComplexProperty {
             result = true;
           } else {
             OutParam<PropertyDefinitionBase> outParam =
-                new OutParam<PropertyDefinitionBase>();
+                    new OutParam<>();
             outParam.setParam(this.otherPropertyDefinition);
 
             result = PropertyDefinitionBase.tryLoadFromXml(reader,
@@ -1227,7 +1224,7 @@ public abstract class SearchFilter extends ComplexProperty {
      * The search filter.
      */
     private ArrayList<SearchFilter> searchFilters =
-        new ArrayList<SearchFilter>();
+            new ArrayList<>();
 
     /**
      * Initializes a new instance of the class.

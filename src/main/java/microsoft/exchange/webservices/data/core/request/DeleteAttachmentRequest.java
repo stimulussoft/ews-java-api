@@ -54,7 +54,7 @@ public final class DeleteAttachmentRequest extends
   /**
    * The attachments.
    */
-  private List<Attachment> attachments = new ArrayList<Attachment>();
+  private List<Attachment> attachments = new ArrayList<>();
 
   /**
    * Initializes a new instance of the DeleteAttachmentRequest class.
@@ -80,8 +80,6 @@ public final class DeleteAttachmentRequest extends
         EwsUtilities.validateParam(this.attachments.get(i).getId(),
             String.format("Attachment[%d].Id ", i));
       }
-    } catch (ServiceLocalException e) {
-      LOG.error(e);
     } catch (Exception e) {
       LOG.error(e);
     }

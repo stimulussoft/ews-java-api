@@ -154,31 +154,30 @@ public final class DelegateUser extends ComplexProperty {
    */
   public boolean tryReadElementFromXml(EwsServiceXmlReader reader)
       throws Exception {
-    if (reader.getLocalName().equals(XmlElementNames.UserId)) {
+      switch (reader.getLocalName()) {
+          case XmlElementNames.UserId:
 
-      this.userId = new UserId();
-      this.userId.loadFromXml(reader, reader.getLocalName());
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.UserId)) {
+              this.userId = new UserId();
+              this.userId.loadFromXml(reader, reader.getLocalName());
+              return true;
+          case XmlElementNames.UserId:
 
-      this.permissions.reset();
-      this.permissions.loadFromXml(reader, reader.getLocalName());
-      return true;
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.ReceiveCopiesOfMeetingMessages)) {
+              this.permissions.reset();
+              this.permissions.loadFromXml(reader, reader.getLocalName());
+              return true;
+          case XmlElementNames.ReceiveCopiesOfMeetingMessages:
 
-      this.receiveCopiesOfMeetingMessages = reader
-          .readElementValue(Boolean.class);
-      return true;
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.ViewPrivateItems)) {
+              this.receiveCopiesOfMeetingMessages = reader
+                      .readElementValue(Boolean.class);
+              return true;
+          case XmlElementNames.ViewPrivateItems:
 
-      this.viewPrivateItems = reader.readElementValue(Boolean.class);
-      return true;
-    } else {
+              this.viewPrivateItems = reader.readElementValue(Boolean.class);
+              return true;
+          default:
 
-      return false;
-    }
+              return false;
+      }
   }
 
   /**

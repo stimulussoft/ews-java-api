@@ -65,115 +65,115 @@ public class MapiTypeConverter {
    * The mapi type converter map.
    */
   private static final LazyMember<MapiTypeConverterMap> MAPI_TYPE_CONVERTER_MAP =
-      new LazyMember<MapiTypeConverterMap>(new ILazyMember<MapiTypeConverterMap>() {
-         @Override
-         public MapiTypeConverterMap createInstance() {
-           MapiTypeConverterMap map = new MapiTypeConverterMap();
+          new LazyMember<>(new ILazyMember<MapiTypeConverterMap>() {
+            @Override
+            public MapiTypeConverterMap createInstance() {
+              MapiTypeConverterMap map = new MapiTypeConverterMap();
 
-           map.put(MapiPropertyType.ApplicationTime, new MapiTypeConverterMapEntry(Double.class));
+              map.put(MapiPropertyType.ApplicationTime, new MapiTypeConverterMapEntry(Double.class));
 
-           MapiTypeConverterMapEntry mapitype = new MapiTypeConverterMapEntry(Double.class);
-           mapitype.setIsArray(true);
-           map.put(MapiPropertyType.ApplicationTimeArray, mapitype);
+              MapiTypeConverterMapEntry mapitype = new MapiTypeConverterMapEntry(Double.class);
+              mapitype.setIsArray(true);
+              map.put(MapiPropertyType.ApplicationTimeArray, mapitype);
 
-           mapitype = new MapiTypeConverterMapEntry(Byte[].class);
-           mapitype.setParse(IFunctions.Base64Decoder.INSTANCE);
-           mapitype.setConvertToString(IFunctions.Base64Encoder.INSTANCE);
-           map.put(MapiPropertyType.Binary, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(Byte[].class);
+              mapitype.setParse(IFunctions.Base64Decoder.INSTANCE);
+              mapitype.setConvertToString(IFunctions.Base64Encoder.INSTANCE);
+              map.put(MapiPropertyType.Binary, mapitype);
 
-           mapitype = new MapiTypeConverterMapEntry(Byte[].class);
-           mapitype.setParse(IFunctions.Base64Decoder.INSTANCE);
-           mapitype.setConvertToString(IFunctions.Base64Encoder.INSTANCE);
-           mapitype.setIsArray(true);
-           map.put(MapiPropertyType.BinaryArray, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(Byte[].class);
+              mapitype.setParse(IFunctions.Base64Decoder.INSTANCE);
+              mapitype.setConvertToString(IFunctions.Base64Encoder.INSTANCE);
+              mapitype.setIsArray(true);
+              map.put(MapiPropertyType.BinaryArray, mapitype);
 
-           mapitype = new MapiTypeConverterMapEntry(Boolean.class);
-           mapitype.setParse(IFunctions.ToBoolean.INSTANCE);
-           mapitype.setConvertToString(IFunctions.ToLowerCase.INSTANCE);
-           map.put(MapiPropertyType.Boolean, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(Boolean.class);
+              mapitype.setParse(IFunctions.ToBoolean.INSTANCE);
+              mapitype.setConvertToString(IFunctions.ToLowerCase.INSTANCE);
+              map.put(MapiPropertyType.Boolean, mapitype);
 
-           mapitype = new MapiTypeConverterMapEntry(UUID.class);
-           mapitype.setParse(IFunctions.ToUUID.INSTANCE);
-           mapitype.setConvertToString(IFunctions.ToString.INSTANCE);
-           map.put(MapiPropertyType.CLSID, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(UUID.class);
+              mapitype.setParse(IFunctions.ToUUID.INSTANCE);
+              mapitype.setConvertToString(IFunctions.ToString.INSTANCE);
+              map.put(MapiPropertyType.CLSID, mapitype);
 
-           mapitype = new MapiTypeConverterMapEntry(UUID.class);
-           mapitype.setParse(IFunctions.ToUUID.INSTANCE);
-           mapitype.setConvertToString(IFunctions.ToString.INSTANCE);
-           mapitype.setIsArray(true);
-           map.put(MapiPropertyType.CLSIDArray, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(UUID.class);
+              mapitype.setParse(IFunctions.ToUUID.INSTANCE);
+              mapitype.setConvertToString(IFunctions.ToString.INSTANCE);
+              mapitype.setIsArray(true);
+              map.put(MapiPropertyType.CLSIDArray, mapitype);
 
-           map.put(MapiPropertyType.Currency, new MapiTypeConverterMapEntry(Long.class));
+              map.put(MapiPropertyType.Currency, new MapiTypeConverterMapEntry(Long.class));
 
-           mapitype = new MapiTypeConverterMapEntry(Long.class);
-           mapitype.setIsArray(true);
-           map.put(MapiPropertyType.CurrencyArray, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(Long.class);
+              mapitype.setIsArray(true);
+              map.put(MapiPropertyType.CurrencyArray, mapitype);
 
-           map.put(MapiPropertyType.Double, new MapiTypeConverterMapEntry(Double.class));
+              map.put(MapiPropertyType.Double, new MapiTypeConverterMapEntry(Double.class));
 
-           mapitype = new MapiTypeConverterMapEntry(Double.class);
-           mapitype.setIsArray(true);
-           map.put(MapiPropertyType.DoubleArray, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(Double.class);
+              mapitype.setIsArray(true);
+              map.put(MapiPropertyType.DoubleArray, mapitype);
 
-           map.put(MapiPropertyType.Error, new MapiTypeConverterMapEntry(Integer.class));
-           map.put(MapiPropertyType.Float, new MapiTypeConverterMapEntry(Float.class));
+              map.put(MapiPropertyType.Error, new MapiTypeConverterMapEntry(Integer.class));
+              map.put(MapiPropertyType.Float, new MapiTypeConverterMapEntry(Float.class));
 
-           mapitype = new MapiTypeConverterMapEntry(Float.class);
-           mapitype.setIsArray(true);
-           map.put(MapiPropertyType.FloatArray, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(Float.class);
+              mapitype.setIsArray(true);
+              map.put(MapiPropertyType.FloatArray, mapitype);
 
-           mapitype = new MapiTypeConverterMapEntry(Integer.class);
-           mapitype.setParse(MAPI_VALUE_PARSER);
-           map.put(MapiPropertyType.Integer, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(Integer.class);
+              mapitype.setParse(MAPI_VALUE_PARSER);
+              map.put(MapiPropertyType.Integer, mapitype);
 
-           mapitype = new MapiTypeConverterMapEntry(Integer.class);
-           mapitype.setIsArray(true);
-           map.put(MapiPropertyType.IntegerArray, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(Integer.class);
+              mapitype.setIsArray(true);
+              map.put(MapiPropertyType.IntegerArray, mapitype);
 
-           map.put(MapiPropertyType.Long, new MapiTypeConverterMapEntry(Long.class));
+              map.put(MapiPropertyType.Long, new MapiTypeConverterMapEntry(Long.class));
 
-           mapitype = new MapiTypeConverterMapEntry(Long.class);
-           mapitype.setIsArray(true);
-           map.put(MapiPropertyType.LongArray, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(Long.class);
+              mapitype.setIsArray(true);
+              map.put(MapiPropertyType.LongArray, mapitype);
 
-           mapitype = new MapiTypeConverterMapEntry(String.class);
-           mapitype.setParse(IFunctions.StringToObject.INSTANCE);
-           map.put(MapiPropertyType.Object, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(String.class);
+              mapitype.setParse(IFunctions.StringToObject.INSTANCE);
+              map.put(MapiPropertyType.Object, mapitype);
 
-           mapitype = new MapiTypeConverterMapEntry(String.class);
-           mapitype.setParse(IFunctions.StringToObject.INSTANCE);
-           mapitype.setIsArray(true);
-           map.put(MapiPropertyType.ObjectArray, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(String.class);
+              mapitype.setParse(IFunctions.StringToObject.INSTANCE);
+              mapitype.setIsArray(true);
+              map.put(MapiPropertyType.ObjectArray, mapitype);
 
-           map.put(MapiPropertyType.Short, new MapiTypeConverterMapEntry(Short.class));
+              map.put(MapiPropertyType.Short, new MapiTypeConverterMapEntry(Short.class));
 
-           mapitype = new MapiTypeConverterMapEntry(Short.class);
-           mapitype.setIsArray(true);
-           map.put(MapiPropertyType.ShortArray, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(Short.class);
+              mapitype.setIsArray(true);
+              map.put(MapiPropertyType.ShortArray, mapitype);
 
-           mapitype = new MapiTypeConverterMapEntry(String.class);
-           mapitype.setParse(IFunctions.StringToObject.INSTANCE);
-           map.put(MapiPropertyType.String, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(String.class);
+              mapitype.setParse(IFunctions.StringToObject.INSTANCE);
+              map.put(MapiPropertyType.String, mapitype);
 
-           mapitype = new MapiTypeConverterMapEntry(String.class);
-           mapitype.setParse(IFunctions.StringToObject.INSTANCE);
-           mapitype.setIsArray(true);
-           map.put(MapiPropertyType.StringArray, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(String.class);
+              mapitype.setParse(IFunctions.StringToObject.INSTANCE);
+              mapitype.setIsArray(true);
+              map.put(MapiPropertyType.StringArray, mapitype);
 
-           mapitype = new MapiTypeConverterMapEntry(Date.class);
-           mapitype.setParse(DATE_TIME_PARSER);
-           mapitype.setConvertToString(IFunctions.DateTimeToXSDateTime.INSTANCE);
-           map.put(MapiPropertyType.SystemTime, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(Date.class);
+              mapitype.setParse(DATE_TIME_PARSER);
+              mapitype.setConvertToString(IFunctions.DateTimeToXSDateTime.INSTANCE);
+              map.put(MapiPropertyType.SystemTime, mapitype);
 
-           mapitype = new MapiTypeConverterMapEntry(Date.class);
-           mapitype.setParse(DATE_TIME_PARSER);
-           mapitype.setConvertToString(IFunctions.DateTimeToXSDateTime.INSTANCE);
-           mapitype.setIsArray(true);
-           map.put(MapiPropertyType.SystemTimeArray, mapitype);
+              mapitype = new MapiTypeConverterMapEntry(Date.class);
+              mapitype.setParse(DATE_TIME_PARSER);
+              mapitype.setConvertToString(IFunctions.DateTimeToXSDateTime.INSTANCE);
+              mapitype.setIsArray(true);
+              map.put(MapiPropertyType.SystemTimeArray, mapitype);
 
-           return map;
-         }
-  });
+              return map;
+            }
+          });
 
 
   /**
@@ -189,7 +189,7 @@ public class MapiTypeConverter {
 
     MapiTypeConverterMapEntry typeConverter = getMapiTypeConverterMap()
         .get(mapiPropType);
-    List<Object> array = new ArrayList<Object>();
+    List<Object> array = new ArrayList<>();
 
     int index = 0;
 
@@ -257,7 +257,7 @@ public class MapiTypeConverter {
     int intValue;
     try {
       intValue = Integer.parseInt(s.trim());
-      return Integer.valueOf(intValue);
+      return intValue;
     } catch (NumberFormatException e) {
       return s;
     }

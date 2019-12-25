@@ -78,19 +78,22 @@ public final class ConvertIdResponse extends ServiceResponse {
 
     // Alternate Id classes are responsible fro reading the AlternateId end
     // element when necessary
-    if (alternateIdClass.equals(AlternateId.SchemaTypeName)) {
-      this.convertedId = new AlternateId();
-    } else if (alternateIdClass
-        .equals(AlternatePublicFolderId.SchemaTypeName)) {
-      this.convertedId = new AlternatePublicFolderId();
-    } else if (alternateIdClass
-        .equals(AlternatePublicFolderItemId.SchemaTypeName)) {
-      this.convertedId = new AlternatePublicFolderItemId();
-    } else {
-      EwsUtilities
-          .ewsAssert(false, "ConvertIdResponse.ReadElementsFromXml",
-                     String.format("Unknown alternate Id class: %s", alternateIdClass));
-    }
+      switch (alternateIdClass) {
+          case AlternateId.SchemaTypeName:
+              this.convertedId = new AlternateId();
+              break;
+          case AlternatePublicFolderId.SchemaTypeName:
+              this.convertedId = new AlternatePublicFolderId();
+              break;
+          case AlternatePublicFolderItemId.SchemaTypeName:
+              this.convertedId = new AlternatePublicFolderItemId();
+              break;
+          default:
+              EwsUtilities
+                      .ewsAssert(false, "ConvertIdResponse.ReadElementsFromXml",
+                              String.format("Unknown alternate Id class: %s", alternateIdClass));
+              break;
+      }
 
     this.convertedId.loadAttributesFromXml(reader);
     reader.readEndElement(XmlNamespace.Messages,

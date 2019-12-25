@@ -69,65 +69,65 @@ public abstract class ServiceObjectSchema implements
    * has an associated schema, add the schema type to the list below.
    */
   private static LazyMember<List<Class<?>>> allSchemaTypes = new
-      LazyMember<List<Class<?>>>(new
-                                     ILazyMember<List<Class<?>>>() {
-                                       public List<Class<?>> createInstance() {
-                                         List<Class<?>> typeList = new ArrayList<Class<?>>();
-                                         // typeList.add()
-                                        /*
-					 * typeList.add(AppointmentSchema.class);
-					 * typeList.add(CalendarResponseObjectSchema.class);
-					 * typeList.add(CancelMeetingMessageSchema.class);
-					 * typeList.add(ContactGroupSchema.class);
-					 * typeList.add(ContactSchema.class);
-					 * typeList.add(EmailMessageSchema.class);
-					 * typeList.add(FolderSchema.class);
-					 * typeList.add(ItemSchema.class);
-					 * typeList.add(MeetingMessageSchema.class);
-					 * typeList.add(MeetingRequestSchema.class);
-					 * typeList.add(PostItemSchema.class);
-					 * typeList.add(PostReplySchema.class);
-					 * typeList.add(ResponseMessageSchema.class);
-					 * typeList.add(ResponseObjectSchema.class);
-					 * typeList.add(ServiceObjectSchema.class);
-					 * typeList.add(SearchFolderSchema.class);
-					 * typeList.add(TaskSchema.class);
-					 */
-                                         // Verify that all Schema types in the Managed API assembly
-                                         // have been included.
-					/*
-					 * var missingTypes = from type in
-					 * Assembly.GetExecutingAssembly().GetTypes() where
-					 * type.IsSubclassOf(typeof(ServiceObjectSchema)) &&
-					 * !typeList.Contains(type) select type; if
-					 * (missingTypes.Count() > 0) { throw new
-					 * ServiceLocalException
-					 * ("SchemaTypeList does not include all 
-					 * defined schema types."
-					 * ); }
-					 */
-                                         return typeList;
-                                       }
-                                     });
+          LazyMember<>(new
+                               ILazyMember<List<Class<?>>>() {
+                                   public List<Class<?>> createInstance() {
+                                       List<Class<?>> typeList = new ArrayList<>();
+                                       // typeList.add()
+                                       /*
+                                        * typeList.add(AppointmentSchema.class);
+                                        * typeList.add(CalendarResponseObjectSchema.class);
+                                        * typeList.add(CancelMeetingMessageSchema.class);
+                                        * typeList.add(ContactGroupSchema.class);
+                                        * typeList.add(ContactSchema.class);
+                                        * typeList.add(EmailMessageSchema.class);
+                                        * typeList.add(FolderSchema.class);
+                                        * typeList.add(ItemSchema.class);
+                                        * typeList.add(MeetingMessageSchema.class);
+                                        * typeList.add(MeetingRequestSchema.class);
+                                        * typeList.add(PostItemSchema.class);
+                                        * typeList.add(PostReplySchema.class);
+                                        * typeList.add(ResponseMessageSchema.class);
+                                        * typeList.add(ResponseObjectSchema.class);
+                                        * typeList.add(ServiceObjectSchema.class);
+                                        * typeList.add(SearchFolderSchema.class);
+                                        * typeList.add(TaskSchema.class);
+                                        */
+                                       // Verify that all Schema types in the Managed API assembly
+                                       // have been included.
+                                       /*
+                                        * var missingTypes = from type in
+                                        * Assembly.GetExecutingAssembly().GetTypes() where
+                                        * type.IsSubclassOf(typeof(ServiceObjectSchema)) &&
+                                        * !typeList.Contains(type) select type; if
+                                        * (missingTypes.Count() > 0) { throw new
+                                        * ServiceLocalException
+                                        * ("SchemaTypeList does not include all
+                                        * defined schema types."
+                                        * ); }
+                                        */
+                                       return typeList;
+                                   }
+                               });
 
   /**
    * Dictionary of all property definitions.
    */
   private static LazyMember<Map<String, PropertyDefinitionBase>>
       allSchemaProperties = new
-      LazyMember<Map<String, PropertyDefinitionBase>>(
-      new ILazyMember<Map<String, PropertyDefinitionBase>>() {
-        public Map<String, PropertyDefinitionBase> createInstance() {
-          Map<String, PropertyDefinitionBase> propDefDictionary =
-              new HashMap<String, PropertyDefinitionBase>();
-          for (Class<?> c : ServiceObjectSchema.allSchemaTypes
-              .getMember()) {
-            ServiceObjectSchema.addSchemaPropertiesToDictionary(c,
-                propDefDictionary);
-          }
-          return propDefDictionary;
-        }
-      });
+          LazyMember<>(
+          new ILazyMember<Map<String, PropertyDefinitionBase>>() {
+              public Map<String, PropertyDefinitionBase> createInstance() {
+                  Map<String, PropertyDefinitionBase> propDefDictionary =
+                          new HashMap<>();
+                  for (Class<?> c : ServiceObjectSchema.allSchemaTypes
+                          .getMember()) {
+                      ServiceObjectSchema.addSchemaPropertiesToDictionary(c,
+                              propDefDictionary);
+                  }
+                  return propDefDictionary;
+              }
+          });
 
   /**
    * Adds schema property to dictionary.
@@ -184,11 +184,7 @@ public abstract class ServiceObjectSchema implements
               }
             }
           }
-        } catch (IllegalArgumentException e) {
-          LOG.error(e);
-
-          // Skip the field
-        } catch (IllegalAccessException e) {
+        } catch (IllegalArgumentException | IllegalAccessException e) {
           LOG.error(e);
 
           // Skip the field
@@ -220,11 +216,7 @@ public abstract class ServiceObjectSchema implements
             propertyNameDictionary.put(propertyDefinition, field
                 .getName());
           }
-        } catch (IllegalArgumentException e) {
-          LOG.error(e);
-
-          // Skip the field
-        } catch (IllegalAccessException e) {
+        } catch (IllegalArgumentException | IllegalAccessException e) {
           LOG.error(e);
 
           // Skip the field
@@ -269,11 +261,7 @@ public abstract class ServiceObjectSchema implements
                     (PropertyDefinition) o;
                 propertyDefinition.setName(field.getName());
               }
-            } catch (IllegalArgumentException e) {
-              LOG.error(e);
-
-              // Skip the field
-            } catch (IllegalAccessException e) {
+            } catch (IllegalArgumentException | IllegalAccessException e) {
               LOG.error(e);
 
               // Skip the field
@@ -288,46 +276,46 @@ public abstract class ServiceObjectSchema implements
    * Defines the ExtendedProperties property.
    */
   public static final PropertyDefinition extendedProperties =
-      new ComplexPropertyDefinition<ExtendedPropertyCollection>(
-          ExtendedPropertyCollection.class,
-          XmlElementNames.ExtendedProperty,
-          EnumSet.of(PropertyDefinitionFlags.AutoInstantiateOnRead,
-              PropertyDefinitionFlags.ReuseInstance,
-              PropertyDefinitionFlags.CanSet,
-              PropertyDefinitionFlags.CanUpdate),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<ExtendedPropertyCollection>() {
-            public ExtendedPropertyCollection createComplexProperty() {
-              return new ExtendedPropertyCollection();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  ExtendedPropertyCollection.class,
+                  XmlElementNames.ExtendedProperty,
+                  EnumSet.of(PropertyDefinitionFlags.AutoInstantiateOnRead,
+                          PropertyDefinitionFlags.ReuseInstance,
+                          PropertyDefinitionFlags.CanSet,
+                          PropertyDefinitionFlags.CanUpdate),
+                  ExchangeVersion.Exchange2007_SP1,
+                  new ICreateComplexPropertyDelegate<ExtendedPropertyCollection>() {
+                      public ExtendedPropertyCollection createComplexProperty() {
+                          return new ExtendedPropertyCollection();
+                      }
+                  });
 
   /**
    * The property.
    */
   private Map<String, PropertyDefinition> properties =
-      new HashMap<String, PropertyDefinition>();
+          new HashMap<>();
 
   /**
    * The visible property.
    */
   private List<PropertyDefinition> visibleProperties =
-      new ArrayList<PropertyDefinition>();
+          new ArrayList<>();
 
   /**
    * The first class property.
    */
   private List<PropertyDefinition> firstClassProperties =
-      new ArrayList<PropertyDefinition>();
+          new ArrayList<>();
 
   /**
    * The first class summary property.
    */
   private List<PropertyDefinition> firstClassSummaryProperties =
-      new ArrayList<PropertyDefinition>();
+          new ArrayList<>();
 
   private List<IndexedPropertyDefinition> indexedProperties =
-      new ArrayList<IndexedPropertyDefinition>();
+          new ArrayList<>();
 
   /**
    * Registers a schema property.

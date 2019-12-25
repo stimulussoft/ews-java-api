@@ -764,10 +764,7 @@ public abstract class ServiceRequestBase<T> {
   private void readXmlDeclaration(EwsServiceXmlReader reader) throws Exception {
     try {
       reader.read(new XmlNodeType(XmlNodeType.START_DOCUMENT));
-    } catch (XmlException ex) {
-      throw new ServiceRequestException("The response received from the service didn't contain valid XML.",
-                                        ex);
-    } catch (ServiceXmlDeserializationException ex) {
+    } catch (XmlException | ServiceXmlDeserializationException ex) {
       throw new ServiceRequestException("The response received from the service didn't contain valid XML.",
                                         ex);
     }

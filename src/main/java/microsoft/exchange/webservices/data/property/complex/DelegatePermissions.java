@@ -49,8 +49,7 @@ public final class DelegatePermissions extends ComplexProperty {
 
   protected DelegatePermissions() {
     super();
-    this.delegateFolderPermissions = new HashMap<String,
-        DelegateFolderPermission>();
+    this.delegateFolderPermissions = new HashMap<>();
 
     delegateFolderPermissions.put(
         XmlElementNames.CalendarFolderPermissionLevel,

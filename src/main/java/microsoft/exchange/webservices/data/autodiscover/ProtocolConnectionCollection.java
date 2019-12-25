@@ -45,7 +45,7 @@ public final class ProtocolConnectionCollection {
    * cref="ProtocolConnectionCollection"/> class.
    */
   ProtocolConnectionCollection() {
-    this.connections = new ArrayList<ProtocolConnection>();
+    this.connections = new ArrayList<>();
   }
 
   /**
