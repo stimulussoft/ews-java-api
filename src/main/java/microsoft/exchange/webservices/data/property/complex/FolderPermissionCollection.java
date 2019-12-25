@@ -31,7 +31,6 @@ import microsoft.exchange.webservices.data.core.service.folder.CalendarFolder;
 import microsoft.exchange.webservices.data.core.service.folder.Folder;
 import microsoft.exchange.webservices.data.core.enumeration.misc.XmlNamespace;
 import microsoft.exchange.webservices.data.core.exception.service.local.ServiceLocalException;
-import microsoft.exchange.webservices.data.core.exception.service.local.ServiceValidationException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

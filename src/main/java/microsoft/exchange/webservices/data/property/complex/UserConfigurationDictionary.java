@@ -352,7 +352,7 @@ public final class UserConfigurationDictionary extends ComplexProperty
         Byte[] from = (Byte[]) dictionaryObject;
         byte[] to = new byte[from.length];
         for (int currentIndex = 0; currentIndex < from.length; currentIndex++) {
-          to[currentIndex] = (byte) from[currentIndex];
+          to[currentIndex] = from[currentIndex];
         }
 
         valueAsString = Base64.encodeBase64String(to);

@@ -77,7 +77,6 @@ public class TimeZoneTransition extends ComplexProperty {
       throws ServiceLocalException {
       switch (xmlElementName) {
           case XmlElementNames.AbsoluteDateTransition:
-              return new AbsoluteDateTransition(timeZoneDefinition);
           case XmlElementNames.AbsoluteDateTransition:
               return new AbsoluteDateTransition(timeZoneDefinition);
           case XmlElementNames.RecurringDayTransition:

@@ -67,7 +67,6 @@ import microsoft.exchange.webservices.data.property.definition.PropertyDefinitio
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumSet;
-import java.util.ListIterator;
 
 /**
  * Represents a generic item. Properties available on item are defined in the

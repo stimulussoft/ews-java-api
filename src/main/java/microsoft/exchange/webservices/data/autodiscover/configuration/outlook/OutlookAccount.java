@@ -126,12 +126,10 @@ final class OutlookAccount {
                     protocol.getProtocolType(), protocol);
             break;
           case XmlElementNames.RedirectAddr:
-            this.setRedirectTarget(reader.readElementValue());
+            case XmlElementNames.RedirectUrl:
+                this.setRedirectTarget(reader.readElementValue());
             break;
-          case XmlElementNames.RedirectUrl:
-            this.setRedirectTarget(reader.readElementValue());
-            break;
-          case XmlElementNames.AlternateMailboxes:
+            case XmlElementNames.AlternateMailboxes:
             AlternateMailbox alternateMailbox = AlternateMailbox.
                     loadFromXml(reader);
             this.alternateMailboxes.getEntries().add(alternateMailbox);

@@ -35,7 +35,6 @@ import microsoft.exchange.webservices.data.core.enumeration.service.error.Servic
 import microsoft.exchange.webservices.data.core.response.DeleteAttachmentResponse;
 import microsoft.exchange.webservices.data.core.enumeration.misc.ExchangeVersion;
 import microsoft.exchange.webservices.data.core.enumeration.misc.XmlNamespace;
-import microsoft.exchange.webservices.data.core.exception.service.local.ServiceLocalException;
 import microsoft.exchange.webservices.data.property.complex.Attachment;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

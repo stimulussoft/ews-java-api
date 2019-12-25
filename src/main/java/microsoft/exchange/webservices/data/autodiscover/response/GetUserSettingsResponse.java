@@ -221,15 +221,9 @@ public final class GetUserSettingsResponse extends AutodiscoverResponse {
 
           switch (settingClass) {
             case XmlElementNames.StringSetting:
-              this.readSettingFromXml(reader);
-              break;
-            case XmlElementNames.WebClientUrlCollectionSetting:
-              this.readSettingFromXml(reader);
-              break;
-            case XmlElementNames.AlternateMailboxCollectionSetting:
-              this.readSettingFromXml(reader);
-              break;
             case XmlElementNames.ProtocolConnectionCollectionSetting:
+            case XmlElementNames.AlternateMailboxCollectionSetting:
+            case XmlElementNames.WebClientUrlCollectionSetting:
               this.readSettingFromXml(reader);
               break;
             default:

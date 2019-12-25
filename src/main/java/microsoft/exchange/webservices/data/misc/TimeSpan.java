@@ -133,7 +133,7 @@ public class TimeSpan implements Comparable<TimeSpan>, java.io.Serializable, Clo
    * less than, equal to, or greater than the specified object.
    */
   public int compareTo(TimeSpan o) {
-    TimeSpan compare = (TimeSpan) o;
+    TimeSpan compare = o;
     if (this.time == compare.time) {
       return 0;
     }

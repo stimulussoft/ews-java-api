@@ -390,16 +390,15 @@ public final class ExtendedPropertyDefinition extends PropertyDefinitionBase {
    * @return The property definition's printable name.
    */
   @Override public String getPrintableName() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("{");
-    sb.append(formatField(NameFieldName, this.getName()));
-    sb.append(formatField(MapiTypeFieldName, this.getMapiType()));
-    sb.append(formatField(IdFieldName, this.getId()));
-    sb.append(formatField(PropertySetFieldName, this.getPropertySet()));
-    sb.append(formatField(PropertySetIdFieldName, this.getPropertySetId()));
-    sb.append(formatField(TagFieldName, this.getTag()));
-    sb.append("}");
-    return sb.toString();
+    String sb = "{" +
+            formatField(NameFieldName, this.getName()) +
+            formatField(MapiTypeFieldName, this.getMapiType()) +
+            formatField(IdFieldName, this.getId()) +
+            formatField(PropertySetFieldName, this.getPropertySet()) +
+            formatField(PropertySetIdFieldName, this.getPropertySetId()) +
+            formatField(TagFieldName, this.getTag()) +
+            "}";
+    return sb;
   }
 
   /**

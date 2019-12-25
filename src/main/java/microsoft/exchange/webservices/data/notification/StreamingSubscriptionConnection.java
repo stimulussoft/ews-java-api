@@ -462,8 +462,7 @@ public final class StreamingSubscriptionConnection implements Closeable,
         // Client can do any good or bad things in the above event
         // handler
         synchronized (this.subscriptions) {
-          if (this.subscriptions != null
-              && this.subscriptions.containsKey(id)) {
+          if (this.subscriptions != null) {
             // We are no longer servicing the subscription.
             this.subscriptions.remove(id);
           }

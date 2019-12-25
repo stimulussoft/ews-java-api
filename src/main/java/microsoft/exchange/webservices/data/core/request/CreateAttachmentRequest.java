@@ -37,7 +37,6 @@ import microsoft.exchange.webservices.data.property.complex.Attachment;
 import microsoft.exchange.webservices.data.property.complex.ItemAttachment;
 
 import java.util.ArrayList;
-import java.util.ListIterator;
 
 /**
  * Represents a CreateAttachment request.

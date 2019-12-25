@@ -88,6 +88,6 @@ public final class BoolPropertyDefinition extends GenericPropertyDefinition<Bool
    * @return String representation of Boolean property.
    */
   protected String toString(Boolean value) {
-    return EwsUtilities.boolToXSBool((Boolean) value);
+    return EwsUtilities.boolToXSBool(value);
   }
 }

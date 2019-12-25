@@ -599,7 +599,7 @@ public class EwsXmlReader {
 
     ByteArrayOutputStream byteArrayStream = new ByteArrayOutputStream();
 
-    buffer = Base64.decodeBase64(this.xmlReader.getElementText().toString());
+    buffer = Base64.decodeBase64(this.xmlReader.getElementText());
     byteArrayStream.write(buffer);
 
     return byteArrayStream.toByteArray();
@@ -617,7 +617,7 @@ public class EwsXmlReader {
     this.ensureCurrentNodeIsStartElement();
 
     byte[] buffer = null;
-    buffer = Base64.decodeBase64(this.xmlReader.getElementText().toString());
+    buffer = Base64.decodeBase64(this.xmlReader.getElementText());
     outputStream.write(buffer);
     outputStream.flush();
   }

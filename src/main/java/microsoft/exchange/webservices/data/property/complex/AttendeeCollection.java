@@ -95,7 +95,7 @@ public final class AttendeeCollection extends ComplexPropertyCollection<Attendee
    */
   public void removeAt(int index) {
     if (index < 0 || index >= this.getCount()) {
-      throw new IllegalArgumentException("parameter \'index\' : " + "index is out of range.");
+      throw new IllegalArgumentException("parameter 'index' : " + "index is out of range.");
     }
 
     this.internalRemoveAt(index);

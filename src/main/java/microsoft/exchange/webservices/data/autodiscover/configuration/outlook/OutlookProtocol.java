@@ -610,6 +610,7 @@ final class OutlookProtocol {
                   this.serverDN = reader.readElementValue();
                   break;
               case XmlElementNames.ServerVersion:
+              case XmlElementNames.OOFUrl:
                   reader.readElementValue();
                   break;
               case XmlElementNames.AD:
@@ -623,9 +624,6 @@ final class OutlookProtocol {
                   break;
               case XmlElementNames.ASUrl:
                   this.availabilityServiceUrl = reader.readElementValue();
-                  break;
-              case XmlElementNames.OOFUrl:
-                  reader.readElementValue();
                   break;
               case XmlElementNames.UMUrl:
                   this.unifiedMessagingUrl = reader.readElementValue();
