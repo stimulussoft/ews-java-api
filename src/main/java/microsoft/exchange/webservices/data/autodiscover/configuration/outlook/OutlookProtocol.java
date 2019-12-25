@@ -692,15 +692,8 @@ final class OutlookProtocol {
    * @param protocolName Name of the protocol.
    * @return OutlookProtocolType
    */
-  private static OutlookProtocolType protocolNameToType(String
-      protocolName) {
-    OutlookProtocolType protocolType = null;
-    if (!(protocolNameToTypeMap.getMember().containsKey(protocolName))) {
-      protocolType = OutlookProtocolType.Unknown;
-    } else {
-      protocolType = protocolNameToTypeMap.getMember().get(protocolName);
-    }
-    return protocolType;
+  private static OutlookProtocolType protocolNameToType(String protocolName) {
+    return protocolNameToTypeMap.getMember().getOrDefault(protocolName, OutlookProtocolType.Unknown);
 
   }
 

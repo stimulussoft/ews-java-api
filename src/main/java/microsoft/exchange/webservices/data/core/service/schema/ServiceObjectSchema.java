@@ -284,11 +284,7 @@ public abstract class ServiceObjectSchema implements
                           PropertyDefinitionFlags.CanSet,
                           PropertyDefinitionFlags.CanUpdate),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<ExtendedPropertyCollection>() {
-                      public ExtendedPropertyCollection createComplexProperty() {
-                          return new ExtendedPropertyCollection();
-                      }
-                  });
+                  ExtendedPropertyCollection::new);
 
   /**
    * The property.

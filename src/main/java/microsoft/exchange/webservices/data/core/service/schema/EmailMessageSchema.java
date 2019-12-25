@@ -146,12 +146,7 @@ public class EmailMessageSchema extends ItemSchema {
                           PropertyDefinitionFlags.CanUpdate,
                           PropertyDefinitionFlags.CanDelete),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<EmailAddressCollection>() {
-                      @Override
-                      public EmailAddressCollection createComplexProperty() {
-                          return new EmailAddressCollection();
-                      }
-                  });
+                  EmailAddressCollection::new);
 
   /**
    * Defines the BccRecipients property.
@@ -166,13 +161,7 @@ public class EmailMessageSchema extends ItemSchema {
                           PropertyDefinitionFlags.CanUpdate,
                           PropertyDefinitionFlags.CanDelete),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate
-                          <EmailAddressCollection>() {
-                      @Override
-                      public EmailAddressCollection createComplexProperty() {
-                          return new EmailAddressCollection();
-                      }
-                  });
+                  EmailAddressCollection::new);
 
   /**
    * Defines the CcRecipients property.
@@ -187,13 +176,7 @@ public class EmailMessageSchema extends ItemSchema {
                           PropertyDefinitionFlags.CanUpdate,
                           PropertyDefinitionFlags.CanDelete),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate
-                          <EmailAddressCollection>() {
-                      @Override
-                      public EmailAddressCollection createComplexProperty() {
-                          return new EmailAddressCollection();
-                      }
-                  });
+                  EmailAddressCollection::new);
 
   /**
    * Defines the ConversationIndex property.
@@ -225,12 +208,7 @@ public class EmailMessageSchema extends ItemSchema {
                           PropertyDefinitionFlags.CanDelete,
                           PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<EmailAddress>() {
-                      @Override
-                      public EmailAddress createComplexProperty() {
-                          return new EmailAddress();
-                      }
-                  });
+                  EmailAddress::new);
 
   /**
    * Defines the IsDeliveryReceiptRequested property.
@@ -314,13 +292,7 @@ public class EmailMessageSchema extends ItemSchema {
                           PropertyDefinitionFlags.CanUpdate,
                           PropertyDefinitionFlags.CanDelete),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate
-                          <EmailAddressCollection>() {
-                      @Override
-                      public EmailAddressCollection createComplexProperty() {
-                          return new EmailAddressCollection();
-                      }
-                  });
+                  EmailAddressCollection::new);
 
   /**
    * Defines the Sender property.
@@ -332,12 +304,7 @@ public class EmailMessageSchema extends ItemSchema {
                   EnumSet.of(PropertyDefinitionFlags.CanSet,
                           PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<EmailAddress>() {
-                      @Override
-                      public EmailAddress createComplexProperty() {
-                          return new EmailAddress();
-                      }
-                  });
+                  EmailAddress::new);
 
   /**
    * Defines the ReceivedBy property.
@@ -349,12 +316,7 @@ public class EmailMessageSchema extends ItemSchema {
                   XmlElementNames.Mailbox, EnumSet
                   .of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<EmailAddress>() {
-                      @Override
-                      public EmailAddress createComplexProperty() {
-                          return new EmailAddress();
-                      }
-                  });
+                  EmailAddress::new);
 
   /**
    * Defines the ReceivedRepresenting property.
@@ -366,12 +328,7 @@ public class EmailMessageSchema extends ItemSchema {
                   FieldUris.ReceivedRepresenting, XmlElementNames.Mailbox, EnumSet
                   .of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<EmailAddress>() {
-                      @Override
-                      public EmailAddress createComplexProperty() {
-                          return new EmailAddress();
-                      }
-                  });
+                  EmailAddress::new);
 
   /**
    * The Constant Instance.

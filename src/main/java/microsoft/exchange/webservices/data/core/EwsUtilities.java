@@ -222,11 +222,7 @@ public final class EwsUtilities {
    */
   private static final LazyMember<ServiceObjectInfo> SERVICE_OBJECT_INFO =
           new LazyMember<>(
-                  new ILazyMember<ServiceObjectInfo>() {
-                    public ServiceObjectInfo createInstance() {
-                      return new ServiceObjectInfo();
-                    }
-                  }
+                  ServiceObjectInfo::new
           );
 
   private static final String XML_SCHEMA_DATE_FORMAT = "yyyy-MM-dd'Z'";
@@ -1029,12 +1025,7 @@ public final class EwsUtilities {
       // Non-empty string has at least one character
       //which is *not* a whitespace character
       if (param.length() == countMatchingChars(param,
-          new IPredicate<Character>() {
-            @Override
-            public boolean predicate(Character obj) {
-              return Character.isWhitespace(obj);
-            }
-          })) {
+              Character::isWhitespace)) {
         throw new ArgumentException("The string argument contains only white space characters.", paramName);
       }
     }

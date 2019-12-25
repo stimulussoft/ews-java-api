@@ -64,12 +64,7 @@ public class SearchFolderSchema extends FolderSchema {
                           PropertyDefinitionFlags.CanUpdate,
                           PropertyDefinitionFlags.AutoInstantiateOnRead),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<SearchFolderParameters>() {
-                      @Override
-                      public SearchFolderParameters createComplexProperty() {
-                          return new SearchFolderParameters();
-                      }
-                  });
+                  SearchFolderParameters::new);
 
   // This must be declared after the property definitions
   /**

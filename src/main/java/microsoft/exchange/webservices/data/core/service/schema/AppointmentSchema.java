@@ -476,11 +476,7 @@ public class AppointmentSchema extends ItemSchema {
                   XmlElementNames.Mailbox, EnumSet
                   .of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<EmailAddress>() {
-                    public EmailAddress createComplexProperty() {
-                      return new EmailAddress();
-                    }
-                  });
+                  EmailAddress::new);
 
   // Defines the RequiredAttendees property.
 
@@ -496,11 +492,7 @@ public class AppointmentSchema extends ItemSchema {
                           PropertyDefinitionFlags.CanUpdate,
                           PropertyDefinitionFlags.CanDelete),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<AttendeeCollection>() {
-                    public AttendeeCollection createComplexProperty() {
-                      return new AttendeeCollection();
-                    }
-                  });
+                  AttendeeCollection::new);
 
   // Defines the OptionalAttendees property.
   /**
@@ -515,11 +507,7 @@ public class AppointmentSchema extends ItemSchema {
                           PropertyDefinitionFlags.CanUpdate,
                           PropertyDefinitionFlags.CanDelete),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<AttendeeCollection>() {
-                    public AttendeeCollection createComplexProperty() {
-                      return new AttendeeCollection();
-                    }
-                  });
+                  AttendeeCollection::new);
 
   // Defines the Resources property.
 
@@ -535,11 +523,7 @@ public class AppointmentSchema extends ItemSchema {
                   PropertyDefinitionFlags.CanUpdate,
                   PropertyDefinitionFlags.CanDelete),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<AttendeeCollection>() {
-                    public AttendeeCollection createComplexProperty() {
-                      return new AttendeeCollection();
-                    }
-                  });
+                  AttendeeCollection::new);
 
   // Defines the ConflictingMeetingCount property.
   /**
@@ -569,12 +553,7 @@ public class AppointmentSchema extends ItemSchema {
                   XmlElementNames.ConflictingMeetings,
                   FieldUris.ConflictingMeetings,
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate
-                          <ItemCollection<Appointment>>() {
-                    public ItemCollection<Appointment> createComplexProperty() {
-                      return new ItemCollection<>();
-                    }
-                  });
+                  (ICreateComplexPropertyDelegate<ItemCollection<Appointment>>) ItemCollection::new);
 
   // Defines the AdjacentMeetings property.
   /**
@@ -585,12 +564,7 @@ public class AppointmentSchema extends ItemSchema {
                   XmlElementNames.AdjacentMeetings,
                   FieldUris.AdjacentMeetings,
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate
-                          <ItemCollection<Appointment>>() {
-                    public ItemCollection<Appointment> createComplexProperty() {
-                      return new ItemCollection<>();
-                    }
-                  });
+                  (ICreateComplexPropertyDelegate<ItemCollection<Appointment>>) ItemCollection::new);
 
   // Defines the Duration property.
   /**
@@ -664,11 +638,7 @@ public class AppointmentSchema extends ItemSchema {
                   OccurrenceInfo.class,
                   XmlElementNames.FirstOccurrence, FieldUris.FirstOccurrence,
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<OccurrenceInfo>() {
-                    public OccurrenceInfo createComplexProperty() {
-                      return new OccurrenceInfo();
-                    }
-                  });
+                  OccurrenceInfo::new);
 
   // Defines the LastOccurrence property.
   /**
@@ -679,11 +649,7 @@ public class AppointmentSchema extends ItemSchema {
                   OccurrenceInfo.class,
                   XmlElementNames.LastOccurrence, FieldUris.LastOccurrence,
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<OccurrenceInfo>() {
-                    public OccurrenceInfo createComplexProperty() {
-                      return new OccurrenceInfo();
-                    }
-                  });
+                  OccurrenceInfo::new);
 
   // Defines the ModifiedOccurrences property.
   /**
@@ -695,12 +661,7 @@ public class AppointmentSchema extends ItemSchema {
                   XmlElementNames.ModifiedOccurrences,
                   FieldUris.ModifiedOccurrences,
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate
-                          <OccurrenceInfoCollection>() {
-                    public OccurrenceInfoCollection createComplexProperty() {
-                      return new OccurrenceInfoCollection();
-                    }
-                  });
+                  OccurrenceInfoCollection::new);
 
   // Defines the DeletedOccurrences property.
   /**
@@ -712,12 +673,7 @@ public class AppointmentSchema extends ItemSchema {
                   XmlElementNames.DeletedOccurrences,
                   FieldUris.DeletedOccurrences,
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate
-                          <DeletedOccurrenceInfoCollection>() {
-                    public DeletedOccurrenceInfoCollection createComplexProperty() {
-                      return new DeletedOccurrenceInfoCollection();
-                    }
-                  });
+                  DeletedOccurrenceInfoCollection::new);
 
   // Defines the MeetingTimeZone property.
   /**

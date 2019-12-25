@@ -262,11 +262,7 @@ public class ItemSchema extends ServiceObjectSchema {
           XmlElementNames.ItemId, FieldUris.ItemId, EnumSet
           .of(PropertyDefinitionFlags.CanFind),
           ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<ItemId>() {
-              public ItemId createComplexProperty() {
-                  return new ItemId();
-              }
-          });
+          ItemId::new);
 
   /**
    * Defines the Body property.
@@ -279,11 +275,7 @@ public class ItemSchema extends ServiceObjectSchema {
           PropertyDefinitionFlags.CanUpdate,
           PropertyDefinitionFlags.CanDelete),
           ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<MessageBody>() {
-              public MessageBody createComplexProperty() {
-                  return new MessageBody();
-              }
-          });
+          MessageBody::new);
 
   /**
    * Defines the ItemClass property.
@@ -318,11 +310,7 @@ public class ItemSchema extends ServiceObjectSchema {
                   PropertyDefinitionFlags.CanUpdate,
                   PropertyDefinitionFlags.MustBeExplicitlyLoaded),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<MimeContent>() {
-                      public MimeContent createComplexProperty() {
-                          return new MimeContent();
-                      }
-                  });
+                  microsoft.exchange.webservices.data.property.complex.MimeContent::new);
 
   /**
    * Defines the ParentFolderId property.
@@ -332,11 +320,7 @@ public class ItemSchema extends ServiceObjectSchema {
                   FolderId.class,
                   XmlElementNames.ParentFolderId, FieldUris.ParentFolderId,
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<FolderId>() {
-                      public FolderId createComplexProperty() {
-                          return new FolderId();
-                      }
-                  });
+                  FolderId::new);
 
   /**
    * Defines the Sensitivity property.
@@ -385,11 +369,7 @@ public class ItemSchema extends ServiceObjectSchema {
                   PropertyDefinitionFlags.CanDelete,
                   PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<StringList>() {
-                      public StringList createComplexProperty() {
-                          return new StringList();
-                      }
-                  });
+                  StringList::new);
 
   /**
    * Defines the Importance property.
@@ -479,12 +459,7 @@ public class ItemSchema extends ServiceObjectSchema {
                   FieldUris.InternetMessageHeaders,
                   EnumSet.of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate
-                          <InternetMessageHeaderCollection>() {
-                      public InternetMessageHeaderCollection createComplexProperty() {
-                          return new InternetMessageHeaderCollection();
-                      }
-                  });
+                  InternetMessageHeaderCollection::new);
 
   /**
    * Defines the DateTimeSent property.
@@ -643,11 +618,7 @@ public class ItemSchema extends ServiceObjectSchema {
                   XmlElementNames.ConversationId, FieldUris.ConversationId, EnumSet
                   .of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2010,
-                  new ICreateComplexPropertyDelegate<ConversationId>() {
-                      public ConversationId createComplexProperty() {
-                          return new ConversationId();
-                      }
-                  });
+                  microsoft.exchange.webservices.data.property.complex.ConversationId::new);
 
   /**
    * Defines the UniqueBody property.
@@ -658,11 +629,7 @@ public class ItemSchema extends ServiceObjectSchema {
                   XmlElementNames.UniqueBody, FieldUris.UniqueBody, EnumSet
                   .of(PropertyDefinitionFlags.MustBeExplicitlyLoaded),
                   ExchangeVersion.Exchange2010,
-                  new ICreateComplexPropertyDelegate<UniqueBody>() {
-                      public UniqueBody createComplexProperty() {
-                          return new UniqueBody();
-                      }
-                  });
+                  microsoft.exchange.webservices.data.property.complex.UniqueBody::new);
 
   /**
    * Defines the StoreEntryId property.

@@ -95,37 +95,16 @@ public class ServiceObjectInfo {
   private void initializeServiceObjectClassMap() {
     // Appointment
     this.addServiceObjectType(XmlElementNames.CalendarItem,
-        Appointment.class, new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new Appointment(srv);
-          }
-        }, new ICreateServiceObjectWithAttachmentParam() {
-          public Object createServiceObjectWithAttachmentParam(
-              ItemAttachment itemAttachment, boolean isNew)
-              throws Exception {
-            return new Appointment(itemAttachment, isNew);
-          }
-        });
+        Appointment.class, Appointment::new, Appointment::new);
 
     // CalendarFolder
     this.addServiceObjectType(XmlElementNames.CalendarFolder,
         CalendarFolder.class,
-        new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new CalendarFolder(srv);
-          }
-        }, null);
+            CalendarFolder::new, null);
 
     // Contact
     this.addServiceObjectType(XmlElementNames.Contact, Contact.class,
-        new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new Contact(srv);
-          }
-        }, new ICreateServiceObjectWithAttachmentParam() {
+            Contact::new, new ICreateServiceObjectWithAttachmentParam() {
           public Object createServiceObjectWithAttachmentParam(
               ItemAttachment itemAttachment, boolean isNew)
               throws Exception {
@@ -136,21 +115,11 @@ public class ServiceObjectInfo {
     // ContactsFolder
     this.addServiceObjectType(XmlElementNames.ContactsFolder,
         ContactsFolder.class,
-        new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new ContactsFolder(srv);
-          }
-        }, null);
+            ContactsFolder::new, null);
 
     // ContactGroup
     this.addServiceObjectType(XmlElementNames.DistributionList,
-        ContactGroup.class, new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new ContactGroup(srv);
-          }
-        }, new ICreateServiceObjectWithAttachmentParam() {
+        ContactGroup.class, ContactGroup::new, new ICreateServiceObjectWithAttachmentParam() {
           public Object createServiceObjectWithAttachmentParam(
               ItemAttachment itemAttachment, boolean isNew)
               throws Exception {
@@ -161,21 +130,11 @@ public class ServiceObjectInfo {
     // Conversation
     this.addServiceObjectType(XmlElementNames.Conversation,
         Conversation.class,
-        new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new Conversation(srv);
-          }
-        }, null);
+            Conversation::new, null);
 
     // EmailMessage
     this.addServiceObjectType(XmlElementNames.Message, EmailMessage.class,
-        new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new EmailMessage(srv);
-          }
-        }, new ICreateServiceObjectWithAttachmentParam() {
+            EmailMessage::new, new ICreateServiceObjectWithAttachmentParam() {
           public Object createServiceObjectWithAttachmentParam(
               ItemAttachment itemAttachment, boolean isNew)
               throws Exception {
@@ -185,21 +144,11 @@ public class ServiceObjectInfo {
 
     // Folder
     this.addServiceObjectType(XmlElementNames.Folder, Folder.class,
-        new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new Folder(srv);
-          }
-        }, null);
+            Folder::new, null);
 
     // Item
     this.addServiceObjectType(XmlElementNames.Item, Item.class,
-        new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new Item(srv);
-          }
-        }, new ICreateServiceObjectWithAttachmentParam() {
+            Item::new, new ICreateServiceObjectWithAttachmentParam() {
           public Object createServiceObjectWithAttachmentParam(
               ItemAttachment itemAttachment, boolean isNew)
               throws Exception {
@@ -210,12 +159,7 @@ public class ServiceObjectInfo {
     // MeetingCancellation
     this.addServiceObjectType(XmlElementNames.MeetingCancellation,
         MeetingCancellation.class,
-        new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new MeetingCancellation(srv);
-          }
-        }, new ICreateServiceObjectWithAttachmentParam() {
+            MeetingCancellation::new, new ICreateServiceObjectWithAttachmentParam() {
           public Object createServiceObjectWithAttachmentParam(
               ItemAttachment itemAttachment, boolean isNew)
               throws Exception {
@@ -226,12 +170,7 @@ public class ServiceObjectInfo {
     // MeetingMessage
     this.addServiceObjectType(XmlElementNames.MeetingMessage,
         MeetingMessage.class,
-        new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new MeetingMessage(srv);
-          }
-        }, new ICreateServiceObjectWithAttachmentParam() {
+            MeetingMessage::new, new ICreateServiceObjectWithAttachmentParam() {
           public Object createServiceObjectWithAttachmentParam(
               ItemAttachment itemAttachment, boolean isNew)
               throws Exception {
@@ -242,12 +181,7 @@ public class ServiceObjectInfo {
     // MeetingRequest
     this.addServiceObjectType(XmlElementNames.MeetingRequest,
         MeetingRequest.class,
-        new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new MeetingRequest(srv);
-          }
-        }, new ICreateServiceObjectWithAttachmentParam() {
+            MeetingRequest::new, new ICreateServiceObjectWithAttachmentParam() {
           public Object createServiceObjectWithAttachmentParam(
               ItemAttachment itemAttachment, boolean isNew)
               throws Exception {
@@ -258,12 +192,7 @@ public class ServiceObjectInfo {
     // MeetingResponse
     this.addServiceObjectType(XmlElementNames.MeetingResponse,
         MeetingResponse.class,
-        new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new MeetingResponse(srv);
-          }
-        }, new ICreateServiceObjectWithAttachmentParam() {
+            MeetingResponse::new, new ICreateServiceObjectWithAttachmentParam() {
           public Object createServiceObjectWithAttachmentParam(
               ItemAttachment itemAttachment, boolean isNew)
               throws Exception {
@@ -273,12 +202,7 @@ public class ServiceObjectInfo {
 
     // PostItem
     this.addServiceObjectType(XmlElementNames.PostItem, PostItem.class,
-        new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new PostItem(srv);
-          }
-        }, new ICreateServiceObjectWithAttachmentParam() {
+            PostItem::new, new ICreateServiceObjectWithAttachmentParam() {
           public Object createServiceObjectWithAttachmentParam(
               ItemAttachment itemAttachment, boolean isNew)
               throws Exception {
@@ -288,21 +212,11 @@ public class ServiceObjectInfo {
 
     // SearchFolder
     this.addServiceObjectType(XmlElementNames.SearchFolder,
-        SearchFolder.class, new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new SearchFolder(srv);
-          }
-        }, null);
+        SearchFolder.class, SearchFolder::new, null);
 
     // Task
     this.addServiceObjectType(XmlElementNames.Task, Task.class,
-        new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new Task(srv);
-          }
-        }, new ICreateServiceObjectWithAttachmentParam() {
+            Task::new, new ICreateServiceObjectWithAttachmentParam() {
           public Object createServiceObjectWithAttachmentParam(
               ItemAttachment itemAttachment, boolean isNew)
               throws Exception {
@@ -312,12 +226,7 @@ public class ServiceObjectInfo {
 
     // TasksFolder
     this.addServiceObjectType(XmlElementNames.TasksFolder,
-        TasksFolder.class, new ICreateServiceObjectWithServiceParam() {
-          public Object createServiceObjectWithServiceParam(
-              ExchangeService srv) throws Exception {
-            return new TasksFolder(srv);
-          }
-        }, null);
+        TasksFolder.class, TasksFolder::new, null);
   }
 
   /**

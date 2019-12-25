@@ -226,11 +226,7 @@ public class TaskSchema extends ItemSchema {
                   PropertyDefinitionFlags.CanDelete,
                   PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<StringList>() {
-                      public StringList createComplexProperty() {
-                          return new StringList();
-                      }
-                  });
+                  StringList::new);
 
   /**
    * Defines the CompleteDate property.
@@ -257,11 +253,7 @@ public class TaskSchema extends ItemSchema {
                   PropertyDefinitionFlags.CanDelete,
                   PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<StringList>() {
-                      public StringList createComplexProperty() {
-                          return new StringList();
-                      }
-                  });
+                  StringList::new);
 
   /**
    * Defines the DelegationState property.

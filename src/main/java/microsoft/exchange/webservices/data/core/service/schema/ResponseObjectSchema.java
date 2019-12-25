@@ -49,11 +49,7 @@ public class ResponseObjectSchema extends ServiceObjectSchema {
                   PropertyDefinitionFlags.AutoInstantiateOnRead,
                   PropertyDefinitionFlags.CanSet),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<ItemId>() {
-                      public ItemId createComplexProperty() {
-                          return new ItemId();
-                      }
-                  });
+                  ItemId::new);
 
   /**
    * The Body prefix.
@@ -64,11 +60,7 @@ public class ResponseObjectSchema extends ServiceObjectSchema {
                   XmlElementNames.NewBodyContent, EnumSet
                   .of(PropertyDefinitionFlags.CanSet),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<MessageBody>() {
-                      public MessageBody createComplexProperty() {
-                          return new MessageBody();
-                      }
-                  });
+                  MessageBody::new);
 
   /**
    * This must be declared after the property definitions.

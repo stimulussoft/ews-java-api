@@ -422,12 +422,7 @@ public class ContactSchema extends ItemSchema {
                   XmlElementNames.CompleteName, FieldUris.CompleteName, EnumSet
                   .of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<CompleteName>() {
-                      @Override
-                      public CompleteName createComplexProperty() {
-                          return new CompleteName();
-                      }
-                  });
+                  microsoft.exchange.webservices.data.property.complex.CompleteName::new);
 
   /**
    * Defines the CompanyName property.
@@ -453,13 +448,7 @@ public class ContactSchema extends ItemSchema {
                           PropertyDefinitionFlags.CanSet,
                           PropertyDefinitionFlags.CanUpdate),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate
-                          <EmailAddressDictionary>() {
-                      @Override
-                      public EmailAddressDictionary createComplexProperty() {
-                          return new EmailAddressDictionary();
-                      }
-                  });
+                  EmailAddressDictionary::new);
 
   /**
    * Defines the PhysicalAddresses property.
@@ -473,13 +462,7 @@ public class ContactSchema extends ItemSchema {
                           PropertyDefinitionFlags.CanSet,
                           PropertyDefinitionFlags.CanUpdate),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate
-                          <PhysicalAddressDictionary>() {
-                      @Override
-                      public PhysicalAddressDictionary createComplexProperty() {
-                          return new PhysicalAddressDictionary();
-                      }
-                  });
+                  PhysicalAddressDictionary::new);
 
   /**
    * Defines the PhoneNumbers property.
@@ -493,13 +476,7 @@ public class ContactSchema extends ItemSchema {
                           PropertyDefinitionFlags.CanSet,
                           PropertyDefinitionFlags.CanUpdate),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate
-                          <PhoneNumberDictionary>() {
-                      @Override
-                      public PhoneNumberDictionary createComplexProperty() {
-                          return new PhoneNumberDictionary();
-                      }
-                  });
+                  PhoneNumberDictionary::new);
 
   /**
    * Defines the AssistantName property.
@@ -552,12 +529,7 @@ public class ContactSchema extends ItemSchema {
                   PropertyDefinitionFlags.CanDelete,
                   PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<StringList>() {
-                      @Override
-                      public StringList createComplexProperty() {
-                          return new StringList();
-                      }
-                  });
+                  StringList::new);
 
   /**
    * Defines the Companies property.
@@ -572,12 +544,7 @@ public class ContactSchema extends ItemSchema {
                   PropertyDefinitionFlags.CanDelete,
                   PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<StringList>() {
-                      @Override
-                      public StringList createComplexProperty() {
-                          return new StringList();
-                      }
-                  });
+                  StringList::new);
 
   /**
    * Defines the ContactSource property.
@@ -624,12 +591,7 @@ public class ContactSchema extends ItemSchema {
                   PropertyDefinitionFlags.CanSet,
                   PropertyDefinitionFlags.CanUpdate),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<ImAddressDictionary>() {
-                      @Override
-                      public ImAddressDictionary createComplexProperty() {
-                          return new ImAddressDictionary();
-                      }
-                  });
+                  ImAddressDictionary::new);
 
   /**
    * Defines the JobTitle property.
@@ -826,12 +788,7 @@ public class ContactSchema extends ItemSchema {
                   FieldUris.UserSMIMECertificate,
                   EnumSet.of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2010_SP1,
-                  new ICreateComplexPropertyDelegate<ByteArrayArray>() {
-                      @Override
-                      public ByteArrayArray createComplexProperty() {
-                          return new ByteArrayArray();
-                      }
-                  });
+                  ByteArrayArray::new);
 
   /**
    * Defines MSExchangeCertificate Property **
@@ -844,12 +801,7 @@ public class ContactSchema extends ItemSchema {
                   FieldUris.MSExchangeCertificate,
                   EnumSet.of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2010_SP1,
-                  new ICreateComplexPropertyDelegate<ByteArrayArray>() {
-                      @Override
-                      public ByteArrayArray createComplexProperty() {
-                          return new ByteArrayArray();
-                      }
-                  });
+                  ByteArrayArray::new);
 
 
   /**
@@ -875,12 +827,7 @@ public class ContactSchema extends ItemSchema {
                   XmlElementNames.Mailbox,
                   EnumSet.of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2010_SP1,
-                  new ICreateComplexPropertyDelegate<EmailAddress>() {
-                      @Override
-                      public EmailAddress createComplexProperty() {
-                          return new EmailAddress();
-                      }
-                  });
+                  EmailAddress::new);
 
   /**
    * Defines DirectReports Property **
@@ -893,12 +840,7 @@ public class ContactSchema extends ItemSchema {
                   FieldUris.DirectReports,
                   EnumSet.of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2010_SP1,
-                  new ICreateComplexPropertyDelegate<EmailAddressCollection>() {
-                      @Override
-                      public EmailAddressCollection createComplexProperty() {
-                          return new EmailAddressCollection();
-                      }
-                  });
+                  EmailAddressCollection::new);
 
 
 

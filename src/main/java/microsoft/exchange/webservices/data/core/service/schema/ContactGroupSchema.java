@@ -69,12 +69,7 @@ public class ContactGroupSchema extends ItemSchema {
                           PropertyDefinitionFlags.CanSet,
                           PropertyDefinitionFlags.CanUpdate),
                   ExchangeVersion.Exchange2010,
-                  new ICreateComplexPropertyDelegate<GroupMemberCollection>() {
-                      @Override
-                      public GroupMemberCollection createComplexProperty() {
-                          return new GroupMemberCollection();
-                      }
-                  });
+                  GroupMemberCollection::new);
 
 
   //This must be declared after the property definitions.

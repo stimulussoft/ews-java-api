@@ -222,9 +222,6 @@ public abstract class HangingServiceRequestBase<T> extends ServiceRequestBase<T>
     } catch (SocketTimeoutException ex) {
       // The connection timed out.
       this.disconnect(HangingRequestDisconnectReason.Timeout, ex);
-    } catch (UnknownServiceException | ObjectStreamException ex) {
-      // Stream is closed, so disconnect.
-      this.disconnect(HangingRequestDisconnectReason.Exception, ex);
     } catch (UnsupportedOperationException ex) {
       LOG.error(ex);
       // This is thrown if we close the stream during a
@@ -305,11 +302,7 @@ public abstract class HangingServiceRequestBase<T> extends ServiceRequestBase<T>
       ThreadPoolExecutor threadPool = new ThreadPoolExecutor(poolSize,
           maxPoolSize,
           keepAliveTime, TimeUnit.SECONDS, queue);
-      threadPool.execute(new Runnable() {
-        public void run() {
-          parseResponses();
-        }
-      });
+      threadPool.execute(this::parseResponses);
       threadPool.shutdown();
     }
   }

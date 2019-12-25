@@ -49,17 +49,9 @@ public class MapiTypeConverter {
 
   private static final Log LOG = LogFactory.getLog(MapiTypeConverter.class);
 
-  private static final IFunction<String, Object> DATE_TIME_PARSER = new IFunction<String, Object>() {
-    public Object func(final String s) {
-      return parseDateTime(s);
-    }
-  };
+  private static final IFunction<String, Object> DATE_TIME_PARSER = MapiTypeConverter::parseDateTime;
 
-  private static final IFunction<String, Object> MAPI_VALUE_PARSER = new IFunction<String, Object>() {
-    public Object func(final String s) {
-      return MapiTypeConverter.parseMapiIntegerValue(s);
-    }
-  };
+  private static final IFunction<String, Object> MAPI_VALUE_PARSER = MapiTypeConverter::parseMapiIntegerValue;
 
   /**
    * The mapi type converter map.

@@ -221,11 +221,7 @@ public class ConversationSchema extends ServiceObjectSchema {
           XmlElementNames.ConversationId, FieldUris.ConversationId, EnumSet
           .of(PropertyDefinitionFlags.CanFind),
           ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<ConversationId>() {
-              public ConversationId createComplexProperty() {
-                  return new ConversationId();
-              }
-          });
+          ConversationId::new);
 
   /**
    * Defines the Topic property.
@@ -248,11 +244,7 @@ public class ConversationSchema extends ServiceObjectSchema {
           FieldUris.UniqueRecipients, EnumSet
           .of(PropertyDefinitionFlags.CanFind),
           ExchangeVersion.Exchange2010_SP1,
-          new ICreateComplexPropertyDelegate<StringList>() {
-              public StringList createComplexProperty() {
-                  return new StringList();
-              }
-          });
+          StringList::new);
 
 
   /**
@@ -266,11 +258,7 @@ public class ConversationSchema extends ServiceObjectSchema {
                   EnumSet
                           .of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2010_SP1,
-                  new ICreateComplexPropertyDelegate<StringList>() {
-                      public StringList createComplexProperty() {
-                          return new StringList();
-                      }
-                  });
+                  StringList::new);
 
   /**
    * Defines the UniqueUnreadSenders property.
@@ -283,11 +271,7 @@ public class ConversationSchema extends ServiceObjectSchema {
                   EnumSet
                           .of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2010_SP1,
-                  new ICreateComplexPropertyDelegate<StringList>() {
-                      public StringList createComplexProperty() {
-                          return new StringList();
-                      }
-                  });
+                  StringList::new);
 
   /**
    * Defines the GlobalUniqueUnreadSenders property.
@@ -300,11 +284,7 @@ public class ConversationSchema extends ServiceObjectSchema {
                   EnumSet
                           .of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2010_SP1,
-                  new ICreateComplexPropertyDelegate<StringList>() {
-                      public StringList createComplexProperty() {
-                          return new StringList();
-                      }
-                  });
+                  StringList::new);
 
   /**
    * Defines the UniqueSenders property.
@@ -317,11 +297,7 @@ public class ConversationSchema extends ServiceObjectSchema {
                   EnumSet
                           .of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2010_SP1,
-                  new ICreateComplexPropertyDelegate<StringList>() {
-                      public StringList createComplexProperty() {
-                          return new StringList();
-                      }
-                  });
+                  StringList::new);
 
   /**
    * Defines the GlobalUniqueSenders property.
@@ -334,11 +310,7 @@ public class ConversationSchema extends ServiceObjectSchema {
                   EnumSet
                           .of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2010_SP1,
-                  new ICreateComplexPropertyDelegate<StringList>() {
-                      public StringList createComplexProperty() {
-                          return new StringList();
-                      }
-                  });
+                  StringList::new);
 
   /**
    * Defines the LastDeliveryTime property.
@@ -373,11 +345,7 @@ public class ConversationSchema extends ServiceObjectSchema {
                   EnumSet
                           .of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2010_SP1,
-                  new ICreateComplexPropertyDelegate<StringList>() {
-                      public StringList createComplexProperty() {
-                          return new StringList();
-                      }
-                  });
+                  StringList::new);
 
   /**
    * Defines the GlobalCategories property.
@@ -390,11 +358,7 @@ public class ConversationSchema extends ServiceObjectSchema {
                   EnumSet
                           .of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2010_SP1,
-                  new ICreateComplexPropertyDelegate<StringList>() {
-                      public StringList createComplexProperty() {
-                          return new StringList();
-                      }
-                  });
+                  StringList::new);
 
   /**
    * Defines the FlagStatus property.
@@ -579,11 +543,7 @@ public class ConversationSchema extends ServiceObjectSchema {
                   EnumSet
                           .of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2010_SP1,
-                  new ICreateComplexPropertyDelegate<ItemIdCollection>() {
-                      public ItemIdCollection createComplexProperty() {
-                          return new ItemIdCollection();
-                      }
-                  });
+                  ItemIdCollection::new);
 
   /**
    * Defines the GlobalItemIds property.
@@ -596,11 +556,7 @@ public class ConversationSchema extends ServiceObjectSchema {
                   EnumSet
                           .of(PropertyDefinitionFlags.CanFind),
                   ExchangeVersion.Exchange2010_SP1,
-                  new ICreateComplexPropertyDelegate<ItemIdCollection>() {
-                      public ItemIdCollection createComplexProperty() {
-                          return new ItemIdCollection();
-                      }
-                  });
+                  ItemIdCollection::new);
 
   /**
    * This must be declared after the property definitions

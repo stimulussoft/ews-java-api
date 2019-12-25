@@ -84,12 +84,7 @@ public class MeetingMessageSchema extends EmailMessageSchema {
                   XmlElementNames.AssociatedCalendarItemId,
                   FieldUris.AssociatedCalendarItemId,
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<ItemId>() {
-                      @Override
-                      public ItemId createComplexProperty() {
-                          return new ItemId();
-                      }
-                  });
+                  ItemId::new);
 
   /**
    * Defines the IsDelegated property.

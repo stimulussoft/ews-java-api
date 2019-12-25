@@ -48,11 +48,7 @@ public final class AttachmentsPropertyDefinition extends
         EnumSet
             .of(PropertyDefinitionFlags.AutoInstantiateOnRead),
         ExchangeVersion.Exchange2007_SP1,
-        new ICreateComplexPropertyDelegate<AttachmentCollection>() {
-          public AttachmentCollection createComplexProperty() {
-            return new AttachmentCollection();
-          }
-        });
+            AttachmentCollection::new);
 
   }
 

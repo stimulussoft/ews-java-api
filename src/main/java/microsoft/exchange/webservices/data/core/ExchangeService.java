@@ -613,12 +613,7 @@ public class ExchangeService extends ExchangeServiceBase implements IAutodiscove
       MessageDisposition messageDisposition,
       SendInvitationsMode sendInvitationsMode) throws Exception {
     // All item have to be new.
-    if (!EwsUtilities.trueForAll(items, new IPredicate<Item>() {
-      @Override
-      public boolean predicate(Item obj) throws ServiceLocalException {
-        return obj.isNew();
-      }
-    })) {
+    if (!EwsUtilities.trueForAll(items, ServiceObject::isNew)) {
       throw new ServiceValidationException(
           "This operation can't be performed because at least one item already has an ID.");
     }

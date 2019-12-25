@@ -47,11 +47,7 @@ public class CancelMeetingMessageSchema extends ServiceObjectSchema {
                   XmlElementNames.NewBodyContent, EnumSet
                   .of(PropertyDefinitionFlags.CanSet),
                   ExchangeVersion.Exchange2007_SP1,
-                  new ICreateComplexPropertyDelegate<MessageBody>() {
-                      public MessageBody createComplexProperty() {
-                          return new MessageBody();
-                      }
-                  });
+                  MessageBody::new);
 
   /**
    * This must be declared after the property definitions.
