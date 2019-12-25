@@ -59,7 +59,7 @@ public abstract class ServiceObject {
     /**
      * The lock object.
      */
-    private Object lockObject = new Object();
+    private final Object lockObject = new Object();
 
     /**
      * The service.
