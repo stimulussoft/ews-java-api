@@ -129,28 +129,29 @@ final class LegacyAvailabilityTimeZoneTime extends ComplexProperty {
   @Override
   public boolean tryReadElementFromXml(EwsServiceXmlReader reader)
       throws Exception {
-    if (reader.getLocalName().equals(XmlElementNames.Bias)) {
-      this.delta = new TimeSpan((long)
-          reader.readElementValue(Integer.class) * 60 * 1000);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.Time)) {
-      this.timeOfDay = TimeSpan.parse(reader.readElementValue());
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.DayOrder)) {
-      this.dayOrder = reader.readElementValue(Integer.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.DayOfWeek)) {
-      this.dayOfTheWeek = reader.readElementValue(DayOfTheWeek.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.Month)) {
-      this.month = reader.readElementValue(Integer.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.Year)) {
-      this.year = reader.readElementValue(Integer.class);
-      return true;
-    } else {
-      return false;
-    }
+      switch (reader.getLocalName()) {
+          case XmlElementNames.Bias:
+              this.delta = new TimeSpan((long)
+                      reader.readElementValue(Integer.class) * 60 * 1000);
+              return true;
+          case XmlElementNames.Time:
+              this.timeOfDay = TimeSpan.parse(reader.readElementValue());
+              return true;
+          case XmlElementNames.DayOrder:
+              this.dayOrder = reader.readElementValue(Integer.class);
+              return true;
+          case XmlElementNames.DayOfWeek:
+              this.dayOfTheWeek = reader.readElementValue(DayOfTheWeek.class);
+              return true;
+          case XmlElementNames.Month:
+              this.month = reader.readElementValue(Integer.class);
+              return true;
+          case XmlElementNames.Year:
+              this.year = reader.readElementValue(Integer.class);
+              return true;
+          default:
+              return false;
+      }
   }
 
   /**

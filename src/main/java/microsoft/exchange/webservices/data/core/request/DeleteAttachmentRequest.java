@@ -35,7 +35,6 @@ import microsoft.exchange.webservices.data.core.enumeration.service.error.Servic
 import microsoft.exchange.webservices.data.core.response.DeleteAttachmentResponse;
 import microsoft.exchange.webservices.data.core.enumeration.misc.ExchangeVersion;
 import microsoft.exchange.webservices.data.core.enumeration.misc.XmlNamespace;
-import microsoft.exchange.webservices.data.core.exception.service.local.ServiceLocalException;
 import microsoft.exchange.webservices.data.property.complex.Attachment;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -54,7 +53,7 @@ public final class DeleteAttachmentRequest extends
   /**
    * The attachments.
    */
-  private List<Attachment> attachments = new ArrayList<Attachment>();
+  private List<Attachment> attachments = new ArrayList<>();
 
   /**
    * Initializes a new instance of the DeleteAttachmentRequest class.
@@ -80,8 +79,6 @@ public final class DeleteAttachmentRequest extends
         EwsUtilities.validateParam(this.attachments.get(i).getId(),
             String.format("Attachment[%d].Id ", i));
       }
-    } catch (ServiceLocalException e) {
-      LOG.error(e);
     } catch (Exception e) {
       LOG.error(e);
     }

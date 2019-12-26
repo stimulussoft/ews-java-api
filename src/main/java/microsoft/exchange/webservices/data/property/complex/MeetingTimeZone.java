@@ -106,20 +106,21 @@ public final class MeetingTimeZone extends ComplexProperty {
   @Override
   public boolean tryReadElementFromXml(EwsServiceXmlReader reader)
       throws Exception {
-    if (reader.getLocalName().equals(XmlElementNames.BaseOffset)) {
-      this.baseOffset = EwsUtilities.getXSDurationToTimeSpan(reader.readElementValue());
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.Standard)) {
-      this.standard = new TimeChange();
-      this.standard.loadFromXml(reader, reader.getLocalName());
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.Daylight)) {
-      this.daylight = new TimeChange();
-      this.daylight.loadFromXml(reader, reader.getLocalName());
-      return true;
-    } else {
-      return false;
-    }
+      switch (reader.getLocalName()) {
+          case XmlElementNames.BaseOffset:
+              this.baseOffset = EwsUtilities.getXSDurationToTimeSpan(reader.readElementValue());
+              return true;
+          case XmlElementNames.Standard:
+              this.standard = new TimeChange();
+              this.standard.loadFromXml(reader, reader.getLocalName());
+              return true;
+          case XmlElementNames.Daylight:
+              this.daylight = new TimeChange();
+              this.daylight.loadFromXml(reader, reader.getLocalName());
+              return true;
+          default:
+              return false;
+      }
   }
 
   /**

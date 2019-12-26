@@ -53,28 +53,28 @@ public final class ResolveNamesRequest extends
    */
   private static LazyMember<Map<ResolveNameSearchLocation, String>>
       searchScopeMap =
-      new LazyMember<Map<ResolveNameSearchLocation, String>>(
-          new ILazyMember<Map<ResolveNameSearchLocation, String>>() {
-            @Override
-            public Map<ResolveNameSearchLocation, String>
-            createInstance() {
+          new LazyMember<>(
+                  new ILazyMember<Map<ResolveNameSearchLocation, String>>() {
+                      @Override
+                      public Map<ResolveNameSearchLocation, String>
+                      createInstance() {
 
-              Map<ResolveNameSearchLocation, String> map =
-                  new HashMap<ResolveNameSearchLocation, String>();
+                          Map<ResolveNameSearchLocation, String> map =
+                                  new HashMap<>();
 
-              map.put(ResolveNameSearchLocation.DirectoryOnly,
-                  "ActiveDirectory");
-              map.put(ResolveNameSearchLocation.DirectoryThenContacts,
-                  "ActiveDirectoryContacts");
-              map.put(ResolveNameSearchLocation.ContactsOnly,
-                  "Contacts");
-              map.put(ResolveNameSearchLocation.ContactsThenDirectory,
-                  "ContactsActiveDirectory");
+                          map.put(ResolveNameSearchLocation.DirectoryOnly,
+                                  "ActiveDirectory");
+                          map.put(ResolveNameSearchLocation.DirectoryThenContacts,
+                                  "ActiveDirectoryContacts");
+                          map.put(ResolveNameSearchLocation.ContactsOnly,
+                                  "Contacts");
+                          map.put(ResolveNameSearchLocation.ContactsThenDirectory,
+                                  "ContactsActiveDirectory");
 
-              return map;
-            }
+                          return map;
+                      }
 
-          });
+                  });
 
   /**
    * The name to resolve.

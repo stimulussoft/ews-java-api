@@ -72,8 +72,8 @@ public final class GetDomainSettingsResponse extends AutodiscoverResponse {
   public GetDomainSettingsResponse() {
     super();
     this.domain = "";
-    this.settings = new HashMap<DomainSettingName, Object>();
-    this.domainSettingErrors = new ArrayList<DomainSettingError>();
+    this.settings = new HashMap<>();
+    this.domainSettingErrors = new ArrayList<>();
   }
 
   /**
@@ -130,26 +130,28 @@ public final class GetDomainSettingsResponse extends AutodiscoverResponse {
    */
   @Override public void loadFromXml(EwsXmlReader reader, String endElementName)
       throws Exception {
+    label:
     do {
       reader.read();
 
       if (reader.getNodeType().nodeType == XmlNodeType.START_ELEMENT) {
-        if (reader.getLocalName()
-            .equals(XmlElementNames.RedirectTarget)) {
-          this.redirectTarget = reader.readElementValue();
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.DomainSettingErrors)) {
-          this.loadDomainSettingErrorsFromXml(reader);
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.DomainSettings)) {
-          try {
-            this.loadDomainSettingsFromXml(reader);
-          } catch (Exception e) {
-            LOG.error(e);
-          }
-        } else {
-          super.loadFromXml(reader, endElementName);
-          break;
+        switch (reader.getLocalName()) {
+          case XmlElementNames.RedirectTarget:
+            this.redirectTarget = reader.readElementValue();
+            break;
+          case XmlElementNames.DomainSettingErrors:
+            this.loadDomainSettingErrorsFromXml(reader);
+            break;
+          case XmlElementNames.DomainSettings:
+            try {
+              this.loadDomainSettingsFromXml(reader);
+            } catch (Exception e) {
+              LOG.error(e);
+            }
+            break;
+          default:
+            super.loadFromXml(reader, endElementName);
+            break label;
         }
       }
     } while (!reader

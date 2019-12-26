@@ -54,7 +54,7 @@ public final class NameResolutionCollection implements
   /**
    * The item.
    */
-  private List<NameResolution> items = new ArrayList<NameResolution>();
+  private List<NameResolution> items = new ArrayList<>();
 
   /**
    * Represents a list of suggested name resolutions.

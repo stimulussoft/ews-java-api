@@ -59,22 +59,25 @@ public abstract class PropertyDefinitionBase {
       OutParam<PropertyDefinitionBase> propertyDefinition)
       throws Exception {
     String strLocalName = reader.getLocalName();
-    if (strLocalName.equals(XmlElementNames.FieldURI)) {
-      PropertyDefinitionBase p = ServiceObjectSchema
-          .findPropertyDefinition(reader.readAttributeValue(XmlAttributeNames.FieldURI));
-      propertyDefinition.setParam(p);
-      return true;
-    } else if (strLocalName.equals(XmlElementNames.IndexedFieldURI)) {
-      reader.skipCurrentElement();
-      return true;
-    } else if (strLocalName.equals(XmlElementNames.ExtendedFieldURI)) {
-      ExtendedPropertyDefinition p = new ExtendedPropertyDefinition();
-      p.loadFromXml(reader);
-      propertyDefinition.setParam(p);
-      return true;
-    } else {
-      return false;
-    }
+      switch (strLocalName) {
+          case XmlElementNames.FieldURI: {
+              PropertyDefinitionBase p = ServiceObjectSchema
+                      .findPropertyDefinition(reader.readAttributeValue(XmlAttributeNames.FieldURI));
+              propertyDefinition.setParam(p);
+              return true;
+          }
+          case XmlElementNames.IndexedFieldURI:
+              reader.skipCurrentElement();
+              return true;
+          case XmlElementNames.ExtendedFieldURI: {
+              ExtendedPropertyDefinition p = new ExtendedPropertyDefinition();
+              p.loadFromXml(reader);
+              propertyDefinition.setParam(p);
+              return true;
+          }
+          default:
+              return false;
+      }
 
   }
 

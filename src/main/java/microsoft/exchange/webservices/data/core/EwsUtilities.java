@@ -84,6 +84,7 @@ import java.util.regex.Pattern;
 public final class EwsUtilities {
 
   private static final Log LOG = LogFactory.getLog(EwsUtilities.class);
+  private static final XMLOutputFactory factory = XMLOutputFactory.newInstance();
 
   /**
    * The Constant XSFalse.
@@ -220,13 +221,9 @@ public final class EwsUtilities {
    * The service object info.
    */
   private static final LazyMember<ServiceObjectInfo> SERVICE_OBJECT_INFO =
-      new LazyMember<ServiceObjectInfo>(
-        new ILazyMember<ServiceObjectInfo>() {
-          public ServiceObjectInfo createInstance() {
-            return new ServiceObjectInfo();
-          }
-        }
-      );
+          new LazyMember<>(
+                  ServiceObjectInfo::new
+          );
 
   private static final String XML_SCHEMA_DATE_FORMAT = "yyyy-MM-dd'Z'";
   private static final String XML_SCHEMA_DATE_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
@@ -260,74 +257,73 @@ public final class EwsUtilities {
    */
   private static final LazyMember<Map<Class<?>, Map<String, ExchangeVersion>>>
       ENUM_VERSION_DICTIONARIES =
-      new LazyMember<Map<Class<?>, Map<String, ExchangeVersion>>>(
-          new ILazyMember<Map<Class<?>, Map<String, ExchangeVersion>>>() {
-            @Override
-            public Map<Class<?>, Map<String, ExchangeVersion>>
-            createInstance() {
-              Map<Class<?>, Map<String, ExchangeVersion>> enumDicts =
-                  new HashMap<Class<?>, Map<String,
-                      ExchangeVersion>>();
-              enumDicts.put(WellKnownFolderName.class,
-                  buildEnumDict(WellKnownFolderName.class));
-              enumDicts.put(ItemTraversal.class,
-                  buildEnumDict(ItemTraversal.class));
-              enumDicts.put(FileAsMapping.class,
-                  buildEnumDict(FileAsMapping.class));
-              enumDicts.put(EventType.class,
-                  buildEnumDict(EventType.class));
-              enumDicts.put(MeetingRequestsDeliveryScope.class,
-                  buildEnumDict(MeetingRequestsDeliveryScope.
-                      class));
-              return enumDicts;
-            }
-          });
+          new LazyMember<>(
+                  new ILazyMember<Map<Class<?>, Map<String, ExchangeVersion>>>() {
+                    @Override
+                    public Map<Class<?>, Map<String, ExchangeVersion>>
+                    createInstance() {
+                      Map<Class<?>, Map<String, ExchangeVersion>> enumDicts =
+                              new HashMap<>();
+                      enumDicts.put(WellKnownFolderName.class,
+                              buildEnumDict(WellKnownFolderName.class));
+                      enumDicts.put(ItemTraversal.class,
+                              buildEnumDict(ItemTraversal.class));
+                      enumDicts.put(FileAsMapping.class,
+                              buildEnumDict(FileAsMapping.class));
+                      enumDicts.put(EventType.class,
+                              buildEnumDict(EventType.class));
+                      enumDicts.put(MeetingRequestsDeliveryScope.class,
+                              buildEnumDict(MeetingRequestsDeliveryScope.
+                                      class));
+                      return enumDicts;
+                    }
+                  });
   /**
    * Dictionary of enum type to schema-name-to-enum-value maps.
    */
   private static final LazyMember<Map<Class<?>, Map<String, String>>>
       SCHEMA_TO_ENUM_DICTIONARIES =
-      new LazyMember<Map<Class<?>, Map<String, String>>>(
-          new ILazyMember<Map<Class<?>, Map<String, String>>>() {
-            @Override
-            public Map<Class<?>, Map<String, String>> createInstance() {
-              Map<Class<?>, Map<String, String>> enumDicts =
-                  new HashMap<Class<?>, Map<String, String>>();
-              enumDicts.put(EventType.class,
-                  buildSchemaToEnumDict(EventType.class));
-              enumDicts.put(MailboxType.class,
-                  buildSchemaToEnumDict(MailboxType.class));
-              enumDicts.put(FileAsMapping.class,
-                  buildSchemaToEnumDict(FileAsMapping.class));
-              enumDicts.put(RuleProperty.class,
-                  buildSchemaToEnumDict(RuleProperty.class));
-              return enumDicts;
+          new LazyMember<>(
+                  new ILazyMember<Map<Class<?>, Map<String, String>>>() {
+                    @Override
+                    public Map<Class<?>, Map<String, String>> createInstance() {
+                      Map<Class<?>, Map<String, String>> enumDicts =
+                              new HashMap<>();
+                      enumDicts.put(EventType.class,
+                              buildSchemaToEnumDict(EventType.class));
+                      enumDicts.put(MailboxType.class,
+                              buildSchemaToEnumDict(MailboxType.class));
+                      enumDicts.put(FileAsMapping.class,
+                              buildSchemaToEnumDict(FileAsMapping.class));
+                      enumDicts.put(RuleProperty.class,
+                              buildSchemaToEnumDict(RuleProperty.class));
+                      return enumDicts;
 
-            }
-          });
+                    }
+                  });
 
   /**
    * Dictionary of enum type to enum-value-to-schema-name maps.
    */
   public static final LazyMember<Map<Class<?>, Map<String, String>>>
       ENUM_TO_SCHEMA_DICTIONARIES =
-      new LazyMember<Map<Class<?>, Map<String, String>>>(
-          new ILazyMember<Map<Class<?>, Map<String, String>>>() {
-            @Override
-            public Map<Class<?>, Map<String, String>> createInstance() {
-              Map<Class<?>, Map<String, String>> enumDicts =
-                  new HashMap<Class<?>, Map<String, String>>();
-              enumDicts.put(EventType.class,
-                  buildEnumToSchemaDict(EventType.class));
-              enumDicts.put(MailboxType.class,
-                  buildEnumToSchemaDict(MailboxType.class));
-              enumDicts.put(FileAsMapping.class,
-                  buildEnumToSchemaDict(FileAsMapping.class));
-              enumDicts.put(RuleProperty.class,
-                  buildEnumToSchemaDict(RuleProperty.class));
-              return enumDicts;
-            }
-          });
+          new LazyMember<>(
+                  new ILazyMember<Map<Class<?>, Map<String, String>>>() {
+                    @Override
+                    public Map<Class<?>, Map<String, String>> createInstance() {
+                      Map<Class<?>, Map<String, String>> enumDicts =
+                              new HashMap<>();
+                      enumDicts.put(EventType.class,
+                              buildEnumToSchemaDict(EventType.class));
+                      enumDicts.put(MailboxType.class,
+                              buildEnumToSchemaDict(MailboxType.class));
+                      enumDicts.put(FileAsMapping.class,
+                              buildEnumToSchemaDict(FileAsMapping.class));
+                      enumDicts.put(RuleProperty.class,
+                              buildEnumToSchemaDict(RuleProperty.class));
+                      return enumDicts;
+                    }
+                  });
 
   /**
    * Regular expression for legal domain names.
@@ -551,7 +547,6 @@ public final class EwsUtilities {
       throws XMLStreamException, IOException {
     String lineSeparator = System.getProperty("line.separator");
     ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-    XMLOutputFactory factory = XMLOutputFactory.newInstance();
     XMLStreamWriter writer = factory.createXMLStreamWriter(outStream);
     EwsUtilities.writeTraceStartElement(writer, entryKind, false);
     writer.writeCharacters(lineSeparator);
@@ -768,7 +763,7 @@ public final class EwsUtilities {
    */
   private static <E extends Enum<E>> Map<String, String>
   buildSchemaToEnumDict(Class<E> c) {
-    Map<String, String> dict = new HashMap<String, String>();
+    Map<String, String> dict = new HashMap<>();
 
     Field[] fields = c.getDeclaredFields();
     for (Field f : fields) {
@@ -1030,12 +1025,7 @@ public final class EwsUtilities {
       // Non-empty string has at least one character
       //which is *not* a whitespace character
       if (param.length() == countMatchingChars(param,
-          new IPredicate<Character>() {
-            @Override
-            public boolean predicate(Character obj) {
-              return Character.isWhitespace(obj);
-            }
-          })) {
+              Character::isWhitespace)) {
         throw new ArgumentException("The string argument contains only white space characters.", paramName);
       }
     }
@@ -1204,7 +1194,7 @@ public final class EwsUtilities {
   private static <E extends Enum<E>> Map<String, ExchangeVersion>
   buildEnumDict(Class<E> c) {
     Map<String, ExchangeVersion> dict =
-        new HashMap<String, ExchangeVersion>();
+            new HashMap<>();
     Field[] fields = c.getDeclaredFields();
     for (Field f : fields) {
       if (f.isEnumConstant()
@@ -1226,7 +1216,7 @@ public final class EwsUtilities {
    * @return The mapping from enum to schema name
    */
   private static Map<String, String> buildEnumToSchemaDict(Class<?> c) {
-    Map<String, String> dict = new HashMap<String, String>();
+    Map<String, String> dict = new HashMap<>();
     Field[] fields = c.getFields();
     for (Field f : fields) {
       if (f.isEnumConstant() && f.isAnnotationPresent(EwsEnum.class)) {

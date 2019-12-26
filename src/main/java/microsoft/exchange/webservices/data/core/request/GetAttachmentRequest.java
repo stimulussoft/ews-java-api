@@ -56,13 +56,13 @@ public final class GetAttachmentRequest extends
   /**
    * The attachments.
    */
-  private List<Attachment> attachments = new ArrayList<Attachment>();
+  private List<Attachment> attachments = new ArrayList<>();
 
   /**
    * The additional property.
    */
   private List<PropertyDefinitionBase> additionalProperties =
-      new ArrayList<PropertyDefinitionBase>();
+          new ArrayList<>();
 
   /**
    * The body type.
@@ -106,7 +106,7 @@ public final class GetAttachmentRequest extends
       responseCollection.getResponseAtIndex(0).throwIfNecessary();
       return responseCollection;
     }
-    return new ServiceResponseCollection<GetAttachmentResponse>();
+    return new ServiceResponseCollection<>();
   }
 
   /**

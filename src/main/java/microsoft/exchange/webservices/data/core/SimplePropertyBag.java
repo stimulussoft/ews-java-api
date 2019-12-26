@@ -42,22 +42,22 @@ public class SimplePropertyBag<TKey> implements Iterable<HashMap<TKey, Object>> 
   /**
    * The item.
    */
-  private Map<TKey, Object> items = new HashMap<TKey, Object>();
+  private Map<TKey, Object> items = new HashMap<>();
 
   /**
    * The removed item.
    */
-  private List<TKey> removedItems = new ArrayList<TKey>();
+  private List<TKey> removedItems = new ArrayList<>();
 
   /**
    * The added item.
    */
-  private List<TKey> addedItems = new ArrayList<TKey>();
+  private List<TKey> addedItems = new ArrayList<>();
 
   /**
    * The modified item.
    */
-  private List<TKey> modifiedItems = new ArrayList<TKey>();
+  private List<TKey> modifiedItems = new ArrayList<>();
 
   /**
    * Add item to change list.
@@ -88,7 +88,7 @@ public class SimplePropertyBag<TKey> implements Iterable<HashMap<TKey, Object>> 
    * @param key the key
    */
   private void internalRemoveItem(TKey key) {
-    OutParam<Object> value = new OutParam<Object>();
+    OutParam<Object> value = new OutParam<>();
     if (this.tryGetValue(key, value)) {
       this.items.remove(key);
       this.removedItems.add(key);
@@ -173,7 +173,7 @@ public class SimplePropertyBag<TKey> implements Iterable<HashMap<TKey, Object>> 
    * @return the simple property bag
    */
   public Object getSimplePropertyBag(TKey key) {
-    OutParam<Object> value = new OutParam<Object>();
+    OutParam<Object> value = new OutParam<>();
     if (this.tryGetValue(key, value)) {
       return value.getParam();
     } else {
@@ -216,7 +216,7 @@ public class SimplePropertyBag<TKey> implements Iterable<HashMap<TKey, Object>> 
    * Occurs when Changed.
    */
   private List<IPropertyBagChangedDelegate<TKey>> onChange =
-      new ArrayList<IPropertyBagChangedDelegate<TKey>>();
+          new ArrayList<>();
 
   /**
    * Set event to happen when property changed.

@@ -49,7 +49,7 @@ public final class WorkingHours extends ComplexProperty {
    * The days of the week.
    */
   private Collection<DayOfTheWeek> daysOfTheWeek =
-      new ArrayList<DayOfTheWeek>();
+          new ArrayList<>();
 
   /**
    * The start time.
@@ -88,7 +88,7 @@ public final class WorkingHours extends ComplexProperty {
       return true;
     }
     if (reader.getLocalName().equals(XmlElementNames.WorkingPeriodArray)) {
-      List<WorkingPeriod> workingPeriods = new ArrayList<WorkingPeriod>();
+      List<WorkingPeriod> workingPeriods = new ArrayList<>();
 
       do {
         reader.read();

@@ -295,28 +295,26 @@ public class EmailAddress extends ComplexProperty implements ISearchStringProvid
   public boolean tryReadElementFromXml(EwsServiceXmlReader reader)
       throws Exception {
     try {
-      if (reader.getLocalName().equals(XmlElementNames.Name)) {
-        this.name = reader.readElementValue();
-        return true;
-      } else if (reader.getLocalName().equals(
-          XmlElementNames.EmailAddress)) {
-        this.address = reader.readElementValue();
-        return true;
-      } else if (reader.getLocalName()
-          .equals(XmlElementNames.RoutingType)) {
-        this.routingType = reader.readElementValue();
-        return true;
-      } else if (reader.getLocalName()
-          .equals(XmlElementNames.MailboxType)) {
-        this.mailboxType = reader.readElementValue(MailboxType.class);
-        return true;
-      } else if (reader.getLocalName().equals(XmlElementNames.ItemId)) {
-        this.id = new ItemId();
-        this.id.loadFromXml(reader, reader.getLocalName());
-        return true;
-      } else {
-        return false;
-      }
+        switch (reader.getLocalName()) {
+            case XmlElementNames.Name:
+                this.name = reader.readElementValue();
+                return true;
+            case XmlElementNames.EmailAddress:
+                this.address = reader.readElementValue();
+                return true;
+            case XmlElementNames.RoutingType:
+                this.routingType = reader.readElementValue();
+                return true;
+            case XmlElementNames.MailboxType:
+                this.mailboxType = reader.readElementValue(MailboxType.class);
+                return true;
+            case XmlElementNames.ItemId:
+                this.id = new ItemId();
+                this.id.loadFromXml(reader, reader.getLocalName());
+                return true;
+            default:
+                return false;
+        }
     } catch (Exception e) {
       LOG.error(e);
       return false;

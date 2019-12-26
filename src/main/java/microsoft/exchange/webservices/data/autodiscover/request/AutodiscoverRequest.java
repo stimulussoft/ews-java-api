@@ -627,25 +627,27 @@ public abstract class AutodiscoverRequest {
       reader.read();
 
       if (reader.isStartElement()) {
-        if (reader.getLocalName().equals(XmlElementNames.MajorVersion)) {
-          serverInfo.setMajorVersion(reader
-              .readElementValue(Integer.class));
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.MinorVersion)) {
-          serverInfo.setMinorVersion(reader
-              .readElementValue(Integer.class));
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.MajorBuildNumber)) {
-          serverInfo.setMajorBuildNumber(reader
-              .readElementValue(Integer.class));
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.MinorBuildNumber)) {
-          serverInfo.setMinorBuildNumber(reader
-              .readElementValue(Integer.class));
-        } else if (reader.getLocalName()
-            .equals(XmlElementNames.Version)) {
-          serverInfo.setVersionString(reader.readElementValue());
-        }
+          switch (reader.getLocalName()) {
+              case XmlElementNames.MajorVersion:
+                  serverInfo.setMajorVersion(reader
+                          .readElementValue(Integer.class));
+                  break;
+              case XmlElementNames.MinorVersion:
+                  serverInfo.setMinorVersion(reader
+                          .readElementValue(Integer.class));
+                  break;
+              case XmlElementNames.MajorBuildNumber:
+                  serverInfo.setMajorBuildNumber(reader
+                          .readElementValue(Integer.class));
+                  break;
+              case XmlElementNames.MinorBuildNumber:
+                  serverInfo.setMinorBuildNumber(reader
+                          .readElementValue(Integer.class));
+                  break;
+              case XmlElementNames.Version:
+                  serverInfo.setVersionString(reader.readElementValue());
+                  break;
+          }
       }
     } while (!reader.isEndElement(XmlNamespace.Autodiscover,
         XmlElementNames.ServerVersionInfo));

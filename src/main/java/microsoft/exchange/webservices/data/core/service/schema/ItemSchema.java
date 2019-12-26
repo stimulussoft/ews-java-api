@@ -257,33 +257,25 @@ public class ItemSchema extends ServiceObjectSchema {
   /**
    * Defines the Id property.
    */
-  public static final PropertyDefinition Id = new ComplexPropertyDefinition<ItemId>(
-      ItemId.class,
-      XmlElementNames.ItemId, FieldUris.ItemId, EnumSet
-      .of(PropertyDefinitionFlags.CanFind),
-      ExchangeVersion.Exchange2007_SP1,
-      new ICreateComplexPropertyDelegate<ItemId>() {
-        public ItemId createComplexProperty() {
-          return new ItemId();
-        }
-      });
+  public static final PropertyDefinition Id = new ComplexPropertyDefinition<>(
+          ItemId.class,
+          XmlElementNames.ItemId, FieldUris.ItemId, EnumSet
+          .of(PropertyDefinitionFlags.CanFind),
+          ExchangeVersion.Exchange2007_SP1,
+          ItemId::new);
 
   /**
    * Defines the Body property.
    */
   public static final PropertyDefinition Body = new
-      ComplexPropertyDefinition<MessageBody>(
-      MessageBody.class,
-      XmlElementNames.Body, FieldUris.Body, EnumSet.of(
-      PropertyDefinitionFlags.CanSet,
-      PropertyDefinitionFlags.CanUpdate,
-      PropertyDefinitionFlags.CanDelete),
-      ExchangeVersion.Exchange2007_SP1,
-      new ICreateComplexPropertyDelegate<MessageBody>() {
-        public MessageBody createComplexProperty() {
-          return new MessageBody();
-        }
-      });
+          ComplexPropertyDefinition<>(
+          MessageBody.class,
+          XmlElementNames.Body, FieldUris.Body, EnumSet.of(
+          PropertyDefinitionFlags.CanSet,
+          PropertyDefinitionFlags.CanUpdate,
+          PropertyDefinitionFlags.CanDelete),
+          ExchangeVersion.Exchange2007_SP1,
+          MessageBody::new);
 
   /**
    * Defines the ItemClass property.
@@ -311,44 +303,36 @@ public class ItemSchema extends ServiceObjectSchema {
    * Defines the MimeContent property.
    */
   public static final PropertyDefinition MimeContent =
-      new ComplexPropertyDefinition<microsoft.exchange.webservices.data.property.complex.MimeContent>(
-          MimeContent.class,
-          XmlElementNames.MimeContent, FieldUris.MimeContent, EnumSet.of(
-          PropertyDefinitionFlags.CanSet,
-          PropertyDefinitionFlags.CanUpdate,
-          PropertyDefinitionFlags.MustBeExplicitlyLoaded),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<MimeContent>() {
-            public MimeContent createComplexProperty() {
-              return new MimeContent();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  MimeContent.class,
+                  XmlElementNames.MimeContent, FieldUris.MimeContent, EnumSet.of(
+                  PropertyDefinitionFlags.CanSet,
+                  PropertyDefinitionFlags.CanUpdate,
+                  PropertyDefinitionFlags.MustBeExplicitlyLoaded),
+                  ExchangeVersion.Exchange2007_SP1,
+                  microsoft.exchange.webservices.data.property.complex.MimeContent::new);
 
   /**
    * Defines the ParentFolderId property.
    */
   public static final PropertyDefinition ParentFolderId =
-      new ComplexPropertyDefinition<FolderId>(
-          FolderId.class,
-          XmlElementNames.ParentFolderId, FieldUris.ParentFolderId,
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<FolderId>() {
-            public FolderId createComplexProperty() {
-              return new FolderId();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  FolderId.class,
+                  XmlElementNames.ParentFolderId, FieldUris.ParentFolderId,
+                  ExchangeVersion.Exchange2007_SP1,
+                  FolderId::new);
 
   /**
    * Defines the Sensitivity property.
    */
   public static final PropertyDefinition Sensitivity =
-      new GenericPropertyDefinition<microsoft.exchange.webservices.data.core.enumeration.property.Sensitivity>(
-          Sensitivity.class,
-          XmlElementNames.Sensitivity, FieldUris.Sensitivity, EnumSet.of(
-          PropertyDefinitionFlags.CanSet,
-          PropertyDefinitionFlags.CanUpdate,
-          PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1);
+          new GenericPropertyDefinition<>(
+                  Sensitivity.class,
+                  XmlElementNames.Sensitivity, FieldUris.Sensitivity, EnumSet.of(
+                  PropertyDefinitionFlags.CanSet,
+                  PropertyDefinitionFlags.CanUpdate,
+                  PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1);
 
   /**
    * Defines the Attachments property.
@@ -376,32 +360,28 @@ public class ItemSchema extends ServiceObjectSchema {
    * Defines the Categories property.
    */
   public static final PropertyDefinition Categories =
-      new ComplexPropertyDefinition<StringList>(
-          StringList.class,
-          XmlElementNames.Categories, FieldUris.Categories, EnumSet.of(
-          PropertyDefinitionFlags.AutoInstantiateOnRead,
-          PropertyDefinitionFlags.CanSet,
-          PropertyDefinitionFlags.CanUpdate,
-          PropertyDefinitionFlags.CanDelete,
-          PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<StringList>() {
-            public StringList createComplexProperty() {
-              return new StringList();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  StringList.class,
+                  XmlElementNames.Categories, FieldUris.Categories, EnumSet.of(
+                  PropertyDefinitionFlags.AutoInstantiateOnRead,
+                  PropertyDefinitionFlags.CanSet,
+                  PropertyDefinitionFlags.CanUpdate,
+                  PropertyDefinitionFlags.CanDelete,
+                  PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1,
+                  StringList::new);
 
   /**
    * Defines the Importance property.
    */
   public static final PropertyDefinition Importance =
-      new GenericPropertyDefinition<microsoft.exchange.webservices.data.core.enumeration.property.Importance>(
-          Importance.class,
-          XmlElementNames.Importance, FieldUris.Importance, EnumSet.of(
-          PropertyDefinitionFlags.CanSet,
-          PropertyDefinitionFlags.CanUpdate,
-          PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1);
+          new GenericPropertyDefinition<>(
+                  Importance.class,
+                  XmlElementNames.Importance, FieldUris.Importance, EnumSet.of(
+                  PropertyDefinitionFlags.CanSet,
+                  PropertyDefinitionFlags.CanUpdate,
+                  PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1);
 
   /**
    * Defines the InReplyTo property.
@@ -473,18 +453,13 @@ public class ItemSchema extends ServiceObjectSchema {
    * Defines the InternetMessageHeaders property.
    */
   public static final PropertyDefinition InternetMessageHeaders =
-      new ComplexPropertyDefinition<InternetMessageHeaderCollection>(
-          InternetMessageHeaderCollection.class,
-          XmlElementNames.InternetMessageHeaders,
-          FieldUris.InternetMessageHeaders,
-          EnumSet.of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate
-              <InternetMessageHeaderCollection>() {
-            public InternetMessageHeaderCollection createComplexProperty() {
-              return new InternetMessageHeaderCollection();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  InternetMessageHeaderCollection.class,
+                  XmlElementNames.InternetMessageHeaders,
+                  FieldUris.InternetMessageHeaders,
+                  EnumSet.of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1,
+                  InternetMessageHeaderCollection::new);
 
   /**
    * Defines the DateTimeSent property.
@@ -638,31 +613,23 @@ public class ItemSchema extends ServiceObjectSchema {
    * Defines the ConversationId property.
    */
   public static final PropertyDefinition ConversationId =
-      new ComplexPropertyDefinition<microsoft.exchange.webservices.data.property.complex.ConversationId>(
-          ConversationId.class,
-          XmlElementNames.ConversationId, FieldUris.ConversationId, EnumSet
-          .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2010,
-          new ICreateComplexPropertyDelegate<ConversationId>() {
-            public ConversationId createComplexProperty() {
-              return new ConversationId();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  ConversationId.class,
+                  XmlElementNames.ConversationId, FieldUris.ConversationId, EnumSet
+                  .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2010,
+                  microsoft.exchange.webservices.data.property.complex.ConversationId::new);
 
   /**
    * Defines the UniqueBody property.
    */
   public static final PropertyDefinition UniqueBody =
-      new ComplexPropertyDefinition<microsoft.exchange.webservices.data.property.complex.UniqueBody>(
-          UniqueBody.class,
-          XmlElementNames.UniqueBody, FieldUris.UniqueBody, EnumSet
-          .of(PropertyDefinitionFlags.MustBeExplicitlyLoaded),
-          ExchangeVersion.Exchange2010,
-          new ICreateComplexPropertyDelegate<UniqueBody>() {
-            public UniqueBody createComplexProperty() {
-              return new UniqueBody();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  UniqueBody.class,
+                  XmlElementNames.UniqueBody, FieldUris.UniqueBody, EnumSet
+                  .of(PropertyDefinitionFlags.MustBeExplicitlyLoaded),
+                  ExchangeVersion.Exchange2010,
+                  microsoft.exchange.webservices.data.property.complex.UniqueBody::new);
 
   /**
    * Defines the StoreEntryId property.

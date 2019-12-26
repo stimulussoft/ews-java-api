@@ -107,18 +107,14 @@ public class FolderSchema extends ServiceObjectSchema {
    * Defines the Id property.
    */
   public static final PropertyDefinition Id =
-      new ComplexPropertyDefinition<FolderId>(
-          FolderId.class,
-          XmlElementNames.FolderId, FieldUris.FolderId, EnumSet
-          .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<FolderId>() {
-            public FolderId createComplexProperty() {
-              return new FolderId();
-            }
-          }
+          new ComplexPropertyDefinition<>(
+                  FolderId.class,
+                  XmlElementNames.FolderId, FieldUris.FolderId, EnumSet
+                  .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1,
+                  FolderId::new
 
-      );
+          );
 
   /**
    * Defines the FolderClass property.
@@ -135,16 +131,12 @@ public class FolderSchema extends ServiceObjectSchema {
    * Defines the ParentFolderId property.
    */
   public static final PropertyDefinition ParentFolderId =
-      new ComplexPropertyDefinition<FolderId>(
-          FolderId.class,
-          XmlElementNames.ParentFolderId, FieldUris.ParentFolderId, EnumSet
-          .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<FolderId>() {
-            public FolderId createComplexProperty() {
-              return new FolderId();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  FolderId.class,
+                  XmlElementNames.ParentFolderId, FieldUris.ParentFolderId, EnumSet
+                  .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1,
+                  FolderId::new);
 
   /**
    * Defines the ChildFolderCount property.
@@ -189,18 +181,13 @@ public class FolderSchema extends ServiceObjectSchema {
    * Defines the ManagedFolderInformation property.
    */
   public static final PropertyDefinition ManagedFolderInformation =
-      new ComplexPropertyDefinition<microsoft.exchange.webservices.data.property.complex.ManagedFolderInformation>(
-          ManagedFolderInformation.class,
-          XmlElementNames.ManagedFolderInformation,
-          FieldUris.ManagedFolderInformation,
-          EnumSet.of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate
-              <ManagedFolderInformation>() {
-            public ManagedFolderInformation createComplexProperty() {
-              return new ManagedFolderInformation();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  ManagedFolderInformation.class,
+                  XmlElementNames.ManagedFolderInformation,
+                  FieldUris.ManagedFolderInformation,
+                  EnumSet.of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1,
+                  microsoft.exchange.webservices.data.property.complex.ManagedFolderInformation::new);
 
   /**
    * Defines the EffectiveRights property.

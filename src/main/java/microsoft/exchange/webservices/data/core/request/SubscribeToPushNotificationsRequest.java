@@ -120,8 +120,8 @@ public class SubscribeToPushNotificationsRequest extends
   @Override
   protected SubscribeResponse<PushSubscription> createServiceResponse(
       ExchangeService service, int responseIndex) throws Exception {
-    return new SubscribeResponse<PushSubscription>(new PushSubscription(
-        service));
+    return new SubscribeResponse<>(new PushSubscription(
+            service));
   }
 
   /*

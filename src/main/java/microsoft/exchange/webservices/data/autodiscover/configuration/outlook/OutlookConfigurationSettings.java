@@ -48,20 +48,20 @@ public final class OutlookConfigurationSettings extends ConfigurationSettingsBas
    * All user settings that are available from the Outlook provider.
    */
   private static LazyMember<List<UserSettingName>>
-      allOutlookProviderSettings = new LazyMember<List<UserSettingName>>(
-      new ILazyMember<List<UserSettingName>>() {
-        public List<UserSettingName> createInstance() {
+      allOutlookProviderSettings = new LazyMember<>(
+          new ILazyMember<List<UserSettingName>>() {
+              public List<UserSettingName> createInstance() {
 
-          List<UserSettingName> results =
-              new ArrayList<UserSettingName>();
-          for (UserSettingName userSettingName : OutlookUser.getAvailableUserSettings()) {
-            results.add(userSettingName);
-          }
-          results.addAll(OutlookProtocol.getAvailableUserSettings());
-          results.add(UserSettingName.AlternateMailboxes);
-          return results;
-        }
-      });
+                  List<UserSettingName> results =
+                          new ArrayList<>();
+                  for (UserSettingName userSettingName : OutlookUser.getAvailableUserSettings()) {
+                      results.add(userSettingName);
+                  }
+                  results.addAll(OutlookProtocol.getAvailableUserSettings());
+                  results.add(UserSettingName.AlternateMailboxes);
+                  return results;
+              }
+          });
 
 
   /**
@@ -200,7 +200,7 @@ public final class OutlookConfigurationSettings extends ConfigurationSettingsBas
 
     //TODO need to check Iterable
     List<UserSettingName> invalidSettingQuery =
-        new ArrayList<UserSettingName>();
+            new ArrayList<>();
     for (UserSettingName userSettingName : requestedSettings) {
       if (!OutlookConfigurationSettings.isAvailableUserSetting(userSettingName)) {
         invalidSettingQuery.add(userSettingName);

@@ -53,8 +53,8 @@ public final class DelegateInformation {
    */
   public DelegateInformation(List<DelegateUserResponse> delegateUserResponses,
       MeetingRequestsDeliveryScope meetingReqestsDeliveryScope) {
-    this.delegateUserResponses = new ArrayList<DelegateUserResponse>(
-        delegateUserResponses);
+    this.delegateUserResponses = new ArrayList<>(
+            delegateUserResponses);
     this.meetingReqestsDeliveryScope = meetingReqestsDeliveryScope;
   }
 

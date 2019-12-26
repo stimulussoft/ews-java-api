@@ -236,7 +236,7 @@ public class HttpClientWebRequest extends HttpWebRequest {
   @Override
   public Map<String, String> getResponseHeaders() throws EWSHttpException {
     throwIfResponseIsNull();
-    Map<String, String> map = new HashMap<String, String>();
+    Map<String, String> map = new HashMap<>();
 
     Header[] hM = response.getAllHeaders();
     for (Header header : hM) {
@@ -359,7 +359,7 @@ public class HttpClientWebRequest extends HttpWebRequest {
    */
   public Map<String, String> getRequestProperty() throws EWSHttpException {
     throwIfRequestIsNull();
-    Map<String, String> map = new HashMap<String, String>();
+    Map<String, String> map = new HashMap<>();
 
     Header[] hM = request.getAllHeaders();
     for (Header header : hM) {

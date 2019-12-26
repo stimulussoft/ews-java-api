@@ -259,7 +259,7 @@ public class Contact extends Item {
     super.validate();
 
     Object fileAsMapping;
-    OutParam<Object> outParam = new OutParam<Object>();
+    OutParam<Object> outParam = new OutParam<>();
     if (this.tryGetProperty(ContactSchema.FileAsMapping, outParam)) {
       fileAsMapping = outParam.getParam();
       // FileAsMapping is extended by 5 new values in 2010 mode. Validate

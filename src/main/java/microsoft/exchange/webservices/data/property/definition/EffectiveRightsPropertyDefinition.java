@@ -73,46 +73,48 @@ public final class EffectiveRightsPropertyDefinition extends PropertyDefinition 
 
         if (reader.isStartElement()) {
 
-          if (reader.getLocalName().equals(
-              XmlElementNames.CreateAssociated)) {
+            switch (reader.getLocalName()) {
+                case XmlElementNames.CreateAssociated:
 
-            if (reader.readElementValue(Boolean.class)) {
-              value.add(EffectiveRights.CreateAssociated);
-            }
-          } else if (reader.getLocalName().equals(
-              XmlElementNames.CreateContents)) {
+                    if (reader.readElementValue(Boolean.class)) {
+                        value.add(EffectiveRights.CreateAssociated);
+                    }
+                    break;
+                case XmlElementNames.CreateContents:
 
-            if (reader.readElementValue(Boolean.class)) {
-              value.add(EffectiveRights.CreateContents);
-            }
-          } else if (reader.getLocalName().equals(
-              XmlElementNames.CreateHierarchy)) {
+                    if (reader.readElementValue(Boolean.class)) {
+                        value.add(EffectiveRights.CreateContents);
+                    }
+                    break;
+                case XmlElementNames.CreateHierarchy:
 
-            if (reader.readElementValue(Boolean.class)) {
-              value.add(EffectiveRights.CreateHierarchy);
-            }
-          } else if (reader.getLocalName().equals(
-              XmlElementNames.Delete)) {
+                    if (reader.readElementValue(Boolean.class)) {
+                        value.add(EffectiveRights.CreateHierarchy);
+                    }
+                    break;
+                case XmlElementNames.Delete:
 
-            if (reader.readElementValue(Boolean.class)) {
-              value.add(EffectiveRights.Delete);
-            }
-          } else if (reader.getLocalName().equals(
-              XmlElementNames.Modify)) {
+                    if (reader.readElementValue(Boolean.class)) {
+                        value.add(EffectiveRights.Delete);
+                    }
+                    break;
+                case XmlElementNames.Modify:
 
-            if (reader.readElementValue(Boolean.class)) {
-              value.add(EffectiveRights.Modify);
-            }
-          } else if (reader.getLocalName().equals(XmlElementNames.Read)) {
-            if (reader.readElementValue(Boolean.class)) {
-              value.add(EffectiveRights.Read);
-            } else if (reader.getLocalName().equals(XmlElementNames.ViewPrivateItems)) {
-              if (reader.readElementValue(Boolean.class)) {
-                value.add(EffectiveRights.ViewPrivateItems);
-              }
-            }
+                    if (reader.readElementValue(Boolean.class)) {
+                        value.add(EffectiveRights.Modify);
+                    }
+                    break;
+                case XmlElementNames.Read:
+                    if (reader.readElementValue(Boolean.class)) {
+                        value.add(EffectiveRights.Read);
+                    } else if (reader.getLocalName().equals(XmlElementNames.ViewPrivateItems)) {
+                        if (reader.readElementValue(Boolean.class)) {
+                            value.add(EffectiveRights.ViewPrivateItems);
+                        }
+                    }
 
-          }
+                    break;
+            }
         }
 
       } while (!reader.isEndElement(XmlNamespace.Types, this

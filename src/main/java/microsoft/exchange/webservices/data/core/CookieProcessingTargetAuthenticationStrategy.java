@@ -61,13 +61,11 @@ public class CookieProcessingTargetAuthenticationStrategy extends TargetAuthenti
       // Remove existing cookies and set the new cookies in the request
       request.removeHeaders("Cookie");
       requestAddCookies.process(request, context);
-    } catch (HttpException e) {
-      throw new RuntimeException(e); // Looking at the source of responseProcessCookies this never happens
-    } catch (IOException e) {
+    } catch (HttpException | IOException e) {
       throw new RuntimeException(e); // Looking at the source of responseProcessCookies this never happens
     }
 
-    return super.getChallenges(authhost, response, context);
+      return super.getChallenges(authhost, response, context);
   }
 
 }

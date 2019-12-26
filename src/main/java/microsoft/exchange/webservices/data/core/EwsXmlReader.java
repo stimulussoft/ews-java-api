@@ -29,6 +29,7 @@ import com.sun.xml.internal.stream.XMLInputFactoryImpl;
 import microsoft.exchange.webservices.data.core.enumeration.misc.XmlNamespace;
 import microsoft.exchange.webservices.data.core.exception.service.local.ServiceXmlDeserializationException;
 import microsoft.exchange.webservices.data.misc.OutParam;
+import microsoft.exchange.webservices.data.security.SafeXmlFactory;
 import microsoft.exchange.webservices.data.security.XmlNodeType;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
@@ -60,6 +61,10 @@ import java.io.UnsupportedEncodingException;
 public class EwsXmlReader {
 
   private static final Log LOG = LogFactory.getLog(EwsXmlReader.class);
+  private static final XMLInputFactory inputFactory = new XMLInputFactoryImpl();
+  static {
+    inputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
+  }
 
   /**
    * The Read write buffer size.
@@ -114,9 +119,6 @@ public class EwsXmlReader {
    * @throws Exception on error
    */
   protected XMLEventReader initializeXmlReader(InputStream stream, boolean ignoreErrors) throws Exception {
-    XMLInputFactory inputFactory = new XMLInputFactoryImpl();
-    inputFactory.setProperty(XMLInputFactory.SUPPORT_DTD, false);
-
     XMLEventReader reader = inputFactory.createXMLEventReader(stream);
 
     if (ignoreErrors) {
@@ -597,7 +599,7 @@ public class EwsXmlReader {
 
     ByteArrayOutputStream byteArrayStream = new ByteArrayOutputStream();
 
-    buffer = Base64.decodeBase64(this.xmlReader.getElementText().toString());
+    buffer = Base64.decodeBase64(this.xmlReader.getElementText());
     byteArrayStream.write(buffer);
 
     return byteArrayStream.toByteArray();
@@ -615,7 +617,7 @@ public class EwsXmlReader {
     this.ensureCurrentNodeIsStartElement();
 
     byte[] buffer = null;
-    buffer = Base64.decodeBase64(this.xmlReader.getElementText().toString());
+    buffer = Base64.decodeBase64(this.xmlReader.getElementText());
     outputStream.write(buffer);
     outputStream.flush();
   }
@@ -992,14 +994,12 @@ public class EwsXmlReader {
 
     try {
 
-      XMLInputFactory inputFactory = XMLInputFactory.newInstance();
-
       try {
         in = new ByteArrayInputStream(str.toString().getBytes("UTF-8"));
       } catch (UnsupportedEncodingException e) {
         LOG.error(e);
       }
-      eventReader = inputFactory.createXMLEventReader(in);
+      eventReader = SafeXmlFactory.createSafeXMLEventReader(in);
 
     } catch (Exception e) {
       LOG.error(e);

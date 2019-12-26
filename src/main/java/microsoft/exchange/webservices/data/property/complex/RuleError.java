@@ -104,20 +104,21 @@ public final class RuleError extends ComplexProperty {
   @Override
   public boolean tryReadElementFromXml(EwsServiceXmlReader reader)
       throws Exception {
-    if (reader.getLocalName().equals(XmlElementNames.FieldURI)) {
-      this.ruleProperty = reader.readElementValue(RuleProperty.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.ErrorCode)) {
-      this.errorCode = reader.readElementValue(RuleErrorCode.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.ErrorMessage)) {
-      this.errorMessage = reader.readElementValue();
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.FieldValue)) {
-      this.value = reader.readElementValue();
-      return true;
-    } else {
-      return false;
+    switch (reader.getLocalName()) {
+      case XmlElementNames.FieldURI:
+        this.ruleProperty = reader.readElementValue(RuleProperty.class);
+        return true;
+      case XmlElementNames.ErrorCode:
+        this.errorCode = reader.readElementValue(RuleErrorCode.class);
+        return true;
+      case XmlElementNames.ErrorMessage:
+        this.errorMessage = reader.readElementValue();
+        return true;
+      case XmlElementNames.FieldValue:
+        this.value = reader.readElementValue();
+        return true;
+      default:
+        return false;
     }
   }
 }

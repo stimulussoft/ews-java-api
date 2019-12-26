@@ -38,7 +38,7 @@ import java.util.List;
  * Represents the response to a Conversation search operation.
  */
 public final class FindConversationResponse extends ServiceResponse {
-  List<Conversation> conversations = new ArrayList<Conversation>();
+  List<Conversation> conversations = new ArrayList<>();
 
   /**
    * Initializes a new instance of the FindConversationResponse class.

@@ -29,7 +29,6 @@ import microsoft.exchange.webservices.data.core.EwsServiceXmlReader;
 import microsoft.exchange.webservices.data.core.EwsServiceXmlWriter;
 import microsoft.exchange.webservices.data.core.enumeration.attribute.EditorBrowsableState;
 import microsoft.exchange.webservices.data.core.enumeration.misc.XmlNamespace;
-import microsoft.exchange.webservices.data.core.exception.service.local.ServiceValidationException;
 import microsoft.exchange.webservices.data.core.exception.service.local.ServiceXmlSerializationException;
 import microsoft.exchange.webservices.data.security.XmlNodeType;
 
@@ -342,7 +341,7 @@ public abstract class ComplexProperty implements ISelfValidate, ComplexFunctionD
    * Change events occur when property changed.
    */
   private List<IComplexPropertyChangedDelegate> onChangeList =
-      new ArrayList<IComplexPropertyChangedDelegate>();
+          new ArrayList<>();
 
   /**
    * Set event to happen when property changed.

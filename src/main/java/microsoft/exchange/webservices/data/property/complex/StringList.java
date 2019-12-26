@@ -44,7 +44,7 @@ public class StringList extends ComplexProperty implements Iterable<String> {
   /**
    * The item.
    */
-  private List<String> items = new ArrayList<String>();
+  private List<String> items = new ArrayList<>();
 
   /**
    * The item xml element name.
@@ -216,7 +216,7 @@ public class StringList extends ComplexProperty implements Iterable<String> {
    */
   @Override
   public String toString() {
-    StringBuffer temp = new StringBuffer();
+    StringBuilder temp = new StringBuilder();
     for (String str : this.items) {
       temp.append(str.concat(","));
     }

@@ -59,7 +59,7 @@ public final class ItemGroup<TItem extends Item> {
         .ewsAssert(items != null, "ItemGroup.ctor", "item is null");
 
     this.groupIndex = groupIndex;
-    this.items = new ArrayList<TItem>(items);
+    this.items = new ArrayList<>(items);
   }
 
   /**

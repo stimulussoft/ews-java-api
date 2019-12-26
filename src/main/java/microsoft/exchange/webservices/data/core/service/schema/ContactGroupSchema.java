@@ -61,20 +61,15 @@ public class ContactGroupSchema extends ItemSchema {
    * The Constant Members.
    */
   public static final PropertyDefinition Members =
-      new ComplexPropertyDefinition<GroupMemberCollection>(
-          GroupMemberCollection.class,
-          XmlElementNames.Members,
-          FieldUris.Members,
-          EnumSet.of(PropertyDefinitionFlags.AutoInstantiateOnRead,
-              PropertyDefinitionFlags.CanSet,
-              PropertyDefinitionFlags.CanUpdate),
-          ExchangeVersion.Exchange2010,
-          new ICreateComplexPropertyDelegate<GroupMemberCollection>() {
-            @Override
-            public GroupMemberCollection createComplexProperty() {
-              return new GroupMemberCollection();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  GroupMemberCollection.class,
+                  XmlElementNames.Members,
+                  FieldUris.Members,
+                  EnumSet.of(PropertyDefinitionFlags.AutoInstantiateOnRead,
+                          PropertyDefinitionFlags.CanSet,
+                          PropertyDefinitionFlags.CanUpdate),
+                  ExchangeVersion.Exchange2010,
+                  GroupMemberCollection::new);
 
 
   //This must be declared after the property definitions.

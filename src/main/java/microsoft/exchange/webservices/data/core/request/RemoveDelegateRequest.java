@@ -44,7 +44,7 @@ public class RemoveDelegateRequest extends
   /**
    * The user ids.
    */
-  private List<UserId> userIds = new ArrayList<UserId>();
+  private List<UserId> userIds = new ArrayList<>();
 
   /**
    * Initializes a new instance of the class.

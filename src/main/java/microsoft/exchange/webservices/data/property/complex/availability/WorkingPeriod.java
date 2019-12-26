@@ -40,7 +40,7 @@ final class WorkingPeriod extends ComplexProperty {
   /**
    * The days of week.
    */
-  private List<DayOfTheWeek> daysOfWeek = new ArrayList<DayOfTheWeek>();
+  private List<DayOfTheWeek> daysOfWeek = new ArrayList<>();
 
   /**
    * The start time.
@@ -69,19 +69,18 @@ final class WorkingPeriod extends ComplexProperty {
   @Override
   public boolean tryReadElementFromXml(EwsServiceXmlReader reader)
       throws Exception {
-    if (reader.getLocalName().equals(XmlElementNames.DayOfWeek)) {
-      EwsUtilities.parseEnumValueList(DayOfTheWeek.class, this.daysOfWeek, reader.readElementValue(), ' ');
-      return true;
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.StartTimeInMinutes)) {
-      this.startTime = reader.readElementValue(Integer.class);
-      return true;
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.EndTimeInMinutes)) {
-      this.endTime = reader.readElementValue(Integer.class);
-      return true;
-    } else {
-      return false;
+    switch (reader.getLocalName()) {
+      case XmlElementNames.DayOfWeek:
+        EwsUtilities.parseEnumValueList(DayOfTheWeek.class, this.daysOfWeek, reader.readElementValue(), ' ');
+        return true;
+      case XmlElementNames.StartTimeInMinutes:
+        this.startTime = reader.readElementValue(Integer.class);
+        return true;
+      case XmlElementNames.EndTimeInMinutes:
+        this.endTime = reader.readElementValue(Integer.class);
+        return true;
+      default:
+        return false;
     }
 
   }

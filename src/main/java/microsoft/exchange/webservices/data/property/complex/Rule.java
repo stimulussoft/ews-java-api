@@ -225,36 +225,37 @@ public final class Rule extends ComplexProperty {
   public boolean tryReadElementFromXml(EwsServiceXmlReader
       reader) throws Exception {
 
-    if (reader.getLocalName().equals(XmlElementNames.DisplayName)) {
-      this.displayName = reader.readElementValue();
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.RuleId)) {
-      this.ruleId = reader.readElementValue();
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.Priority)) {
-      this.priority = reader.readElementValue(Integer.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.IsEnabled)) {
-      this.isEnabled = reader.readElementValue(Boolean.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.IsNotSupported)) {
-      this.isNotSupported = reader.readElementValue(Boolean.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.IsInError)) {
-      this.isInError = reader.readElementValue(Boolean.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.Conditions)) {
-      this.conditions.loadFromXml(reader, reader.getLocalName());
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.Actions)) {
-      this.actions.loadFromXml(reader, reader.getLocalName());
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.Exceptions)) {
-      this.exceptions.loadFromXml(reader, reader.getLocalName());
-      return true;
-    } else {
-      return false;
-    }
+      switch (reader.getLocalName()) {
+          case XmlElementNames.DisplayName:
+              this.displayName = reader.readElementValue();
+              return true;
+          case XmlElementNames.RuleId:
+              this.ruleId = reader.readElementValue();
+              return true;
+          case XmlElementNames.Priority:
+              this.priority = reader.readElementValue(Integer.class);
+              return true;
+          case XmlElementNames.IsEnabled:
+              this.isEnabled = reader.readElementValue(Boolean.class);
+              return true;
+          case XmlElementNames.IsNotSupported:
+              this.isNotSupported = reader.readElementValue(Boolean.class);
+              return true;
+          case XmlElementNames.IsInError:
+              this.isInError = reader.readElementValue(Boolean.class);
+              return true;
+          case XmlElementNames.Conditions:
+              this.conditions.loadFromXml(reader, reader.getLocalName());
+              return true;
+          case XmlElementNames.Actions:
+              this.actions.loadFromXml(reader, reader.getLocalName());
+              return true;
+          case XmlElementNames.Exceptions:
+              this.exceptions.loadFromXml(reader, reader.getLocalName());
+              return true;
+          default:
+              return false;
+      }
   }
 
   /**

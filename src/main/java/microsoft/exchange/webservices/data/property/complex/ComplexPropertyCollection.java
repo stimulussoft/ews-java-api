@@ -53,25 +53,25 @@ public abstract class ComplexPropertyCollection
   /**
    * The item.
    */
-  private final List<TComplexProperty> items = new ArrayList<TComplexProperty>();
+  private final List<TComplexProperty> items = new ArrayList<>();
 
   /**
    * The added item.
    */
   private final List<TComplexProperty> addedItems =
-      new ArrayList<TComplexProperty>();
+          new ArrayList<>();
 
   /**
    * The modified item.
    */
   private final List<TComplexProperty> modifiedItems =
-      new ArrayList<TComplexProperty>();
+          new ArrayList<>();
 
   /**
    * The removed item.
    */
   private final List<TComplexProperty> removedItems =
-      new ArrayList<TComplexProperty>();
+          new ArrayList<>();
 
   /**
    * Creates the complex property.

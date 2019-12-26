@@ -27,7 +27,6 @@ import microsoft.exchange.webservices.data.EWSConstants;
 import microsoft.exchange.webservices.data.core.exception.dns.DnsException;
 
 import javax.naming.NamingEnumeration;
-import javax.naming.NamingException;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.DirContext;
@@ -50,7 +49,7 @@ public class DnsClient {
    */
   static Hashtable<String, String> getEnv(String dnsServerAddress) {
     // Set up environment for creating initial context
-    Hashtable<String, String> env = new Hashtable<String, String>();
+    Hashtable<String, String> env = new Hashtable<>();
     env.put("java.naming.factory.initial",
             "com.sun.jndi.dns.DnsContextFactory");
     if(dnsServerAddress != null && !dnsServerAddress.isEmpty()) {
@@ -73,7 +72,7 @@ public class DnsClient {
   public static <T extends DnsRecord> List<T> dnsQuery(Class<T> cls, String domain, String dnsServerAddress) throws
                                                                                                              DnsException {
 
-    List<T> dnsRecordList = new ArrayList<T>();
+    List<T> dnsRecordList = new ArrayList<>();
     try {
       // Create initial context
       DirContext ictx = new InitialDirContext(getEnv(dnsServerAddress));
@@ -99,10 +98,8 @@ public class DnsClient {
           }
         }
       }
-    } catch (NamingException ne) {
+    } catch (Exception ne) {
       throw new DnsException(ne.getMessage());
-    } catch (Exception e) {
-      throw new DnsException(e.getMessage());
     }
     return dnsRecordList;
   }

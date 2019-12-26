@@ -44,7 +44,6 @@ import microsoft.exchange.webservices.data.security.XmlNodeType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -78,31 +77,31 @@ public class PropertyBag implements IComplexPropertyChanged, IComplexPropertyCha
    * The loaded property.
    */
   private List<PropertyDefinition> loadedProperties =
-      new ArrayList<PropertyDefinition>();
+          new ArrayList<>();
 
   /**
    * The property.
    */
   private Map<PropertyDefinition, Object> properties =
-      new HashMap<PropertyDefinition, Object>();
+          new HashMap<>();
 
   /**
    * The deleted property.
    */
   private Map<PropertyDefinition, Object> deletedProperties =
-      new HashMap<PropertyDefinition, Object>();
+          new HashMap<>();
 
   /**
    * The modified property.
    */
   private List<PropertyDefinition> modifiedProperties =
-      new ArrayList<PropertyDefinition>();
+          new ArrayList<>();
 
   /**
    * The added property.
    */
   private List<PropertyDefinition> addedProperties =
-      new ArrayList<PropertyDefinition>();
+          new ArrayList<>();
 
   /**
    * The requested property set.
@@ -233,7 +232,7 @@ public class PropertyBag implements IComplexPropertyChanged, IComplexPropertyCha
   protected boolean tryGetProperty(PropertyDefinition propertyDefinition,
       OutParam<Object> propertyValueOutParam) {
     OutParam<ServiceLocalException> serviceExceptionOutParam =
-        new OutParam<ServiceLocalException>();
+            new OutParam<>();
     propertyValueOutParam.setParam(this.getPropertyValueOrException(
         propertyDefinition, serviceExceptionOutParam));
     return serviceExceptionOutParam.getParam() == null;
@@ -260,7 +259,7 @@ public class PropertyBag implements IComplexPropertyChanged, IComplexPropertyCha
       throw new ArgumentException(errorMessage, "propertyDefinition");
     }
 
-    OutParam<Object> value = new OutParam<Object>();
+    OutParam<Object> value = new OutParam<>();
     boolean result = this.tryGetProperty(propertyDefinition, value);
     if (result) {
       propertyValue.setParam((T) value.getParam());
@@ -283,7 +282,7 @@ public class PropertyBag implements IComplexPropertyChanged, IComplexPropertyCha
   private <T> T getPropertyValueOrException(
       PropertyDefinition propertyDefinition,
       OutParam<ServiceLocalException> serviceExceptionOutParam) {
-    OutParam<T> propertyValueOutParam = new OutParam<T>();
+    OutParam<T> propertyValueOutParam = new OutParam<>();
     propertyValueOutParam.setParam(null);
     serviceExceptionOutParam.setParam(null);
 
@@ -400,18 +399,16 @@ public class PropertyBag implements IComplexPropertyChanged, IComplexPropertyCha
    * @param complexProperty The property that changes.
    */
   protected void propertyChanged(ComplexProperty complexProperty) {
-    Iterator<Entry<PropertyDefinition, Object>> it = this.properties
-        .entrySet().iterator();
-    while (it.hasNext()) {
-      Entry<PropertyDefinition, Object> keyValuePair = it.next();
-      if (keyValuePair.getValue().equals(complexProperty)) {
-        if (!this.deletedProperties.containsKey(keyValuePair.getKey())) {
-          addToChangeList(keyValuePair.getKey(),
-              this.modifiedProperties);
-          this.changed();
-        }
+      for (Entry<PropertyDefinition, Object> keyValuePair : this.properties
+              .entrySet()) {
+          if (keyValuePair.getValue().equals(complexProperty)) {
+              if (!this.deletedProperties.containsKey(keyValuePair.getKey())) {
+                  addToChangeList(keyValuePair.getKey(),
+                          this.modifiedProperties);
+                  this.changed();
+              }
+          }
       }
-    }
   }
 
   /**
@@ -457,16 +454,14 @@ public class PropertyBag implements IComplexPropertyChanged, IComplexPropertyCha
     this.modifiedProperties.clear();
     this.addedProperties.clear();
 
-    Iterator<Entry<PropertyDefinition, Object>> it = this.properties
-        .entrySet().iterator();
-    while (it.hasNext()) {
-      Entry<PropertyDefinition, Object> keyValuePair = it.next();
-      if (keyValuePair.getValue() instanceof ComplexProperty) {
-        ComplexProperty complexProperty = (ComplexProperty) keyValuePair
-            .getValue();
-        complexProperty.clearChangeLog();
+      for (Entry<PropertyDefinition, Object> keyValuePair : this.properties
+              .entrySet()) {
+          if (keyValuePair.getValue() instanceof ComplexProperty) {
+              ComplexProperty complexProperty = (ComplexProperty) keyValuePair
+                      .getValue();
+              complexProperty.clearChangeLog();
+          }
       }
-    }
 
     this.isDirty = false;
   }
@@ -501,7 +496,7 @@ public class PropertyBag implements IComplexPropertyChanged, IComplexPropertyCha
 
         if (reader.getNodeType().getNodeType() == XmlNodeType.START_ELEMENT) {
           OutParam<PropertyDefinition> propertyDefinitionOut =
-              new OutParam<PropertyDefinition>();
+                  new OutParam<>();
           PropertyDefinition propertyDefinition;
 
           if (this.getOwner().schema().tryGetPropertyDefinition(
@@ -534,22 +529,19 @@ public class PropertyBag implements IComplexPropertyChanged, IComplexPropertyCha
     writer.writeStartElement(XmlNamespace.Types, this.getOwner()
         .getXmlElementName());
 
-    Iterator<PropertyDefinition> it = this.getOwner().getSchema()
-        .iterator();
-    while (it.hasNext()) {
-      PropertyDefinition propertyDefinition = it.next();
-      // The following test should not be necessary since the property bag
-      // prevents
-      // property to be set if they don't have the CanSet flag, but it
-      // doesn't hurt...
-      if (propertyDefinition
-          .hasFlag(PropertyDefinitionFlags.CanSet, writer.getService().getRequestedServerVersion())) {
-        if (this.contains(propertyDefinition)) {
-          propertyDefinition.writePropertyValueToXml(writer, this,
-              false /* isUpdateOperation */);
-        }
+      for (PropertyDefinition propertyDefinition : this.getOwner().getSchema()) {
+          // The following test should not be necessary since the property bag
+          // prevents
+          // property to be set if they don't have the CanSet flag, but it
+          // doesn't hurt...
+          if (propertyDefinition
+                  .hasFlag(PropertyDefinitionFlags.CanSet, writer.getService().getRequestedServerVersion())) {
+              if (this.contains(propertyDefinition)) {
+                  propertyDefinition.writePropertyValueToXml(writer, this,
+                          false /* isUpdateOperation */);
+              }
+          }
       }
-    }
 
     writer.writeEndElement();
   }
@@ -578,13 +570,11 @@ public class PropertyBag implements IComplexPropertyChanged, IComplexPropertyCha
       this.writeSetUpdateToXml(writer, propertyDefinition);
     }
 
-    Iterator<Entry<PropertyDefinition, Object>> it = this.deletedProperties
-        .entrySet().iterator();
-    while (it.hasNext()) {
-      Entry<PropertyDefinition, Object> property = it.next();
-      this.writeDeleteUpdateToXml(writer, property.getKey(), property
-          .getValue());
-    }
+      for (Entry<PropertyDefinition, Object> property : this.deletedProperties
+              .entrySet()) {
+          this.writeDeleteUpdateToXml(writer, property.getKey(), property
+                  .getValue());
+      }
 
     writer.writeEndElement();
     writer.writeEndElement();
@@ -599,7 +589,7 @@ public class PropertyBag implements IComplexPropertyChanged, IComplexPropertyCha
    */
   public boolean getIsUpdateCallNecessary() {
     List<PropertyDefinition> propertyDefinitions =
-        new ArrayList<PropertyDefinition>();
+            new ArrayList<>();
     propertyDefinitions.addAll(this.addedProperties);
     propertyDefinitions.addAll(this.modifiedProperties);
     propertyDefinitions.addAll(this.deletedProperties.keySet());
@@ -731,7 +721,7 @@ public class PropertyBag implements IComplexPropertyChanged, IComplexPropertyCha
    */
   private void validatePropertyValue(PropertyDefinition propertyDefinition)
       throws Exception {
-    OutParam<Object> propertyValueOut = new OutParam<Object>();
+    OutParam<Object> propertyValueOut = new OutParam<>();
     if (this.tryGetProperty(propertyDefinition, propertyValueOut)) {
       Object propertyValue = propertyValueOut.getParam();
 
@@ -756,7 +746,7 @@ public class PropertyBag implements IComplexPropertyChanged, IComplexPropertyCha
   public <T> T getObjectFromPropertyDefinition(PropertyDefinition propertyDefinition)
       throws ServiceLocalException {
     OutParam<ServiceLocalException> serviceExceptionOut =
-        new OutParam<ServiceLocalException>();
+            new OutParam<>();
     T propertyValue = getPropertyValueOrException(propertyDefinition, serviceExceptionOut);
 
     ServiceLocalException serviceException = serviceExceptionOut.getParam();

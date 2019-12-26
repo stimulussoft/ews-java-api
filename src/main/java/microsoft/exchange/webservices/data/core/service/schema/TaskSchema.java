@@ -217,20 +217,16 @@ public class TaskSchema extends ItemSchema {
    * Defines the Companies property.
    */
   public static final PropertyDefinition Companies =
-      new ComplexPropertyDefinition<StringList>(
-          StringList.class,
-          XmlElementNames.Companies, FieldUris.Companies, EnumSet.of(
-          PropertyDefinitionFlags.AutoInstantiateOnRead,
-          PropertyDefinitionFlags.CanSet,
-          PropertyDefinitionFlags.CanUpdate,
-          PropertyDefinitionFlags.CanDelete,
-          PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<StringList>() {
-            public StringList createComplexProperty() {
-              return new StringList();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  StringList.class,
+                  XmlElementNames.Companies, FieldUris.Companies, EnumSet.of(
+                  PropertyDefinitionFlags.AutoInstantiateOnRead,
+                  PropertyDefinitionFlags.CanSet,
+                  PropertyDefinitionFlags.CanUpdate,
+                  PropertyDefinitionFlags.CanDelete,
+                  PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1,
+                  StringList::new);
 
   /**
    * Defines the CompleteDate property.
@@ -248,20 +244,16 @@ public class TaskSchema extends ItemSchema {
    * Defines the Contacts property.
    */
   public static final PropertyDefinition Contacts =
-      new ComplexPropertyDefinition<StringList>(
-          StringList.class,
-          XmlElementNames.Contacts, FieldUris.Contacts, EnumSet.of(
-          PropertyDefinitionFlags.AutoInstantiateOnRead,
-          PropertyDefinitionFlags.CanSet,
-          PropertyDefinitionFlags.CanUpdate,
-          PropertyDefinitionFlags.CanDelete,
-          PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<StringList>() {
-            public StringList createComplexProperty() {
-              return new StringList();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  StringList.class,
+                  XmlElementNames.Contacts, FieldUris.Contacts, EnumSet.of(
+                  PropertyDefinitionFlags.AutoInstantiateOnRead,
+                  PropertyDefinitionFlags.CanSet,
+                  PropertyDefinitionFlags.CanUpdate,
+                  PropertyDefinitionFlags.CanDelete,
+                  PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1,
+                  StringList::new);
 
   /**
    * Defines the DelegationState property.
@@ -297,12 +289,12 @@ public class TaskSchema extends ItemSchema {
    * Defines the Mode property.
    */
   public static final PropertyDefinition Mode =
-      new GenericPropertyDefinition<TaskMode>(
-          TaskMode.class,
-          XmlElementNames.IsAssignmentEditable,
-          FieldUris.IsAssignmentEditable, EnumSet
-          .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1);
+          new GenericPropertyDefinition<>(
+                  TaskMode.class,
+                  XmlElementNames.IsAssignmentEditable,
+                  FieldUris.IsAssignmentEditable, EnumSet
+                  .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1);
 
   /**
    * Defines the IsComplete property.
@@ -389,13 +381,13 @@ public class TaskSchema extends ItemSchema {
    * Defines the Status property.
    */
   public static final PropertyDefinition Status =
-      new GenericPropertyDefinition<TaskStatus>(
-          TaskStatus.class,
-          XmlElementNames.Status, FieldUris.Status, EnumSet.of(
-          PropertyDefinitionFlags.CanSet,
-          PropertyDefinitionFlags.CanUpdate,
-          PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1);
+          new GenericPropertyDefinition<>(
+                  TaskStatus.class,
+                  XmlElementNames.Status, FieldUris.Status, EnumSet.of(
+                  PropertyDefinitionFlags.CanSet,
+                  PropertyDefinitionFlags.CanUpdate,
+                  PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1);
 
   /**
    * Defines the StatusDescription property.

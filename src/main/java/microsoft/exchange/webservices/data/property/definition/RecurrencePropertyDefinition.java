@@ -77,50 +77,51 @@ public class RecurrencePropertyDefinition extends PropertyDefinition {
     // pattern
     // element
 
-    if (reader.getLocalName().equals(
-        XmlElementNames.RelativeYearlyRecurrence)) {
+      switch (reader.getLocalName()) {
+          case XmlElementNames.RelativeYearlyRecurrence:
 
-      recurrence = new Recurrence.RelativeYearlyPattern();
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.AbsoluteYearlyRecurrence)) {
+              recurrence = new Recurrence.RelativeYearlyPattern();
+              break;
+          case XmlElementNames.AbsoluteYearlyRecurrence:
 
-      recurrence = new Recurrence.YearlyPattern();
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.RelativeMonthlyRecurrence)) {
+              recurrence = new Recurrence.YearlyPattern();
+              break;
+          case XmlElementNames.RelativeMonthlyRecurrence:
 
-      recurrence = new Recurrence.RelativeMonthlyPattern();
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.AbsoluteMonthlyRecurrence)) {
+              recurrence = new Recurrence.RelativeMonthlyPattern();
+              break;
+          case XmlElementNames.AbsoluteMonthlyRecurrence:
 
-      recurrence = new Recurrence.MonthlyPattern();
-    } else if (reader.getLocalName()
-        .equals(XmlElementNames.DailyRecurrence)) {
+              recurrence = new Recurrence.MonthlyPattern();
+              break;
+          case XmlElementNames.DailyRecurrence:
 
-      recurrence = new Recurrence.DailyPattern();
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.DailyRegeneration)) {
+              recurrence = new Recurrence.DailyPattern();
+              break;
+          case XmlElementNames.DailyRegeneration:
 
-      recurrence = new Recurrence.DailyRegenerationPattern();
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.WeeklyRecurrence)) {
+              recurrence = new Recurrence.DailyRegenerationPattern();
+              break;
+          case XmlElementNames.WeeklyRecurrence:
 
-      recurrence = new Recurrence.WeeklyPattern();
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.WeeklyRegeneration)) {
+              recurrence = new Recurrence.WeeklyPattern();
+              break;
+          case XmlElementNames.WeeklyRegeneration:
 
-      recurrence = new Recurrence.WeeklyRegenerationPattern();
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.MonthlyRegeneration)) {
+              recurrence = new Recurrence.WeeklyRegenerationPattern();
+              break;
+          case XmlElementNames.MonthlyRegeneration:
 
-      recurrence = new Recurrence.MonthlyRegenerationPattern();
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.YearlyRegeneration)) {
+              recurrence = new Recurrence.MonthlyRegenerationPattern();
+              break;
+          case XmlElementNames.YearlyRegeneration:
 
-      recurrence = new Recurrence.YearlyRegenerationPattern();
-    } else {
+              recurrence = new Recurrence.YearlyRegenerationPattern();
+              break;
+          default:
 
-      throw new ServiceXmlDeserializationException(String.format("Invalid recurrence pattern: (%s).", reader.getLocalName()));
-    }
+              throw new ServiceXmlDeserializationException(String.format("Invalid recurrence pattern: (%s).", reader.getLocalName()));
+      }
 
     recurrence.loadFromXml(reader, reader.getLocalName());
 
@@ -130,20 +131,22 @@ public class RecurrencePropertyDefinition extends PropertyDefinition {
 
     RecurrenceRange range;
 
-    if (reader.getLocalName().equals(XmlElementNames.NoEndRecurrence)) {
+      switch (reader.getLocalName()) {
+          case XmlElementNames.NoEndRecurrence:
 
-      range = new NoEndRecurrenceRange();
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.EndDateRecurrence)) {
+              range = new NoEndRecurrenceRange();
+              break;
+          case XmlElementNames.EndDateRecurrence:
 
-      range = new EndDateRecurrenceRange();
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.NumberedRecurrence)) {
+              range = new EndDateRecurrenceRange();
+              break;
+          case XmlElementNames.NumberedRecurrence:
 
-      range = new NumberedRecurrenceRange();
-    } else {
-      throw new ServiceXmlDeserializationException(String.format("Invalid recurrence range: (%s).", reader.getLocalName()));
-    }
+              range = new NumberedRecurrenceRange();
+              break;
+          default:
+              throw new ServiceXmlDeserializationException(String.format("Invalid recurrence range: (%s).", reader.getLocalName()));
+      }
 
     range.loadFromXml(reader, reader.getLocalName());
     range.setupRecurrence(recurrence);

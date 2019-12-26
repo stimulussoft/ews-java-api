@@ -66,8 +66,8 @@ public final class FindItemRequest<TItem extends Item> extends
   @Override
   protected FindItemResponse<TItem> createServiceResponse(
       ExchangeService service, int responseIndex) {
-    return new FindItemResponse<TItem>(this.getGroupBy() != null, this
-        .getView().getPropertySetOrDefault());
+    return new FindItemResponse<>(this.getGroupBy() != null, this
+            .getView().getPropertySetOrDefault());
   }
 
   /**

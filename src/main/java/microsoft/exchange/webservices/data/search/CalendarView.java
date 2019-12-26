@@ -231,7 +231,7 @@ public final class CalendarView extends ViewBase {
   public void setMaxItemsReturned(Integer maxItemsReturned)
       throws ArgumentException {
     if (maxItemsReturned != null) {
-      if (maxItemsReturned.intValue() <= 0) {
+      if (maxItemsReturned <= 0) {
         throw new ArgumentException("The value must be greater than 0.");
       }
     }

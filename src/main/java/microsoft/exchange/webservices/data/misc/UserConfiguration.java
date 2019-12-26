@@ -586,33 +586,36 @@ public class UserConfiguration {
 
     do {
       if (reader.getNodeType().getNodeType() == XmlNodeType.START_ELEMENT) {
-        if (reader.getLocalName().equals(
-            XmlElementNames.UserConfigurationName)) {
-          String responseName = reader
-              .readAttributeValue(XmlAttributeNames.Name);
+          switch (reader.getLocalName()) {
+              case XmlElementNames.UserConfigurationName:
+                  String responseName = reader
+                          .readAttributeValue(XmlAttributeNames.Name);
 
-          EwsUtilities.ewsAssert(this.name.equals(responseName), "UserConfiguration.loadFromXml",
-                                 "UserConfigurationName does not match: Expected: " + this.name
-                                 + " Name in response: " + responseName);
+                  EwsUtilities.ewsAssert(this.name.equals(responseName), "UserConfiguration.loadFromXml",
+                          "UserConfigurationName does not match: Expected: " + this.name
+                                  + " Name in response: " + responseName);
 
-          reader.skipCurrentElement();
-        } else if (reader.getLocalName().equals(XmlElementNames.ItemId)) {
-          this.itemId = new ItemId();
-          this.itemId.loadFromXml(reader, XmlElementNames.ItemId);
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.Dictionary)) {
-          this.dictionary.loadFromXml(reader,
-              XmlElementNames.Dictionary);
-        } else if (reader.getLocalName()
-            .equals(XmlElementNames.XmlData)) {
-          this.xmlData = Base64.decodeBase64(reader.readElementValue());
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.BinaryData)) {
-          this.binaryData = Base64.decodeBase64(reader.readElementValue());
-        } else {
-          EwsUtilities.ewsAssert(false, "UserConfiguration.loadFromXml",
-                                 "Xml element not supported: " + reader.getLocalName());
-        }
+                  reader.skipCurrentElement();
+                  break;
+              case XmlElementNames.ItemId:
+                  this.itemId = new ItemId();
+                  this.itemId.loadFromXml(reader, XmlElementNames.ItemId);
+                  break;
+              case XmlElementNames.Dictionary:
+                  this.dictionary.loadFromXml(reader,
+                          XmlElementNames.Dictionary);
+                  break;
+              case XmlElementNames.XmlData:
+                  this.xmlData = Base64.decodeBase64(reader.readElementValue());
+                  break;
+              case XmlElementNames.BinaryData:
+                  this.binaryData = Base64.decodeBase64(reader.readElementValue());
+                  break;
+              default:
+                  EwsUtilities.ewsAssert(false, "UserConfiguration.loadFromXml",
+                          "Xml element not supported: " + reader.getLocalName());
+                  break;
+          }
       }
 
       // If XmlData was loaded, read is skipped because GetXmlData

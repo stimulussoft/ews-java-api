@@ -57,7 +57,7 @@ public final class GetStreamingEventsResults {
    * Collection of notification events.
    */
   private Collection<NotificationGroup> events =
-      new ArrayList<NotificationGroup>();
+          new ArrayList<>();
 
   /**
    * Initializes a new instance of the <see cref=
@@ -81,7 +81,7 @@ public final class GetStreamingEventsResults {
       notifications.subscriptionId = reader.readElementValue(
           XmlNamespace.Types,
           XmlElementNames.SubscriptionId);
-      notifications.events = new ArrayList<NotificationEvent>();
+      notifications.events = new ArrayList<>();
 
       synchronized (this) {
         this.events.add(notifications);

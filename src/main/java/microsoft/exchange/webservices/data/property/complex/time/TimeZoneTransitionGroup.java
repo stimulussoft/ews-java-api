@@ -56,7 +56,7 @@ public class TimeZoneTransitionGroup extends ComplexProperty {
    * The transitions.
    */
   private List<TimeZoneTransition> transitions =
-      new ArrayList<TimeZoneTransition>();
+          new ArrayList<>();
 
   /**
    * The transition to standard.

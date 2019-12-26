@@ -43,13 +43,13 @@ public final class AttendeeAvailability extends ServiceResponse {
    * The calendar events.
    */
   private Collection<CalendarEvent> calendarEvents =
-      new ArrayList<CalendarEvent>();
+          new ArrayList<>();
 
   /**
    * The merged free busy status.
    */
   private Collection<LegacyFreeBusyStatus> mergedFreeBusyStatus =
-      new ArrayList<LegacyFreeBusyStatus>();
+          new ArrayList<>();
 
   /**
    * The view type.
@@ -88,50 +88,51 @@ public final class AttendeeAvailability extends ServiceResponse {
         break;
       }
     }
+    label:
     do {
       reader.read();
 
       if (reader.isStartElement()) {
-        if (reader.getLocalName()
-            .equals(XmlElementNames.MergedFreeBusy)) {
-          String mergedFreeBusy = reader.readElementValue();
+        switch (reader.getLocalName()) {
+          case XmlElementNames.MergedFreeBusy:
+            String mergedFreeBusy = reader.readElementValue();
 
-          for (int i = 0; i < mergedFreeBusy.length(); i++) {
+            for (int i = 0; i < mergedFreeBusy.length(); i++) {
 
-            Byte b = Byte.parseByte(mergedFreeBusy.charAt(i) + "");
-            for (LegacyFreeBusyStatus legacyStatus : LegacyFreeBusyStatus.values()) {
-              if (b == legacyStatus.getBusyStatus()) {
-                this.mergedFreeBusyStatus.add(legacyStatus);
-                break;
+              Byte b = Byte.parseByte(mergedFreeBusy.charAt(i) + "");
+              for (LegacyFreeBusyStatus legacyStatus : LegacyFreeBusyStatus.values()) {
+                if (b == legacyStatus.getBusyStatus()) {
+                  this.mergedFreeBusyStatus.add(legacyStatus);
+                  break;
+                }
               }
+
             }
 
-          }
+            break;
+          case XmlElementNames.CalendarEventArray:
+            do {
+              reader.read();
 
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.CalendarEventArray)) {
-          do {
-            reader.read();
+              if (reader.isStartElement(XmlNamespace.Types,
+                      XmlElementNames.CalendarEvent)) {
+                CalendarEvent calendarEvent = new CalendarEvent();
 
-            if (reader.isStartElement(XmlNamespace.Types,
-                XmlElementNames.CalendarEvent)) {
-              CalendarEvent calendarEvent = new CalendarEvent();
+                calendarEvent.loadFromXml(reader,
+                        XmlElementNames.CalendarEvent);
 
-              calendarEvent.loadFromXml(reader,
-                  XmlElementNames.CalendarEvent);
+                this.calendarEvents.add(calendarEvent);
+              }
+            } while (!reader.isEndElement(XmlNamespace.Types,
+                    XmlElementNames.CalendarEventArray));
 
-              this.calendarEvents.add(calendarEvent);
-            }
-          } while (!reader.isEndElement(XmlNamespace.Types,
-              XmlElementNames.CalendarEventArray));
+            break;
+          case XmlElementNames.WorkingHours:
+            this.workingHours = new WorkingHours();
+            this.workingHours
+                    .loadFromXml(reader, reader.getLocalName());
 
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.WorkingHours)) {
-          this.workingHours = new WorkingHours();
-          this.workingHours
-              .loadFromXml(reader, reader.getLocalName());
-
-          break;
+            break label;
         }
       }
     } while (!reader.isEndElement(XmlNamespace.Messages,

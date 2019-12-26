@@ -109,19 +109,20 @@ public final class CalendarEvent extends ComplexProperty {
   @Override
   public boolean tryReadElementFromXml(EwsServiceXmlReader reader)
       throws Exception {
-    if (reader.getLocalName().equals(XmlElementNames.StartTime)) {
-      this.startTime = reader
-          .readElementValueAsUnbiasedDateTimeScopedToServiceTimeZone();
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.EndTime)) {
-      this.endTime = reader
-          .readElementValueAsUnbiasedDateTimeScopedToServiceTimeZone();
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.BusyType)) {
-      this.freeBusyStatus = reader
-          .readElementValue(LegacyFreeBusyStatus.class);
-      return true;
-    }
+      switch (reader.getLocalName()) {
+          case XmlElementNames.StartTime:
+              this.startTime = reader
+                      .readElementValueAsUnbiasedDateTimeScopedToServiceTimeZone();
+              return true;
+          case XmlElementNames.EndTime:
+              this.endTime = reader
+                      .readElementValueAsUnbiasedDateTimeScopedToServiceTimeZone();
+              return true;
+          case XmlElementNames.BusyType:
+              this.freeBusyStatus = reader
+                      .readElementValue(LegacyFreeBusyStatus.class);
+              return true;
+      }
     if (reader.getLocalName().equals(XmlElementNames.CalendarEventDetails)) {
       this.details = new CalendarEventDetails();
       this.details.loadFromXml(reader, reader.getLocalName());

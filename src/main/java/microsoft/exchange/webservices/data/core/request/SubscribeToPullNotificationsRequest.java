@@ -101,8 +101,8 @@ public class SubscribeToPullNotificationsRequest extends
   @Override
   protected SubscribeResponse<PullSubscription> createServiceResponse(
       ExchangeService service, int responseIndex) throws Exception {
-    return new SubscribeResponse<PullSubscription>(new PullSubscription(
-        service));
+    return new SubscribeResponse<>(new PullSubscription(
+            service));
   }
 
   /**

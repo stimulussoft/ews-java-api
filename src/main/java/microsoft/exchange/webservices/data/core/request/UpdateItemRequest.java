@@ -53,7 +53,7 @@ public final class UpdateItemRequest extends
   /**
    * The item.
    */
-  private List<Item> items = new ArrayList<Item>();
+  private List<Item> items = new ArrayList<>();
 
   /**
    * The saved item destination folder.

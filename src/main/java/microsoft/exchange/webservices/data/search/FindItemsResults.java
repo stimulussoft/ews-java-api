@@ -54,7 +54,7 @@ public final class FindItemsResults<TItem extends Item> implements
   /**
    * The item.
    */
-  private ArrayList<TItem> items = new ArrayList<TItem>();
+  private ArrayList<TItem> items = new ArrayList<>();
 
   /**
    * Initializes a new instance of the FindItemsResults class.

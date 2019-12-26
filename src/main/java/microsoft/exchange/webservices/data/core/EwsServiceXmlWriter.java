@@ -57,6 +57,7 @@ import java.util.Date;
 public class EwsServiceXmlWriter implements IDisposable {
 
   private static final Log LOG = LogFactory.getLog(EwsServiceXmlWriter.class);
+  private static final XMLOutputFactory xmlof = XMLOutputFactory.newInstance();
 
   /**
    * The is disposed.
@@ -98,9 +99,7 @@ public class EwsServiceXmlWriter implements IDisposable {
    */
   public EwsServiceXmlWriter(ExchangeServiceBase service, OutputStream stream) throws XMLStreamException {
     this.service = service;
-    XMLOutputFactory xmlof = XMLOutputFactory.newInstance();
     xmlWriter = xmlof.createXMLStreamWriter(stream, "utf-8");
-
   }
 
   /**
@@ -214,7 +213,7 @@ public class EwsServiceXmlWriter implements IDisposable {
   public void writeAttributeValue(String localName,
       boolean alwaysWriteEmptyString,
       Object value) throws ServiceXmlSerializationException {
-    OutParam<String> stringOut = new OutParam<String>();
+    OutParam<String> stringOut = new OutParam<>();
     String stringValue = null;
     if (this.tryConvertObjectToString(value, stringOut)) {
       stringValue = stringOut.getParam();
@@ -238,7 +237,7 @@ public class EwsServiceXmlWriter implements IDisposable {
    */
   public void writeAttributeValue(String namespacePrefix, String localName,
       Object value) throws ServiceXmlSerializationException {
-    OutParam<String> stringOut = new OutParam<String>();
+    OutParam<String> stringOut = new OutParam<>();
     String stringValue = null;
     if (this.tryConvertObjectToString(value, stringOut)) {
       stringValue = stringOut.getParam();
@@ -326,7 +325,7 @@ public class EwsServiceXmlWriter implements IDisposable {
   public void writeElementValue(XmlNamespace xmlNamespace, String localName, String displayName, Object value)
       throws XMLStreamException, ServiceXmlSerializationException {
     String stringValue = null;
-    OutParam<String> strOut = new OutParam<String>();
+    OutParam<String> strOut = new OutParam<>();
 
     if (this.tryConvertObjectToString(value, strOut)) {
       stringValue = strOut.getParam();

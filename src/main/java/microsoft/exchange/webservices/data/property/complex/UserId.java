@@ -212,23 +212,22 @@ public class UserId extends ComplexProperty {
    */
   public boolean tryReadElementFromXml(EwsServiceXmlReader reader)
       throws Exception {
-    if (reader.getLocalName().equals(XmlElementNames.SID)) {
-      this.sID = reader.readValue();
-      return true;
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.PrimarySmtpAddress)) {
-      this.primarySmtpAddress = reader.readValue();
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.DisplayName)) {
-      this.displayName = reader.readValue();
-      return true;
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.DistinguishedUser)) {
-      this.standardUser = reader.readValue(StandardUser.class);
-      return true;
-    } else {
-      return false;
-    }
+      switch (reader.getLocalName()) {
+          case XmlElementNames.SID:
+              this.sID = reader.readValue();
+              return true;
+          case XmlElementNames.PrimarySmtpAddress:
+              this.primarySmtpAddress = reader.readValue();
+              return true;
+          case XmlElementNames.DisplayName:
+              this.displayName = reader.readValue();
+              return true;
+          case XmlElementNames.DistinguishedUser:
+              this.standardUser = reader.readValue(StandardUser.class);
+              return true;
+          default:
+              return false;
+      }
   }
 
   /**

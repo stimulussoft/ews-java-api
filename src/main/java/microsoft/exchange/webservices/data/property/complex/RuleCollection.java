@@ -51,7 +51,7 @@ public final class RuleCollection extends ComplexProperty implements Iterable<Ru
    */
   public RuleCollection() {
     super();
-    this.rules = new ArrayList<Rule>();
+    this.rules = new ArrayList<>();
   }
 
   /**

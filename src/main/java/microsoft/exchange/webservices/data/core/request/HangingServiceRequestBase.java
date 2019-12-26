@@ -50,7 +50,9 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownServiceException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -123,7 +125,7 @@ public abstract class HangingServiceRequestBase<T> extends ServiceRequestBase<T>
    * Disconnect events Occur when the hanging request is disconnected.
    */
   private List<IHangingRequestDisconnectHandler> onDisconnectList =
-      new ArrayList<IHangingRequestDisconnectHandler>();
+          new ArrayList<>();
 
   /**
    * Set event to happen when property disconnect.
@@ -220,15 +222,6 @@ public abstract class HangingServiceRequestBase<T> extends ServiceRequestBase<T>
     } catch (SocketTimeoutException ex) {
       // The connection timed out.
       this.disconnect(HangingRequestDisconnectReason.Timeout, ex);
-    } catch (UnknownServiceException ex) {
-      // Stream is closed, so disconnect.
-      this.disconnect(HangingRequestDisconnectReason.Exception, ex);
-    } catch (ObjectStreamException ex) {
-      // Stream is closed, so disconnect.
-      this.disconnect(HangingRequestDisconnectReason.Exception, ex);
-    } catch (IOException ex) {
-      // Stream is closed, so disconnect.
-      this.disconnect(HangingRequestDisconnectReason.Exception, ex);
     } catch (UnsupportedOperationException ex) {
       LOG.error(ex);
       // This is thrown if we close the stream during a
@@ -304,21 +297,12 @@ public abstract class HangingServiceRequestBase<T> extends ServiceRequestBase<T>
       long keepAliveTime = 10;
 
       final ArrayBlockingQueue<Runnable> queue =
-          new ArrayBlockingQueue<Runnable>(
-              1);
+              new ArrayBlockingQueue<>(
+                      1);
       ThreadPoolExecutor threadPool = new ThreadPoolExecutor(poolSize,
           maxPoolSize,
-          keepAliveTime, TimeUnit.SECONDS, queue, r -> {
-            Thread t = Executors.defaultThreadFactory().newThread(r);
-            t.setDaemon(true);
-            t.setName("ews hangingservicerequest");
-            return t;
-          });
-      threadPool.execute(new Runnable() {
-        public void run() {
-          parseResponses();
-        }
-      });
+          keepAliveTime, TimeUnit.SECONDS, queue);
+      threadPool.execute(this::parseResponses);
       threadPool.shutdown();
     }
   }
@@ -352,9 +336,7 @@ public abstract class HangingServiceRequestBase<T> extends ServiceRequestBase<T>
     // Do nothing.
     try {
       ewsXmlReader.read(new XmlNodeType(XmlNodeType.START_DOCUMENT));
-    } catch (XmlException ex) {
-      throw new ServiceRequestException("The response received from the service didn't contain valid XML.", ex);
-    } catch (ServiceXmlDeserializationException ex) {
+    } catch (XmlException | ServiceXmlDeserializationException ex) {
       throw new ServiceRequestException("The response received from the service didn't contain valid XML.", ex);
     }
   }

@@ -96,7 +96,7 @@ public abstract class ComplexPropertyDefinitionBase extends PropertyDefinition {
   protected void internalLoadFromXml(
     final EwsServiceXmlReader reader, final PropertyBag propertyBag
   ) throws Exception {
-    final OutParam<ComplexProperty> complexProperty = new OutParam<ComplexProperty>();
+    final OutParam<ComplexProperty> complexProperty = new OutParam<>();
     final boolean justCreated = getPropertyInstance(propertyBag, complexProperty);
 
     if (!justCreated && this.hasFlag(PropertyDefinitionFlags.UpdateCollectionItems,

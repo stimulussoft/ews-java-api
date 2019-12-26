@@ -95,7 +95,7 @@ public class SoapFaultDetails {
    * MessageXml details (e.g. CASOverBudgetException includes BackoffTime
    * value).
    */
-  private Map<String, String> errorDetails = new HashMap<String, String>();
+  private Map<String, String> errorDetails = new HashMap<>();
 
   /**
    * Parses the.
@@ -113,17 +113,19 @@ public class SoapFaultDetails {
       if (reader.getNodeType().equals(
           new XmlNodeType(XmlNodeType.START_ELEMENT))) {
         String localName = reader.getLocalName();
-        if (localName.equals(XmlElementNames.SOAPFaultCodeElementName)) {
-          soapFaultDetails.setFaultCode(reader.readElementValue());
-        } else if (localName
-            .equals(XmlElementNames.SOAPFaultStringElementName)) {
-          soapFaultDetails.setFaultString(reader.readElementValue());
-        } else if (localName
-            .equals(XmlElementNames.SOAPFaultActorElementName)) {
-          soapFaultDetails.setFaultActor(reader.readElementValue());
-        } else if (localName
-            .equals(XmlElementNames.SOAPDetailElementName)) {
-          soapFaultDetails.parseDetailNode(reader);
+        switch (localName) {
+          case XmlElementNames.SOAPFaultCodeElementName:
+            soapFaultDetails.setFaultCode(reader.readElementValue());
+            break;
+          case XmlElementNames.SOAPFaultStringElementName:
+            soapFaultDetails.setFaultString(reader.readElementValue());
+            break;
+          case XmlElementNames.SOAPFaultActorElementName:
+            soapFaultDetails.setFaultActor(reader.readElementValue());
+            break;
+          case XmlElementNames.SOAPDetailElementName:
+            soapFaultDetails.parseDetailNode(reader);
+            break;
         }
       }
     } while (!reader.isEndElement(soapNamespace,
@@ -144,55 +146,58 @@ public class SoapFaultDetails {
       if (reader.getNodeType().equals(
           new XmlNodeType(XmlNodeType.START_ELEMENT))) {
         String localName = reader.getLocalName();
-        if (localName
-            .equals(XmlElementNames.EwsResponseCodeElementName)) {
-          try {
-            this.setResponseCode(reader
-                .readElementValue(ServiceError.class));
-          } catch (Exception e) {
-            LOG.error(e);
+        switch (localName) {
+          case XmlElementNames.EwsResponseCodeElementName:
+            try {
+              this.setResponseCode(reader
+                      .readElementValue(ServiceError.class));
+            } catch (Exception e) {
+              LOG.error(e);
 
-            // ServiceError couldn't be mapped to enum value, treat
-            // as an ISE
-            this
-                .setResponseCode(ServiceError.
-                    ErrorInternalServerError);
-          }
+              // ServiceError couldn't be mapped to enum value, treat
+              // as an ISE
+              this
+                      .setResponseCode(ServiceError.
+                              ErrorInternalServerError);
+            }
 
-        } else if (localName
-            .equals(XmlElementNames.EwsMessageElementName)) {
-          this.setMessage(reader.readElementValue());
-        } else if (localName.equals(XmlElementNames.EwsLineElementName)) {
-          this.setLineNumber(reader.readElementValue(Integer.class));
-        } else if (localName
-            .equals(XmlElementNames.EwsPositionElementName)) {
-          this.setPositionWithinLine(reader
-              .readElementValue(Integer.class));
-        } else if (localName
-            .equals(XmlElementNames.EwsErrorCodeElementName)) {
-          try {
-            this.setErrorCode(reader
-                .readElementValue(ServiceError.class));
-          } catch (Exception e) {
-            LOG.error(e);
+            break;
+          case XmlElementNames.EwsMessageElementName:
+            this.setMessage(reader.readElementValue());
+            break;
+          case XmlElementNames.EwsLineElementName:
+            this.setLineNumber(reader.readElementValue(Integer.class));
+            break;
+          case XmlElementNames.EwsPositionElementName:
+            this.setPositionWithinLine(reader
+                    .readElementValue(Integer.class));
+            break;
+          case XmlElementNames.EwsErrorCodeElementName:
+            try {
+              this.setErrorCode(reader
+                      .readElementValue(ServiceError.class));
+            } catch (Exception e) {
+              LOG.error(e);
 
-            // ServiceError couldn't be mapped to enum value, treat
-            // as an ISE
-            this
-                .setErrorCode(ServiceError.
-                    ErrorInternalServerError);
-          }
+              // ServiceError couldn't be mapped to enum value, treat
+              // as an ISE
+              this
+                      .setErrorCode(ServiceError.
+                              ErrorInternalServerError);
+            }
 
-        } else if (localName
-            .equals(XmlElementNames.EwsExceptionTypeElementName)) {
-          try {
-            this.setExceptionType(reader.readElementValue());
-          } catch (Exception e) {
-            LOG.error(e);
-            this.setExceptionType(null);
-          }
-        } else if (localName.equals(XmlElementNames.MessageXml)) {
-          this.parseMessageXml(reader);
+            break;
+          case XmlElementNames.EwsExceptionTypeElementName:
+            try {
+              this.setExceptionType(reader.readElementValue());
+            } catch (Exception e) {
+              LOG.error(e);
+              this.setExceptionType(null);
+            }
+            break;
+          case XmlElementNames.MessageXml:
+            this.parseMessageXml(reader);
+            break;
         }
       }
     } while (!reader.isEndElement(XmlNamespace.NotSpecified,

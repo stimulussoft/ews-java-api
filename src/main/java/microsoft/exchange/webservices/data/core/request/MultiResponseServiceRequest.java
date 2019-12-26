@@ -56,7 +56,7 @@ public abstract class MultiResponseServiceRequest<TResponse extends ServiceRespo
   protected ServiceResponseCollection<TResponse> parseResponse(EwsServiceXmlReader reader)
       throws Exception {
     ServiceResponseCollection<TResponse> serviceResponses =
-        new ServiceResponseCollection<TResponse>();
+            new ServiceResponseCollection<>();
 
     reader.readStartElement(XmlNamespace.Messages,
         XmlElementNames.ResponseMessages);

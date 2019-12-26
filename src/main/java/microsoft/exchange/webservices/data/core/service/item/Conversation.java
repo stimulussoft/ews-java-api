@@ -204,7 +204,7 @@ public class Conversation extends ServiceObject {
       boolean processSynchronously) throws ServiceResponseException,
       IndexOutOfBoundsException, Exception {
 
-    ArrayList<ConversationId> convArry = new ArrayList<ConversationId>();
+    ArrayList<ConversationId> convArry = new ArrayList<>();
     convArry.add(this.getId());
 
     this.getService().enableAlwaysCategorizeItemsInConversations(
@@ -229,7 +229,7 @@ public class Conversation extends ServiceObject {
    */
   public void disableAlwaysCategorizeItems(boolean processSynchronously)
       throws ServiceResponseException, IndexOutOfBoundsException, Exception {
-    ArrayList<ConversationId> convArry = new ArrayList<ConversationId>();
+    ArrayList<ConversationId> convArry = new ArrayList<>();
     convArry.add(this.getId());
     this.getService().disableAlwaysCategorizeItemsInConversations(
         convArry, processSynchronously).
@@ -251,7 +251,7 @@ public class Conversation extends ServiceObject {
    */
   public void enableAlwaysDeleteItems(boolean processSynchronously)
       throws ServiceResponseException, IndexOutOfBoundsException, Exception {
-    ArrayList<ConversationId> convArry = new ArrayList<ConversationId>();
+    ArrayList<ConversationId> convArry = new ArrayList<>();
     convArry.add(this.getId());
     this.getService().enableAlwaysDeleteItemsInConversations(
         convArry,
@@ -273,7 +273,7 @@ public class Conversation extends ServiceObject {
    */
   public void disableAlwaysDeleteItems(boolean processSynchronously)
       throws ServiceResponseException, IndexOutOfBoundsException, Exception {
-    ArrayList<ConversationId> convArry = new ArrayList<ConversationId>();
+    ArrayList<ConversationId> convArry = new ArrayList<>();
     convArry.add(this.getId());
     this.getService().disableAlwaysDeleteItemsInConversations(
         convArry,
@@ -297,7 +297,7 @@ public class Conversation extends ServiceObject {
   public void enableAlwaysMoveItems(FolderId destinationFolderId,
       boolean processSynchronously) throws ServiceResponseException,
       IndexOutOfBoundsException, Exception {
-    ArrayList<ConversationId> convArry = new ArrayList<ConversationId>();
+    ArrayList<ConversationId> convArry = new ArrayList<>();
     convArry.add(this.getId());
     this.getService().enableAlwaysMoveItemsInConversations(
         convArry,
@@ -320,7 +320,7 @@ public class Conversation extends ServiceObject {
    */
   public void disableAlwaysMoveItemsInConversation(boolean processSynchronously)
       throws ServiceResponseException, IndexOutOfBoundsException, Exception {
-    ArrayList<ConversationId> convArry = new ArrayList<ConversationId>();
+    ArrayList<ConversationId> convArry = new ArrayList<>();
     convArry.add(this.getId());
     this.getService().disableAlwaysMoveItemsInConversations(
         convArry,
@@ -341,10 +341,10 @@ public class Conversation extends ServiceObject {
    */
   public void deleteItems(FolderId contextFolderId, DeleteMode deleteMode)
       throws ServiceResponseException, IndexOutOfBoundsException, Exception {
-    HashMap<ConversationId, Date> m = new HashMap<ConversationId, Date>();
+    HashMap<ConversationId, Date> m = new HashMap<>();
     m.put(this.getId(), this.getGlobalLastDeliveryTime());
 
-    List<HashMap<ConversationId, Date>> f = new ArrayList<HashMap<ConversationId, Date>>();
+    List<HashMap<ConversationId, Date>> f = new ArrayList<>();
     f.add(m);
 
     this.getService().deleteItemsInConversations(
@@ -370,10 +370,10 @@ public class Conversation extends ServiceObject {
       FolderId contextFolderId,
       FolderId destinationFolderId) throws ServiceResponseException,
       IndexOutOfBoundsException, Exception {
-    HashMap<ConversationId, Date> m = new HashMap<ConversationId, Date>();
+    HashMap<ConversationId, Date> m = new HashMap<>();
     m.put(this.getId(), this.getGlobalLastDeliveryTime());
 
-    List<HashMap<ConversationId, Date>> f = new ArrayList<HashMap<ConversationId, Date>>();
+    List<HashMap<ConversationId, Date>> f = new ArrayList<>();
     f.add(m);
 
     this.getService().moveItemsInConversations(
@@ -397,10 +397,10 @@ public class Conversation extends ServiceObject {
       FolderId contextFolderId,
       FolderId destinationFolderId) throws ServiceResponseException,
       IndexOutOfBoundsException, Exception {
-    HashMap<ConversationId, Date> m = new HashMap<ConversationId, Date>();
+    HashMap<ConversationId, Date> m = new HashMap<>();
     m.put(this.getId(), this.getGlobalLastDeliveryTime());
 
-    List<HashMap<ConversationId, Date>> f = new ArrayList<HashMap<ConversationId, Date>>();
+    List<HashMap<ConversationId, Date>> f = new ArrayList<>();
     f.add(m);
 
     this.getService().copyItemsInConversations(
@@ -426,10 +426,10 @@ public class Conversation extends ServiceObject {
       FolderId contextFolderId,
       boolean isRead) throws ServiceResponseException,
       IndexOutOfBoundsException, Exception {
-    HashMap<ConversationId, Date> m = new HashMap<ConversationId, Date>();
+    HashMap<ConversationId, Date> m = new HashMap<>();
     m.put(this.getId(), this.getGlobalLastDeliveryTime());
 
-    List<HashMap<ConversationId, Date>> f = new ArrayList<HashMap<ConversationId, Date>>();
+    List<HashMap<ConversationId, Date>> f = new ArrayList<>();
     f.add(m);
 
     this.getService().setReadStateForItemsInConversations(
@@ -462,7 +462,7 @@ public class Conversation extends ServiceObject {
      *Check for the presence of this property before accessing it.
      */
     if (this.getPropertyBag().contains(ConversationSchema.Topic)) {
-      OutParam<String> out = new OutParam<String>();
+      OutParam<String> out = new OutParam<>();
       this.getPropertyBag().tryGetPropertyType(String.class,
           ConversationSchema.Topic,
           out);
@@ -512,7 +512,7 @@ public class Conversation extends ServiceObject {
      *Check for the presence of this property before accessing it.
      */
     if (this.getPropertyBag().contains(ConversationSchema.UniqueUnreadSenders)) {
-      OutParam<StringList> out = new OutParam<StringList>();
+      OutParam<StringList> out = new OutParam<>();
       this.getPropertyBag().tryGetPropertyType(StringList.class,
           ConversationSchema.UniqueUnreadSenders,
           out);
@@ -538,7 +538,7 @@ public class Conversation extends ServiceObject {
     //the property bag may not contain it.
     // Check for the presence of this property before accessing it.
     if (this.getPropertyBag().contains(ConversationSchema.GlobalUniqueUnreadSenders)) {
-      OutParam<StringList> out = new OutParam<StringList>();
+      OutParam<StringList> out = new OutParam<>();
       this.getPropertyBag().tryGetPropertyType(StringList.class,
           ConversationSchema.GlobalUniqueUnreadSenders,
           out);
@@ -611,7 +611,7 @@ public class Conversation extends ServiceObject {
      * Check for the presence of this property before accessing it.
      */
     if (this.getPropertyBag().contains(ConversationSchema.Categories)) {
-      OutParam<StringList> out = new OutParam<StringList>();
+      OutParam<StringList> out = new OutParam<>();
       this.getPropertyBag().tryGetPropertyType(StringList.class,
           ConversationSchema.Categories,
           out);
@@ -634,7 +634,7 @@ public class Conversation extends ServiceObject {
     //property bag may not contain it.
     // Check for the presence of this property before accessing it.
     if (this.getPropertyBag().contains(ConversationSchema.GlobalCategories)) {
-      OutParam<StringList> out = new OutParam<StringList>();
+      OutParam<StringList> out = new OutParam<>();
       this.getPropertyBag().tryGetPropertyType(StringList.class,
           ConversationSchema.GlobalCategories,
           out);
@@ -657,7 +657,7 @@ public class Conversation extends ServiceObject {
     //property bag may not contain it.
     // Check for the presence of this property before accessing it.
     if (this.getPropertyBag().contains(ConversationSchema.FlagStatus)) {
-      OutParam<ConversationFlagStatus> out = new OutParam<ConversationFlagStatus>();
+      OutParam<ConversationFlagStatus> out = new OutParam<>();
       this.getPropertyBag().tryGetPropertyType(
           ConversationFlagStatus.class,
           ConversationSchema.FlagStatus,
@@ -683,7 +683,7 @@ public class Conversation extends ServiceObject {
     //property bag may not contain it.
     // Check for the presence of this property before accessing it.
     if (this.getPropertyBag().contains(ConversationSchema.GlobalFlagStatus)) {
-      OutParam<ConversationFlagStatus> out = new OutParam<ConversationFlagStatus>();
+      OutParam<ConversationFlagStatus> out = new OutParam<>();
       this.getPropertyBag().tryGetPropertyType(
           ConversationFlagStatus.class,
           ConversationSchema.GlobalFlagStatus,
@@ -757,11 +757,11 @@ public class Conversation extends ServiceObject {
      * Check for the presence of this property before accessing it.
      */
     if (this.getPropertyBag().contains(ConversationSchema.UnreadCount)) {
-      OutParam<Integer> out = new OutParam<Integer>();
+      OutParam<Integer> out = new OutParam<>();
       this.getPropertyBag().tryGetPropertyType(Integer.class,
           ConversationSchema.UnreadCount,
           out);
-      returnValue = out.getParam().intValue();
+      returnValue = out.getParam();
     }
 
     return returnValue;
@@ -778,11 +778,11 @@ public class Conversation extends ServiceObject {
     int returnValue = 0;
 
     if (this.getPropertyBag().contains(ConversationSchema.GlobalUnreadCount)) {
-      OutParam<Integer> out = new OutParam<Integer>();
+      OutParam<Integer> out = new OutParam<>();
       this.getPropertyBag().tryGetPropertyType(Integer.class,
           ConversationSchema.GlobalUnreadCount,
           out);
-      returnValue = out.getParam().intValue();
+      returnValue = out.getParam();
     }
     return returnValue;
 

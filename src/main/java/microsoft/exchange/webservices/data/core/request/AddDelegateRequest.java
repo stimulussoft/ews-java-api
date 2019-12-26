@@ -45,7 +45,7 @@ public class AddDelegateRequest extends
   /**
    * The delegate users.
    */
-  private List<DelegateUser> delegateUsers = new ArrayList<DelegateUser>();
+  private List<DelegateUser> delegateUsers = new ArrayList<>();
 
   /**
    * The meeting request delivery scope.

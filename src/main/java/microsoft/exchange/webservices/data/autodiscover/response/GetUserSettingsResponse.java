@@ -72,8 +72,8 @@ public final class GetUserSettingsResponse extends AutodiscoverResponse {
   public GetUserSettingsResponse() {
     super();
     this.setSmtpAddress(null);
-    this.setSettings(new HashMap<UserSettingName, Object>());
-    this.setUserSettingErrors(new ArrayList<UserSettingError>());
+    this.setSettings(new HashMap<>());
+    this.setUserSettingErrors(new ArrayList<>());
   }
 
   /**
@@ -179,18 +179,20 @@ public final class GetUserSettingsResponse extends AutodiscoverResponse {
       reader.read();
 
       if (reader.getNodeType().getNodeType() == XmlNodeType.START_ELEMENT) {
-        if (reader.getLocalName()
-            .equals(XmlElementNames.RedirectTarget)) {
+        switch (reader.getLocalName()) {
+          case XmlElementNames.RedirectTarget:
 
-          this.setRedirectTarget(reader.readElementValue());
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.UserSettingErrors)) {
-          this.loadUserSettingErrorsFromXml(reader);
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.UserSettings)) {
-          this.loadUserSettingsFromXml(reader);
-        } else {
-          super.loadFromXml(reader, endElementName);
+            this.setRedirectTarget(reader.readElementValue());
+            break;
+          case XmlElementNames.UserSettingErrors:
+            this.loadUserSettingErrorsFromXml(reader);
+            break;
+          case XmlElementNames.UserSettings:
+            this.loadUserSettingsFromXml(reader);
+            break;
+          default:
+            super.loadFromXml(reader, endElementName);
+            break;
         }
       }
     } while (!reader
@@ -206,6 +208,7 @@ public final class GetUserSettingsResponse extends AutodiscoverResponse {
   protected void loadUserSettingsFromXml(EwsXmlReader reader)
       throws Exception {
     if (!reader.isEmptyElement()) {
+      label:
       do {
         reader.read();
 
@@ -216,18 +219,17 @@ public final class GetUserSettingsResponse extends AutodiscoverResponse {
               XmlNamespace.XmlSchemaInstance,
               XmlAttributeNames.Type);
 
-          if (settingClass.equals(XmlElementNames.StringSetting)) {
-            this.readSettingFromXml(reader);
-          } else if (settingClass.equals(XmlElementNames.WebClientUrlCollectionSetting)) {
-            this.readSettingFromXml(reader);
-          } else if (settingClass.equals(XmlElementNames.AlternateMailboxCollectionSetting)) {
-            this.readSettingFromXml(reader);
-          } else if (settingClass.equals(XmlElementNames.ProtocolConnectionCollectionSetting)) {
-            this.readSettingFromXml(reader);
-          } else {
-            EwsUtilities.ewsAssert(false, "GetUserSettingsResponse." + "LoadUserSettingsFromXml", String
-                .format("%s,%s", "Invalid setting class '%s' returned", settingClass));
-            break;
+          switch (settingClass) {
+            case XmlElementNames.StringSetting:
+            case XmlElementNames.ProtocolConnectionCollectionSetting:
+            case XmlElementNames.AlternateMailboxCollectionSetting:
+            case XmlElementNames.WebClientUrlCollectionSetting:
+              this.readSettingFromXml(reader);
+              break;
+            default:
+              EwsUtilities.ewsAssert(false, "GetUserSettingsResponse." + "LoadUserSettingsFromXml", String
+                      .format("%s,%s", "Invalid setting class '%s' returned", settingClass));
+              break label;
           }
         }
       } while (!reader.isEndElement(XmlNamespace.Autodiscover,
@@ -251,20 +253,23 @@ public final class GetUserSettingsResponse extends AutodiscoverResponse {
       reader.read();
 
       if (reader.getNodeType().getNodeType() == XmlNodeType.START_ELEMENT) {
-        if (reader.getLocalName().equals(XmlElementNames.Name)) {
-          name = reader.readElementValue(UserSettingName.class);
-        } else if (reader.getLocalName().equals(XmlElementNames.Value)) {
-          value = reader.readElementValue();
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.WebClientUrls)) {
+        switch (reader.getLocalName()) {
+          case XmlElementNames.Name:
+            name = reader.readElementValue(UserSettingName.class);
+            break;
+          case XmlElementNames.Value:
+            value = reader.readElementValue();
+            break;
+          case XmlElementNames.WebClientUrls:
 
-          value = WebClientUrlCollection.loadFromXml(reader);
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.ProtocolConnections)) {
-          value = ProtocolConnectionCollection.loadFromXml(reader);
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.AlternateMailboxes)) {
-          value = AlternateMailboxCollection.loadFromXml(reader);
+            value = WebClientUrlCollection.loadFromXml(reader);
+            break;
+          case XmlElementNames.ProtocolConnections:
+            value = ProtocolConnectionCollection.loadFromXml(reader);
+            break;
+          case XmlElementNames.AlternateMailboxes:
+            value = AlternateMailboxCollection.loadFromXml(reader);
+            break;
         }
       }
     } while (!reader.isEndElement(XmlNamespace.Autodiscover,

@@ -67,12 +67,10 @@ public class DeletedOccurrenceInfo extends ComplexProperty {
     if (reader.getLocalName().equalsIgnoreCase(XmlElementNames.Start)) {
       try {
         this.originalStart = reader.readElementValueAsDateTime();
-      } catch (ServiceXmlDeserializationException e) {
-        LOG.error(e);
-      } catch (XMLStreamException e) {
+      } catch (ServiceXmlDeserializationException | XMLStreamException e) {
         LOG.error(e);
       }
-      return true;
+        return true;
     } else {
       return false;
     }

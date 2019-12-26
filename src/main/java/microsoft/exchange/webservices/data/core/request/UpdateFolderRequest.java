@@ -46,7 +46,7 @@ public final class UpdateFolderRequest extends
   /**
    * The folder.
    */
-  private ArrayList<Folder> folders = new ArrayList<Folder>();
+  private ArrayList<Folder> folders = new ArrayList<>();
 
   /**
    * Initializes a new instance of the UpdateFolderRequest class.

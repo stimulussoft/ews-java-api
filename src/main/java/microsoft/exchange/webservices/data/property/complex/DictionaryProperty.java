@@ -55,22 +55,22 @@ public abstract class DictionaryProperty
   /**
    * The entries.
    */
-  private Map<TKey, TEntry> entries = new HashMap<TKey, TEntry>();
+  private Map<TKey, TEntry> entries = new HashMap<>();
 
   /**
    * The removed entries.
    */
-  private Map<TKey, TEntry> removedEntries = new HashMap<TKey, TEntry>();
+  private Map<TKey, TEntry> removedEntries = new HashMap<>();
 
   /**
    * The added entries.
    */
-  private List<TKey> addedEntries = new ArrayList<TKey>();
+  private List<TKey> addedEntries = new ArrayList<>();
 
   /**
    * The modified entries.
    */
-  private List<TKey> modifiedEntries = new ArrayList<TKey>();
+  private List<TKey> modifiedEntries = new ArrayList<>();
 
   /**
    * Entry was changed.
@@ -334,7 +334,7 @@ public abstract class DictionaryProperty
   public boolean writeSetUpdateToXml(EwsServiceXmlWriter writer,
       ServiceObject ewsObject, PropertyDefinition propertyDefinition)
       throws Exception {
-    List<TEntry> tempEntries = new ArrayList<TEntry>();
+    List<TEntry> tempEntries = new ArrayList<>();
 
     for (TKey key : this.addedEntries) {
       tempEntries.add(this.entries.get(key));

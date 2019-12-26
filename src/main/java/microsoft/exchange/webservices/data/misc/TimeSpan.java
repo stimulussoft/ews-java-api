@@ -133,14 +133,8 @@ public class TimeSpan implements Comparable<TimeSpan>, java.io.Serializable, Clo
    * less than, equal to, or greater than the specified object.
    */
   public int compareTo(TimeSpan o) {
-    TimeSpan compare = (TimeSpan) o;
-    if (this.time == compare.time) {
-      return 0;
-    }
-    if (this.time > compare.time) {
-      return +1;
-    }
-    return -1;
+    TimeSpan compare = o;
+    return Long.compare(this.time, compare.time);
   }
 
   /**
@@ -184,7 +178,7 @@ public class TimeSpan implements Comparable<TimeSpan>, java.io.Serializable, Clo
    * @return a string containing the number of milliseconds.
    */
   public String toString() {
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
     long millis = this.time;
     if (millis < 0) {
       sb.append("-");
@@ -380,13 +374,7 @@ public class TimeSpan implements Comparable<TimeSpan>, java.io.Serializable, Clo
    * TimeSpan.
    */
   public static int compare(TimeSpan first, TimeSpan second) {
-    if (first.time == second.time) {
-      return 0;
-    }
-    if (first.time > second.time) {
-      return +1;
-    }
-    return -1;
+    return Long.compare(first.time, second.time);
   }
 
   /**

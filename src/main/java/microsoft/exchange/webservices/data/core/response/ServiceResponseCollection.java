@@ -41,7 +41,7 @@ public final class ServiceResponseCollection<TResponse extends ServiceResponse>
   /**
    * The response.
    */
-  private Vector<TResponse> responses = new Vector<TResponse>();
+  private Vector<TResponse> responses = new Vector<>();
 
   /**
    * The overall result.

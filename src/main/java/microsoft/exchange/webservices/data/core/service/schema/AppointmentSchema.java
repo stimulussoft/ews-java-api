@@ -354,14 +354,14 @@ public class AppointmentSchema extends ItemSchema {
    * The Constant LegacyFreeBusyStatus.
    */
   public static final PropertyDefinition LegacyFreeBusyStatus =
-      new GenericPropertyDefinition<LegacyFreeBusyStatus>(
-          LegacyFreeBusyStatus.class,
-          XmlElementNames.LegacyFreeBusyStatus,
-          FieldUris.LegacyFreeBusyStatus, EnumSet.of(
-          PropertyDefinitionFlags.CanSet,
-          PropertyDefinitionFlags.CanUpdate,
-          PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1);
+          new GenericPropertyDefinition<>(
+                  LegacyFreeBusyStatus.class,
+                  XmlElementNames.LegacyFreeBusyStatus,
+                  FieldUris.LegacyFreeBusyStatus, EnumSet.of(
+                  PropertyDefinitionFlags.CanSet,
+                  PropertyDefinitionFlags.CanUpdate,
+                  PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1);
 
   // Defines the Location property.
   /**
@@ -446,41 +446,37 @@ public class AppointmentSchema extends ItemSchema {
    * The Constant AppointmentType.
    */
   public static final PropertyDefinition AppointmentType =
-      new GenericPropertyDefinition<AppointmentType>(
-          AppointmentType.class,
-          XmlElementNames.CalendarItemType, FieldUris.CalendarItemType,
-          EnumSet.of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1);
+          new GenericPropertyDefinition<>(
+                  AppointmentType.class,
+                  XmlElementNames.CalendarItemType, FieldUris.CalendarItemType,
+                  EnumSet.of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1);
 
   // Defines the MyResponseType property.
   /**
    * The Constant MyResponseType.
    */
   public static final PropertyDefinition MyResponseType =
-      new GenericPropertyDefinition<MeetingResponseType>(
-          MeetingResponseType.class,
-          XmlElementNames.MyResponseType, FieldUris.MyResponseType, EnumSet
-          .of(PropertyDefinitionFlags.CanSet,
-              PropertyDefinitionFlags.CanUpdate,
-              PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1);
+          new GenericPropertyDefinition<>(
+                  MeetingResponseType.class,
+                  XmlElementNames.MyResponseType, FieldUris.MyResponseType, EnumSet
+                  .of(PropertyDefinitionFlags.CanSet,
+                          PropertyDefinitionFlags.CanUpdate,
+                          PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1);
 
   // Defines the Organizer property.
   /**
    * The Constant Organizer.
    */
   public static final PropertyDefinition Organizer =
-      new ContainedPropertyDefinition<EmailAddress>(
-          EmailAddress.class,
-          XmlElementNames.Organizer, FieldUris.Organizer,
-          XmlElementNames.Mailbox, EnumSet
-          .of(PropertyDefinitionFlags.CanFind),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<EmailAddress>() {
-            public EmailAddress createComplexProperty() {
-              return new EmailAddress();
-            }
-          });
+          new ContainedPropertyDefinition<>(
+                  EmailAddress.class,
+                  XmlElementNames.Organizer, FieldUris.Organizer,
+                  XmlElementNames.Mailbox, EnumSet
+                  .of(PropertyDefinitionFlags.CanFind),
+                  ExchangeVersion.Exchange2007_SP1,
+                  EmailAddress::new);
 
   // Defines the RequiredAttendees property.
 
@@ -488,38 +484,30 @@ public class AppointmentSchema extends ItemSchema {
    * The Constant RequiredAttendees.
    */
   public static final PropertyDefinition RequiredAttendees =
-      new ComplexPropertyDefinition<AttendeeCollection>(
-          AttendeeCollection.class,
-          XmlElementNames.RequiredAttendees, FieldUris.RequiredAttendees,
-          EnumSet.of(PropertyDefinitionFlags.AutoInstantiateOnRead,
-              PropertyDefinitionFlags.CanSet,
-              PropertyDefinitionFlags.CanUpdate,
-              PropertyDefinitionFlags.CanDelete),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<AttendeeCollection>() {
-            public AttendeeCollection createComplexProperty() {
-              return new AttendeeCollection();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  AttendeeCollection.class,
+                  XmlElementNames.RequiredAttendees, FieldUris.RequiredAttendees,
+                  EnumSet.of(PropertyDefinitionFlags.AutoInstantiateOnRead,
+                          PropertyDefinitionFlags.CanSet,
+                          PropertyDefinitionFlags.CanUpdate,
+                          PropertyDefinitionFlags.CanDelete),
+                  ExchangeVersion.Exchange2007_SP1,
+                  AttendeeCollection::new);
 
   // Defines the OptionalAttendees property.
   /**
    * The Constant OptionalAttendees.
    */
   public static final PropertyDefinition OptionalAttendees =
-      new ComplexPropertyDefinition<AttendeeCollection>(
-          AttendeeCollection.class,
-          XmlElementNames.OptionalAttendees, FieldUris.OptionalAttendees,
-          EnumSet.of(PropertyDefinitionFlags.AutoInstantiateOnRead,
-              PropertyDefinitionFlags.CanSet,
-              PropertyDefinitionFlags.CanUpdate,
-              PropertyDefinitionFlags.CanDelete),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<AttendeeCollection>() {
-            public AttendeeCollection createComplexProperty() {
-              return new AttendeeCollection();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  AttendeeCollection.class,
+                  XmlElementNames.OptionalAttendees, FieldUris.OptionalAttendees,
+                  EnumSet.of(PropertyDefinitionFlags.AutoInstantiateOnRead,
+                          PropertyDefinitionFlags.CanSet,
+                          PropertyDefinitionFlags.CanUpdate,
+                          PropertyDefinitionFlags.CanDelete),
+                  ExchangeVersion.Exchange2007_SP1,
+                  AttendeeCollection::new);
 
   // Defines the Resources property.
 
@@ -527,19 +515,15 @@ public class AppointmentSchema extends ItemSchema {
    * The Constant Resources.
    */
   public static final PropertyDefinition Resources =
-      new ComplexPropertyDefinition<AttendeeCollection>(
-          AttendeeCollection.class,
-          XmlElementNames.Resources, FieldUris.Resources, EnumSet.of(
-          PropertyDefinitionFlags.AutoInstantiateOnRead,
-          PropertyDefinitionFlags.CanSet,
-          PropertyDefinitionFlags.CanUpdate,
-          PropertyDefinitionFlags.CanDelete),
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<AttendeeCollection>() {
-            public AttendeeCollection createComplexProperty() {
-              return new AttendeeCollection();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  AttendeeCollection.class,
+                  XmlElementNames.Resources, FieldUris.Resources, EnumSet.of(
+                  PropertyDefinitionFlags.AutoInstantiateOnRead,
+                  PropertyDefinitionFlags.CanSet,
+                  PropertyDefinitionFlags.CanUpdate,
+                  PropertyDefinitionFlags.CanDelete),
+                  ExchangeVersion.Exchange2007_SP1,
+                  AttendeeCollection::new);
 
   // Defines the ConflictingMeetingCount property.
   /**
@@ -565,32 +549,22 @@ public class AppointmentSchema extends ItemSchema {
    * The Constant ConflictingMeetings.
    */
   public static final PropertyDefinition ConflictingMeetings =
-      new ComplexPropertyDefinition<ItemCollection<Appointment>>(
-          XmlElementNames.ConflictingMeetings,
-          FieldUris.ConflictingMeetings,
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate
-              <ItemCollection<Appointment>>() {
-            public ItemCollection<Appointment> createComplexProperty() {
-              return new ItemCollection<Appointment>();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  XmlElementNames.ConflictingMeetings,
+                  FieldUris.ConflictingMeetings,
+                  ExchangeVersion.Exchange2007_SP1,
+                  (ICreateComplexPropertyDelegate<ItemCollection<Appointment>>) ItemCollection::new);
 
   // Defines the AdjacentMeetings property.
   /**
    * The Constant AdjacentMeetings.
    */
   public static final PropertyDefinition AdjacentMeetings =
-      new ComplexPropertyDefinition<ItemCollection<Appointment>>(
-          XmlElementNames.AdjacentMeetings,
-          FieldUris.AdjacentMeetings,
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate
-              <ItemCollection<Appointment>>() {
-            public ItemCollection<Appointment> createComplexProperty() {
-              return new ItemCollection<Appointment>();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  XmlElementNames.AdjacentMeetings,
+                  FieldUris.AdjacentMeetings,
+                  ExchangeVersion.Exchange2007_SP1,
+                  (ICreateComplexPropertyDelegate<ItemCollection<Appointment>>) ItemCollection::new);
 
   // Defines the Duration property.
   /**
@@ -660,64 +634,46 @@ public class AppointmentSchema extends ItemSchema {
    * The Constant FirstOccurrence.
    */
   public static final PropertyDefinition FirstOccurrence =
-      new ComplexPropertyDefinition<OccurrenceInfo>(
-          OccurrenceInfo.class,
-          XmlElementNames.FirstOccurrence, FieldUris.FirstOccurrence,
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<OccurrenceInfo>() {
-            public OccurrenceInfo createComplexProperty() {
-              return new OccurrenceInfo();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  OccurrenceInfo.class,
+                  XmlElementNames.FirstOccurrence, FieldUris.FirstOccurrence,
+                  ExchangeVersion.Exchange2007_SP1,
+                  OccurrenceInfo::new);
 
   // Defines the LastOccurrence property.
   /**
    * The Constant LastOccurrence.
    */
   public static final PropertyDefinition LastOccurrence =
-      new ComplexPropertyDefinition<OccurrenceInfo>(
-          OccurrenceInfo.class,
-          XmlElementNames.LastOccurrence, FieldUris.LastOccurrence,
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate<OccurrenceInfo>() {
-            public OccurrenceInfo createComplexProperty() {
-              return new OccurrenceInfo();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  OccurrenceInfo.class,
+                  XmlElementNames.LastOccurrence, FieldUris.LastOccurrence,
+                  ExchangeVersion.Exchange2007_SP1,
+                  OccurrenceInfo::new);
 
   // Defines the ModifiedOccurrences property.
   /**
    * The Constant ModifiedOccurrences.
    */
   public static final PropertyDefinition ModifiedOccurrences =
-      new ComplexPropertyDefinition<OccurrenceInfoCollection>(
-          OccurrenceInfoCollection.class,
-          XmlElementNames.ModifiedOccurrences,
-          FieldUris.ModifiedOccurrences,
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate
-              <OccurrenceInfoCollection>() {
-            public OccurrenceInfoCollection createComplexProperty() {
-              return new OccurrenceInfoCollection();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  OccurrenceInfoCollection.class,
+                  XmlElementNames.ModifiedOccurrences,
+                  FieldUris.ModifiedOccurrences,
+                  ExchangeVersion.Exchange2007_SP1,
+                  OccurrenceInfoCollection::new);
 
   // Defines the DeletedOccurrences property.
   /**
    * The Constant DeletedOccurrences.
    */
   public static final PropertyDefinition DeletedOccurrences =
-      new ComplexPropertyDefinition<DeletedOccurrenceInfoCollection>(
-          DeletedOccurrenceInfoCollection.class,
-          XmlElementNames.DeletedOccurrences,
-          FieldUris.DeletedOccurrences,
-          ExchangeVersion.Exchange2007_SP1,
-          new ICreateComplexPropertyDelegate
-              <DeletedOccurrenceInfoCollection>() {
-            public DeletedOccurrenceInfoCollection createComplexProperty() {
-              return new DeletedOccurrenceInfoCollection();
-            }
-          });
+          new ComplexPropertyDefinition<>(
+                  DeletedOccurrenceInfoCollection.class,
+                  XmlElementNames.DeletedOccurrences,
+                  FieldUris.DeletedOccurrences,
+                  ExchangeVersion.Exchange2007_SP1,
+                  DeletedOccurrenceInfoCollection::new);
 
   // Defines the MeetingTimeZone property.
   /**

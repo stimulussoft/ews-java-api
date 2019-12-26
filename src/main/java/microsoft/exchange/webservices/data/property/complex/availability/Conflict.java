@@ -84,31 +84,29 @@ public final class Conflict extends ComplexProperty {
   @Override
   public boolean tryReadElementFromXml(EwsServiceXmlReader reader)
       throws Exception {
-    if (reader.getLocalName().equals(XmlElementNames.NumberOfMembers)) {
-      this.numberOfMembers = reader.readElementValue(Integer.class);
-      return true;
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.NumberOfMembersAvailable)) {
-      this.numberOfMembersAvailable = reader
-          .readElementValue(Integer.class);
-      return true;
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.NumberOfMembersWithConflict)) {
-      this.numberOfMembersWithConflict = reader
-          .readElementValue(Integer.class);
-      return true;
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.NumberOfMembersWithNoData)) {
-      this.numberOfMembersWithNoData = reader
-          .readElementValue(Integer.class);
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.BusyType)) {
-      this.freeBusyStatus = reader
-          .readElementValue(LegacyFreeBusyStatus.class);
-      return true;
-    } else {
-      return false;
-    }
+      switch (reader.getLocalName()) {
+          case XmlElementNames.NumberOfMembers:
+              this.numberOfMembers = reader.readElementValue(Integer.class);
+              return true;
+          case XmlElementNames.NumberOfMembersAvailable:
+              this.numberOfMembersAvailable = reader
+                      .readElementValue(Integer.class);
+              return true;
+          case XmlElementNames.NumberOfMembersWithConflict:
+              this.numberOfMembersWithConflict = reader
+                      .readElementValue(Integer.class);
+              return true;
+          case XmlElementNames.NumberOfMembersWithNoData:
+              this.numberOfMembersWithNoData = reader
+                      .readElementValue(Integer.class);
+              return true;
+          case XmlElementNames.BusyType:
+              this.freeBusyStatus = reader
+                      .readElementValue(LegacyFreeBusyStatus.class);
+              return true;
+          default:
+              return false;
+      }
   }
 
   /**

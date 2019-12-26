@@ -51,10 +51,7 @@ import org.apache.commons.logging.LogFactory;
       String xmlElementName) throws Exception {
     try {
       return EwsUtilities.createEwsObjectFromXmlElementName(Item.class, service, xmlElementName);
-    } catch (InstantiationException e) {
-      LOG.error(e);
-      return null;
-    } catch (IllegalAccessException e) {
+    } catch (InstantiationException | IllegalAccessException e) {
       LOG.error(e);
       return null;
     }

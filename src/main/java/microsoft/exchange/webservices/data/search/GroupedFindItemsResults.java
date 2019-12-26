@@ -55,7 +55,7 @@ public final class GroupedFindItemsResults<TItem extends Item> implements
    * List of ItemGroups.
    */
   private ArrayList<ItemGroup<TItem>> itemGroups =
-      new ArrayList<ItemGroup<TItem>>();
+          new ArrayList<>();
 
   /**
    * Initializes a new instance of the GroupedFindItemsResults class.

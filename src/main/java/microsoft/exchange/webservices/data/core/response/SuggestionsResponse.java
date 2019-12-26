@@ -39,7 +39,7 @@ public final class SuggestionsResponse extends ServiceResponse {
   /**
    * The day suggestions.
    */
-  private Collection<Suggestion> daySuggestions = new ArrayList<Suggestion>();
+  private Collection<Suggestion> daySuggestions = new ArrayList<>();
 
   /**
    * Initializes a new instance of the SuggestionsResponse class.

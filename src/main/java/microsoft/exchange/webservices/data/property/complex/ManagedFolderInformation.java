@@ -123,7 +123,7 @@ public final class ManagedFolderInformation extends ComplexProperty {
       return true;
     } else if (reader.getLocalName().equalsIgnoreCase(
         XmlElementNames.Comment)) {
-      OutParam<String> value = new OutParam<String>();
+      OutParam<String> value = new OutParam<>();
       reader.tryReadValue(value);
       this.comment = value.getParam();
       return true;
@@ -137,7 +137,7 @@ public final class ManagedFolderInformation extends ComplexProperty {
       return true;
     } else if (reader.getLocalName().equalsIgnoreCase(
         XmlElementNames.HomePage)) {
-      OutParam<String> value = new OutParam<String>();
+      OutParam<String> value = new OutParam<>();
       reader.tryReadValue(value);
       this.homePage = value.getParam();
       return true;

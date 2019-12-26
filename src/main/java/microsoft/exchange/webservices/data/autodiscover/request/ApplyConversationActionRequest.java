@@ -43,7 +43,7 @@ import java.util.List;
 public final class ApplyConversationActionRequest extends MultiResponseServiceRequest<ServiceResponse> {
 
   private List<ConversationAction> conversationActions =
-      new ArrayList<ConversationAction>();
+          new ArrayList<>();
 
   public List<ConversationAction> getConversationActions() {
     return this.conversationActions;

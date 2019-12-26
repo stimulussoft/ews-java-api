@@ -87,7 +87,6 @@ public final class GetRoomListsResponse extends ServiceResponse {
     } else {
       reader.read();
     }
-    return;
   }
 
 }

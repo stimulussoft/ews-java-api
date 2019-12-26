@@ -121,7 +121,7 @@ public class StartTimeZonePropertyDefinition extends TimeZonePropertyDefinition 
    * flag is set; otherwise, <c>false</c>.
    */
   @Override public boolean hasFlag(PropertyDefinitionFlags flag, ExchangeVersion version) {
-    if (version != null && (version == ExchangeVersion.Exchange2007_SP1)) {
+    if ((version == ExchangeVersion.Exchange2007_SP1)) {
       return AppointmentSchema.MeetingTimeZone.hasFlag(flag, version);
     } else {
       return super.hasFlag(flag, version);

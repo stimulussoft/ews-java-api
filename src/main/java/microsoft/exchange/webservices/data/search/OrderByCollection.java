@@ -59,7 +59,7 @@ public final class OrderByCollection implements
    */
   protected OrderByCollection() {
     this.propDefSortOrderPairList = new
-        ArrayList<Map<PropertyDefinitionBase, SortDirection>>();
+            ArrayList<>();
   }
 
   /**
@@ -77,7 +77,7 @@ public final class OrderByCollection implements
           propertyDefinition.getPrintableName()));
     }
     Map<PropertyDefinitionBase, SortDirection> propertyDefinitionSortDirectionPair = new
-        HashMap<PropertyDefinitionBase, SortDirection>();
+            HashMap<>();
     propertyDefinitionSortDirectionPair.put(propertyDefinition,
         sortDirection);
     this.propDefSortOrderPairList.add(propertyDefinitionSortDirectionPair);
@@ -123,7 +123,7 @@ public final class OrderByCollection implements
    */
   public boolean remove(PropertyDefinitionBase propertyDefinition) {
     List<Map<PropertyDefinitionBase, SortDirection>> removeList = new
-        ArrayList<Map<PropertyDefinitionBase, SortDirection>>();
+            ArrayList<>();
     for (Map<PropertyDefinitionBase, SortDirection> propDefSortOrderPair : propDefSortOrderPairList) {
       if (propDefSortOrderPair.containsKey(propertyDefinition)) {
         removeList.add(propDefSortOrderPair);

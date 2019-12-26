@@ -904,24 +904,24 @@ public abstract class Recurrence extends ComplexProperty {
       if (super.tryReadElementFromXml(reader)) {
         return true;
       } else {
-        if (reader.getLocalName().equals(XmlElementNames.DaysOfWeek)) {
+        switch (reader.getLocalName()) {
+          case XmlElementNames.DaysOfWeek:
 
-          this.dayOfTheWeek = reader
-              .readElementValue(DayOfTheWeek.class);
-          return true;
-        } else if (reader.getLocalName().equals(
-            XmlElementNames.DayOfWeekIndex)) {
+            this.dayOfTheWeek = reader
+                    .readElementValue(DayOfTheWeek.class);
+            return true;
+          case XmlElementNames.DayOfWeekIndex:
 
-          this.dayOfTheWeekIndex = reader
-              .readElementValue(DayOfTheWeekIndex.class);
-          return true;
-        } else if (reader.getLocalName().equals(XmlElementNames.Month)) {
+            this.dayOfTheWeekIndex = reader
+                    .readElementValue(DayOfTheWeekIndex.class);
+            return true;
+          case XmlElementNames.Month:
 
-          this.month = reader.readElementValue(Month.class);
-          return true;
-        } else {
+            this.month = reader.readElementValue(Month.class);
+            return true;
+          default:
 
-          return false;
+            return false;
         }
       }
     }
@@ -1095,8 +1095,8 @@ public abstract class Recurrence extends ComplexProperty {
         throws ArgumentOutOfRangeException {
       super(startDate, interval);
 
-      ArrayList<DayOfTheWeek> toProcess = new ArrayList<DayOfTheWeek>(
-          Arrays.asList(daysOfTheWeek));
+      ArrayList<DayOfTheWeek> toProcess = new ArrayList<>(
+              Arrays.asList(daysOfTheWeek));
       Iterator<DayOfTheWeek> idaysOfTheWeek = toProcess.iterator();
       this.daysOfTheWeek.addRange(idaysOfTheWeek);
     }

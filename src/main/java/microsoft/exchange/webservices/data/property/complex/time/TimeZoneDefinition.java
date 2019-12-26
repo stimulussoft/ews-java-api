@@ -35,11 +35,9 @@ import microsoft.exchange.webservices.data.core.exception.service.local.ServiceX
 import microsoft.exchange.webservices.data.property.complex.ComplexProperty;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -87,19 +85,19 @@ public class TimeZoneDefinition extends ComplexProperty implements Comparator<Ti
    * The periods.
    */
   private Map<String, TimeZonePeriod> periods =
-      new HashMap<String, TimeZonePeriod>();
+          new HashMap<>();
 
   /**
    * The transition groups.
    */
   private Map<String, TimeZoneTransitionGroup> transitionGroups =
-      new HashMap<String, TimeZoneTransitionGroup>();
+          new HashMap<>();
 
   /**
    * The transitions.
    */
   private List<TimeZoneTransition> transitions =
-      new ArrayList<TimeZoneTransition>();
+          new ArrayList<>();
 
   /**
    * Compares the transitions.
@@ -205,56 +203,56 @@ public class TimeZoneDefinition extends ComplexProperty implements Comparator<Ti
   @Override
   public boolean tryReadElementFromXml(EwsServiceXmlReader reader)
       throws Exception {
-    if (reader.getLocalName().equals(XmlElementNames.Periods)) {
-      do {
-        reader.read();
-        if (reader.isStartElement(XmlNamespace.Types,
-            XmlElementNames.Period)) {
-          TimeZonePeriod period = new TimeZonePeriod();
-          period.loadFromXml(reader);
+    switch (reader.getLocalName()) {
+      case XmlElementNames.Periods:
+        do {
+          reader.read();
+          if (reader.isStartElement(XmlNamespace.Types,
+                  XmlElementNames.Period)) {
+            TimeZonePeriod period = new TimeZonePeriod();
+            period.loadFromXml(reader);
 
-          this.periods.put(period.getId(), period);
-        }
-      } while (!reader.isEndElement(XmlNamespace.Types,
-          XmlElementNames.Periods));
+            this.periods.put(period.getId(), period);
+          }
+        } while (!reader.isEndElement(XmlNamespace.Types,
+                XmlElementNames.Periods));
 
-      return true;
-    } else if (reader.getLocalName().equals(
-        XmlElementNames.TransitionsGroups)) {
-      do {
-        reader.read();
-        if (reader.isStartElement(XmlNamespace.Types,
-            XmlElementNames.TransitionsGroup)) {
-          TimeZoneTransitionGroup transitionGroup =
-              new TimeZoneTransitionGroup(
-                  this);
+        return true;
+      case XmlElementNames.TransitionsGroups:
+        do {
+          reader.read();
+          if (reader.isStartElement(XmlNamespace.Types,
+                  XmlElementNames.TransitionsGroup)) {
+            TimeZoneTransitionGroup transitionGroup =
+                    new TimeZoneTransitionGroup(
+                            this);
 
-          transitionGroup.loadFromXml(reader);
+            transitionGroup.loadFromXml(reader);
 
-          this.transitionGroups.put(transitionGroup.getId(),
-              transitionGroup);
-        }
-      } while (!reader.isEndElement(XmlNamespace.Types,
-          XmlElementNames.TransitionsGroups));
+            this.transitionGroups.put(transitionGroup.getId(),
+                    transitionGroup);
+          }
+        } while (!reader.isEndElement(XmlNamespace.Types,
+                XmlElementNames.TransitionsGroups));
 
-      return true;
-    } else if (reader.getLocalName().equals(XmlElementNames.Transitions)) {
-      do {
-        reader.read();
-        if (reader.isStartElement()) {
-          TimeZoneTransition transition = TimeZoneTransition.create(
-              this, reader.getLocalName());
+        return true;
+      case XmlElementNames.Transitions:
+        do {
+          reader.read();
+          if (reader.isStartElement()) {
+            TimeZoneTransition transition = TimeZoneTransition.create(
+                    this, reader.getLocalName());
 
-          transition.loadFromXml(reader);
+            transition.loadFromXml(reader);
 
-          this.transitions.add(transition);
-        }
-      } while (!reader.isEndElement(XmlNamespace.Types,
-          XmlElementNames.Transitions));
+            this.transitions.add(transition);
+          }
+        } while (!reader.isEndElement(XmlNamespace.Types,
+                XmlElementNames.Transitions));
 
-      return true;
-    } else {
-      return false;
+        return true;
+      default:
+        return false;
     }
   }
 
@@ -266,7 +264,7 @@ public class TimeZoneDefinition extends ComplexProperty implements Comparator<Ti
    */
   public void loadFromXml(EwsServiceXmlReader reader) throws Exception {
     this.loadFromXml(reader, XmlElementNames.TimeZoneDefinition);
-    Collections.sort(this.transitions, new TimeZoneDefinition());
+    this.transitions.sort(new TimeZoneDefinition());
   }
 
   /**
@@ -285,9 +283,8 @@ public class TimeZoneDefinition extends ComplexProperty implements Comparator<Ti
         writer.writeStartElement(XmlNamespace.Types,
             XmlElementNames.Periods);
 
-        Iterator<TimeZonePeriod> it = this.periods.values().iterator();
-        while (it.hasNext()) {
-          it.next().writeToXml(writer);
+        for (TimeZonePeriod timeZonePeriod : this.periods.values()) {
+          timeZonePeriod.writeToXml(writer);
         }
 
         writer.writeEndElement(); // Periods

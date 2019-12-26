@@ -42,7 +42,7 @@ public final class AlternateMailboxCollection {
    * Initializes a new instance of the class
    */
   public AlternateMailboxCollection() {
-    this.setEntries(new ArrayList<AlternateMailbox>());
+    this.setEntries(new ArrayList<>());
   }
 
   /**

@@ -50,7 +50,7 @@ public abstract class SyncResponse<TServiceObject extends ServiceObject,
   /**
    * The changes.
    */
-  private ChangeCollection<TChange> changes = new ChangeCollection<TChange>();
+  private ChangeCollection<TChange> changes = new ChangeCollection<>();
 
   /**
    * The property set.
@@ -106,19 +106,22 @@ public abstract class SyncResponse<TServiceObject extends ServiceObject,
         if (reader.isStartElement()) {
           TChange change = this.createChangeInstance();
 
-          if (reader.getLocalName().equals(XmlElementNames.Create)) {
-            change.setChangeType(ChangeType.Create);
-          } else if (reader.getLocalName().equals(
-              XmlElementNames.Update)) {
-            change.setChangeType(ChangeType.Update);
-          } else if (reader.getLocalName().equals(
-              XmlElementNames.Delete)) {
-            change.setChangeType(ChangeType.Delete);
-          } else if (reader.getLocalName().equals(
-              XmlElementNames.ReadFlagChange)) {
-            change.setChangeType(ChangeType.ReadFlagChange);
-          } else {
-            reader.skipCurrentElement();
+          switch (reader.getLocalName()) {
+            case XmlElementNames.Create:
+              change.setChangeType(ChangeType.Create);
+              break;
+            case XmlElementNames.Update:
+              change.setChangeType(ChangeType.Update);
+              break;
+            case XmlElementNames.Delete:
+              change.setChangeType(ChangeType.Delete);
+              break;
+            case XmlElementNames.ReadFlagChange:
+              change.setChangeType(ChangeType.ReadFlagChange);
+              break;
+            default:
+              reader.skipCurrentElement();
+              break;
           }
 
           if (change != null) {

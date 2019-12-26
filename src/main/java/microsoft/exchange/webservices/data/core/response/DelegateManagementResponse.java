@@ -75,7 +75,7 @@ public class DelegateManagementResponse extends ServiceResponse {
   protected void readElementsFromXml(EwsServiceXmlReader reader)
       throws Exception {
     if (this.getErrorCode() == ServiceError.NoError) {
-      this.delegateUserResponses = new ArrayList<DelegateUserResponse>();
+      this.delegateUserResponses = new ArrayList<>();
 
       reader.read();
 

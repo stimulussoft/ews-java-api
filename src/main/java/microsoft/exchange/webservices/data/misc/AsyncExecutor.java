@@ -32,7 +32,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class AsyncExecutor extends ThreadPoolExecutor implements ExecutorService {
-  final static ArrayBlockingQueue<Runnable> queue = new ArrayBlockingQueue<Runnable>(1);
+  final static ArrayBlockingQueue<Runnable> queue = new ArrayBlockingQueue<>(1);
 
   public AsyncExecutor() {
     super(1, 5, 10, TimeUnit.SECONDS, queue);
