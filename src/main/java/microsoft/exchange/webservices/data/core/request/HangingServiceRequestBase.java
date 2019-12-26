@@ -50,9 +50,7 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownServiceException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 
 /**
@@ -310,7 +308,12 @@ public abstract class HangingServiceRequestBase<T> extends ServiceRequestBase<T>
               1);
       ThreadPoolExecutor threadPool = new ThreadPoolExecutor(poolSize,
           maxPoolSize,
-          keepAliveTime, TimeUnit.SECONDS, queue);
+          keepAliveTime, TimeUnit.SECONDS, queue, r -> {
+            Thread t = Executors.defaultThreadFactory().newThread(r);
+            t.setDaemon(true);
+            t.setName("ews hangingservicerequest");
+            return t;
+          });
       threadPool.execute(new Runnable() {
         public void run() {
           parseResponses();
