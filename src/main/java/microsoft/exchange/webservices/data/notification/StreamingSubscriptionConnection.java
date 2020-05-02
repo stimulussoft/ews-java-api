@@ -53,6 +53,9 @@ public final class StreamingSubscriptionConnection implements Closeable,
 
     private static final Log LOG = LogFactory.getLog(StreamingSubscriptionConnection.class);
 
+
+    private final Set<SubscriptionNotify> notifiers;
+
     /**
      * Mapping of streaming id to subscriptions currently on the connection.
      */
@@ -225,6 +228,7 @@ public final class StreamingSubscriptionConnection implements Closeable,
 
         this.session = service;
         this.subscriptions = new ConcurrentHashMap<>();
+        this.notifiers = ConcurrentHashMap.newKeySet();
         this.connectionTimeout = lifetime;
     }
 
@@ -249,6 +253,30 @@ public final class StreamingSubscriptionConnection implements Closeable,
     }
 
     /**
+     * Initializes a new instance of the StreamingSubscriptionConnection class.
+     *
+     * @param service       The ExchangeService instance this connection uses to connect
+     *                      to the server.
+     * @param subscriptions Iterable subcriptions
+     * @param lifetime      The maximum time, in minutes, the connection will remain open.
+     *                      Lifetime must be between 1 and 30.
+     * @throws Exception
+     */
+    public StreamingSubscriptionConnection(ExchangeService service,
+                                           Iterable<StreamingSubscription> subscriptions, int lifetime, SubscriptionNotify subscriptionNotify)
+            throws Exception {
+        this(service, lifetime);
+        EwsUtilities.validateParamCollection(subscriptions.iterator(), "subscriptions");
+        notifiers.add(subscriptionNotify);
+        for (StreamingSubscription subscription : subscriptions) {
+            this.subscriptions.put(subscription.getId(), subscription);
+            for (SubscriptionNotify notify : notifiers)
+                notify.addStreamingSubscription(subscription);
+        }
+    }
+
+
+    /**
      * Adds a subscription to this connection.
      *
      * @param subscription The subscription to add.
@@ -260,6 +288,8 @@ public final class StreamingSubscriptionConnection implements Closeable,
         EwsUtilities.validateParam(subscription, "subscription");
         this.validateConnectionState(false, "Subscriptions can't be added to an open connection.");
         this.subscriptions.putIfAbsent(subscription.getId(), subscription);
+        for (SubscriptionNotify notify : notifiers)
+            notify.addStreamingSubscription(subscription);
     }
 
     /**
@@ -277,7 +307,11 @@ public final class StreamingSubscriptionConnection implements Closeable,
         this.validateConnectionState(false, "Subscriptions can't be removed from an open connection.");
 
         this.subscriptions.remove(subscription.getId());
+
+        for (SubscriptionNotify notify : notifiers)
+            notify.removeStreamingSubscription(subscription);
     }
+
 
     /**
      * Opens this connection so it starts receiving events from the server.This
@@ -444,6 +478,8 @@ public final class StreamingSubscriptionConnection implements Closeable,
             }
             if (gseResponse.getErrorCode() != ServiceError.ErrorMissedNotificationEvents) {
               this.subscriptions.remove(id);
+                for (SubscriptionNotify notify : notifiers)
+                    notify.removeStreamingSubscription(subscription);
             }
         }
     }
@@ -493,6 +529,8 @@ public final class StreamingSubscriptionConnection implements Closeable,
         if (this.currentHangingRequest != null)
             this.currentHangingRequest = null;
         this.subscriptions.clear();
+        for (SubscriptionNotify notify : notifiers)
+            notify.clearStreamingSubscriptions();
         this.session = null;
         this.isDisposed = true;
     }
@@ -519,4 +557,18 @@ public final class StreamingSubscriptionConnection implements Closeable,
         this.onRequestDisconnect(sender, args);
     }
 
+    public void registerSubscriptionNotify(SubscriptionNotify notify) {
+        notifiers.add(notify);
+    }
+
+    public void unregisterSubscriptionNotify(SubscriptionNotify notify) {
+        notifiers.remove(notify);
+    }
+
+    public interface SubscriptionNotify {
+
+        public void addStreamingSubscription(StreamingSubscription subs);
+        public void removeStreamingSubscription(StreamingSubscription subs);
+        public void clearStreamingSubscriptions();
+    }
 }
